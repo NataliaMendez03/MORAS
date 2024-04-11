@@ -1,0 +1,6 @@
+@Sistema_de_Gestion_Moras_HostAddress = http://localhost:5255
+
+GET {{Sistema_de_Gestion_Moras_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
