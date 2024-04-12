@@ -12,6 +12,12 @@
             modelBuilder.Entity<Tracking>()
                 .HasKey(e => e.IdTracking);
             //HasNoKey()
+            foreach (var foreignKey in modelBuilder.Model.GetEntityTypes()
+            .SelectMany(e => e.GetForeignKeys()))
+            {
+                foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
+
+            }
         }
         public DbSet<Tracking> Tracking { get; set; }
     }
