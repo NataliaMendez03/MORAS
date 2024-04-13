@@ -1,15 +1,15 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Threading;
-
-public class Tracking
+namespace Sistema_de_Gestion_Moras.Models
 {
-	public Tracking()
-	{
-		public int IdTracking {  get; set; }
-	    public DateTime DateTracking { get; set; }
-	    public required int IdSalesbilling { get; set; }
-	    public required Salesbilling Salesbilling { get; set; }
-	    public required int IdState { get; set; }
-	    public required State State { get; set; }
+    public class Tracking
+    {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int IdTracking { get; set; }
+        public DateTime DateTracking { get; set; }
+        public required int IdState { get; set; }
+        public required State State { get; set; }
     }
 }
+
