@@ -8,7 +8,7 @@ namespace Sistema_de_Gestion_Moras.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdDispatch {  get; set; }
         public required int? IdEmployees { get; set; }
-        public required Employees Employee { get; set; }
+        public required Employees Employees { get; set; }
         public required int? IdSalesDetails { get; set; }
         public required SalesDetails SalesDetails { get; set; }
 
