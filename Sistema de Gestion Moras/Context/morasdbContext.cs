@@ -43,6 +43,21 @@ namespace Sistema_de_Gestion_Moras.Context
             modelBuilder.Entity<IdentificationType>()
                 .HasKey(e => e.IdIdentificationType);
 
+            modelBuilder.Entity<City>()
+                .HasKey(e => e.IdCity);
+            modelBuilder.Entity<Address>()
+                .HasKey(e => e.IdAddress);
+            modelBuilder.Entity<Quality>()
+                .HasKey(e => e.IdQuality);
+            modelBuilder.Entity<Providers>()
+                .HasKey(e => e.IdProviders);
+            modelBuilder.Entity<BillSale>()
+                .HasKey(e => e.IdBillSale);
+            modelBuilder.Entity<Purchase>()
+                .HasKey(e => e.IdPurchase);
+            modelBuilder.Entity<ProvidervsInputs>()
+              .HasKey(e => e.IdProvsInp);
+
             //HasNoKey()
             foreach (var foreignKey in modelBuilder.Model.GetEntityTypes()
             .SelectMany(e => e.GetForeignKeys()))
@@ -66,5 +81,14 @@ namespace Sistema_de_Gestion_Moras.Context
         public DbSet<Post> Post { get; set; }
         public DbSet<State> State { get; set; }
         public DbSet<IdentificationType> IdentificationType { get; set; }
+
+        public DbSet<City> City { get; set; }
+        public DbSet<Address> Address { get; set; }
+        public DbSet<Quality> Quality { get; set; }
+        public DbSet<Providers> Providers { get; set; }
+        public DbSet<BillSale> BillSale { get; set; }
+        public DbSet<Purchase> Purchase { get; set; }
+        public DbSet<ProvidervsInputs> ProvidervsInputs { get; set; }
+
     }
 }
