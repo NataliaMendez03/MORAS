@@ -12,7 +12,7 @@ namespace Sistema_de_Gestion_Moras.Models
         public required int IdContact { get; set; }
         public required Contact Contact { get; set; }
         public required int IdTypeIdentification { get; set; }
-        public required TypeIdentification TypeIdentification { get; set; }
+        public required IdentificationType TypeIdentification { get; set; }
         public int NumberIdentification { get; set; }
     }
 }
