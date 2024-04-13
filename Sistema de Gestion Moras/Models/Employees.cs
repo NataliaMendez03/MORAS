@@ -6,9 +6,9 @@ namespace Sistema_de_Gestion_Moras.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdEmployees { get; set; }
-        public required int IdPost { get; set; }
+        public required int? IdPost { get; set; }
         public required Post Post { get; set; }
-        public required int IdPerson { get; set; }
+        public required int? IdPerson { get; set; }
         public required Person Person { get; set; }
     }
 }
