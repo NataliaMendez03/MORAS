@@ -14,5 +14,7 @@ namespace Sistema_de_Gestion_Moras.Models
         public required int IdTypeIdentification { get; set; }
         public required IdentificationType TypeIdentification { get; set; }
         public int NumberIdentification { get; set; }
+        public required int IdAddress { get; set; }
+        public required Address Address { get; set; }
     }
 }
