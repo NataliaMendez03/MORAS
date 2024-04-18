@@ -4,10 +4,10 @@ using System.Reflection.Metadata;
 using Sistema_de_Gestion_Moras.Models;
 namespace Sistema_de_Gestion_Moras.Context
 {
-    public class morasdbContext: DbContext
+    public class berriesdbContext : DbContext
     {
         ///HOLA :D
-        public morasdbContext(DbContextOptions<morasdbContext> options) : base(options)
+        public berriesdbContext(DbContextOptions<berriesdbContext> options) : base(options)
         {
             
         }
