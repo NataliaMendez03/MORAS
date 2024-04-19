@@ -12,7 +12,7 @@ using Sistema_de_Gestion_Moras.Context;
 namespace Sistema_de_Gestion_Moras.Migrations
 {
     [DbContext(typeof(berriesdbContext))]
-    [Migration("20240419153657_Initial")]
+    [Migration("20240419214235_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -33,10 +33,14 @@ namespace Sistema_de_Gestion_Moras.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdIdentificationType"));
 
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("IdentifiType")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool?>("StateDelete")
+                    b.Property<bool>("StateDelete")
                         .HasColumnType("bit");
 
                     b.HasKey("IdIdentificationType");
@@ -53,15 +57,19 @@ namespace Sistema_de_Gestion_Moras.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdAddress"));
 
                     b.Property<string>("Addres")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("CityIdCity")
                         .HasColumnType("int");
 
-                    b.Property<int?>("IdCity")
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("IdCity")
                         .HasColumnType("int");
 
-                    b.Property<bool?>("StateDelete")
+                    b.Property<bool>("StateDelete")
                         .HasColumnType("bit");
 
                     b.HasKey("IdAddress");
@@ -82,22 +90,26 @@ namespace Sistema_de_Gestion_Moras.Migrations
                     b.Property<int>("ClientIdClient")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("DateSale")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("IdClient")
+                    b.Property<DateTime>("DateSale")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("IdClient")
                         .HasColumnType("int");
 
-                    b.Property<int?>("IdSalesDetails")
+                    b.Property<int>("IdSalesDetails")
                         .HasColumnType("int");
 
                     b.Property<string>("Notes")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("SalesDetailsIdSalesDetails")
+                    b.Property<int>("SalesDetailsIdSalesDetails")
                         .HasColumnType("int");
 
-                    b.Property<bool?>("StateDelete")
+                    b.Property<bool>("StateDelete")
                         .HasColumnType("bit");
 
                     b.HasKey("IdBillSale");
@@ -117,10 +129,14 @@ namespace Sistema_de_Gestion_Moras.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdCity"));
 
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("NameCity")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool?>("StateDelete")
+                    b.Property<bool>("StateDelete")
                         .HasColumnType("bit");
 
                     b.HasKey("IdCity");
@@ -136,13 +152,16 @@ namespace Sistema_de_Gestion_Moras.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdClient"));
 
-                    b.Property<int?>("IdPerson")
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("IdPerson")
                         .HasColumnType("int");
 
                     b.Property<int>("PersonIdPerson")
                         .HasColumnType("int");
 
-                    b.Property<bool?>("StateDelete")
+                    b.Property<bool>("StateDelete")
                         .HasColumnType("bit");
 
                     b.HasKey("IdClient");
@@ -160,13 +179,18 @@ namespace Sistema_de_Gestion_Moras.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdContact"));
 
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Phone")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool?>("StateDelete")
+                    b.Property<bool>("StateDelete")
                         .HasColumnType("bit");
 
                     b.HasKey("IdContact");
@@ -182,25 +206,28 @@ namespace Sistema_de_Gestion_Moras.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdDispatch"));
 
-                    b.Property<DateTime?>("Date")
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("EmployeesIdEmployees")
                         .HasColumnType("int");
 
-                    b.Property<int?>("IdEmployees")
+                    b.Property<int>("IdEmployees")
                         .HasColumnType("int");
 
-                    b.Property<int?>("IdSalesDetails")
+                    b.Property<int>("IdSalesDetails")
                         .HasColumnType("int");
 
-                    b.Property<int?>("IdTracking")
+                    b.Property<int>("IdTracking")
                         .HasColumnType("int");
 
                     b.Property<int>("SalesDetailsIdSalesDetails")
                         .HasColumnType("int");
 
-                    b.Property<bool?>("StateDelete")
+                    b.Property<bool>("StateDelete")
                         .HasColumnType("bit");
 
                     b.Property<int>("TrackingIdTracking")
@@ -225,10 +252,13 @@ namespace Sistema_de_Gestion_Moras.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdEmployees"));
 
-                    b.Property<int?>("IdPerson")
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("IdPerson")
                         .HasColumnType("int");
 
-                    b.Property<int?>("IdPost")
+                    b.Property<int>("IdPost")
                         .HasColumnType("int");
 
                     b.Property<int>("PersonIdPerson")
@@ -237,7 +267,7 @@ namespace Sistema_de_Gestion_Moras.Migrations
                     b.Property<int>("PostIdPost")
                         .HasColumnType("int");
 
-                    b.Property<bool?>("StateDelete")
+                    b.Property<bool>("StateDelete")
                         .HasColumnType("bit");
 
                     b.HasKey("IdEmployees");
@@ -257,25 +287,29 @@ namespace Sistema_de_Gestion_Moras.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdHarvests"));
 
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("EmployeesIdEmployees")
                         .HasColumnType("int");
 
                     b.Property<string>("HarvestAmount")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("HarvestDate")
+                    b.Property<DateTime>("HarvestDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("IdQuality")
+                    b.Property<int>("IdQuality")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Idemployees")
+                    b.Property<int>("Idemployees")
                         .HasColumnType("int");
 
                     b.Property<int>("QualityIdQuality")
                         .HasColumnType("int");
 
-                    b.Property<bool?>("StateDelete")
+                    b.Property<bool>("StateDelete")
                         .HasColumnType("bit");
 
                     b.HasKey("IdHarvests");
@@ -301,6 +335,9 @@ namespace Sistema_de_Gestion_Moras.Migrations
                     b.Property<int>("ContactIdContact")
                         .HasColumnType("int");
 
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("IdAddress")
                         .HasColumnType("int");
 
@@ -311,15 +348,17 @@ namespace Sistema_de_Gestion_Moras.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("LastName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("NumberIdentification")
                         .HasColumnType("int");
 
-                    b.Property<bool?>("StateDelete")
+                    b.Property<bool>("StateDelete")
                         .HasColumnType("bit");
 
                     b.Property<int>("TypeIdentificationIdIdentificationType")
@@ -344,10 +383,14 @@ namespace Sistema_de_Gestion_Moras.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdPost"));
 
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("NamePost")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool?>("StateDelete")
+                    b.Property<bool>("StateDelete")
                         .HasColumnType("bit");
 
                     b.HasKey("IdPost");
@@ -363,13 +406,16 @@ namespace Sistema_de_Gestion_Moras.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdProviders"));
 
-                    b.Property<int?>("IdPerson")
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("IdPerson")
                         .HasColumnType("int");
 
                     b.Property<int>("PersonIdPerson")
                         .HasColumnType("int");
 
-                    b.Property<bool?>("StateDelete")
+                    b.Property<bool>("StateDelete")
                         .HasColumnType("bit");
 
                     b.HasKey("IdProviders");
@@ -387,16 +433,19 @@ namespace Sistema_de_Gestion_Moras.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdProvsInp"));
 
-                    b.Property<int?>("IdProviders")
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("IdProviders")
                         .HasColumnType("int");
 
-                    b.Property<int?>("IdSupplies")
+                    b.Property<int>("IdSupplies")
                         .HasColumnType("int");
 
                     b.Property<int>("ProvidersIdProviders")
                         .HasColumnType("int");
 
-                    b.Property<bool?>("StateDelete")
+                    b.Property<bool>("StateDelete")
                         .HasColumnType("bit");
 
                     b.Property<int>("SuppliesIdSupplies")
@@ -419,13 +468,16 @@ namespace Sistema_de_Gestion_Moras.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdPurchase"));
 
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime?>("DateProviders")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("IdProviders")
+                    b.Property<int>("IdProviders")
                         .HasColumnType("int");
 
-                    b.Property<int?>("IdPurchaseDetail")
+                    b.Property<int>("IdPurchaseDetail")
                         .HasColumnType("int");
 
                     b.Property<int>("ProvidersIdProviders")
@@ -434,7 +486,7 @@ namespace Sistema_de_Gestion_Moras.Migrations
                     b.Property<int>("PurchaseDetailIdPurchaseDetail")
                         .HasColumnType("int");
 
-                    b.Property<bool?>("StateDelete")
+                    b.Property<bool>("StateDelete")
                         .HasColumnType("bit");
 
                     b.HasKey("IdPurchase");
@@ -454,19 +506,24 @@ namespace Sistema_de_Gestion_Moras.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdPurchaseDetail"));
 
-                    b.Property<int?>("IdSupplies")
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("IdSupplies")
                         .HasColumnType("int");
 
                     b.Property<string>("Notes")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PurchasePrice")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("Quantity")
+                    b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<bool?>("StateDelete")
+                    b.Property<bool>("StateDelete")
                         .HasColumnType("bit");
 
                     b.Property<int>("SuppliesIdSupplies")
@@ -487,13 +544,18 @@ namespace Sistema_de_Gestion_Moras.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdQuality"));
 
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("NQuality")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Quantity")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool?>("StateDelete")
+                    b.Property<bool>("StateDelete")
                         .HasColumnType("bit");
 
                     b.HasKey("IdQuality");
@@ -510,12 +572,17 @@ namespace Sistema_de_Gestion_Moras.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdSalesDetails"));
 
                     b.Property<string>("Amount")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("SalePrice")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool?>("StateDelete")
+                    b.Property<bool>("StateDelete")
                         .HasColumnType("bit");
 
                     b.HasKey("IdSalesDetails");
@@ -531,10 +598,14 @@ namespace Sistema_de_Gestion_Moras.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdState"));
 
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("NameState")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool?>("StateDelete")
+                    b.Property<bool>("StateDelete")
                         .HasColumnType("bit");
 
                     b.HasKey("IdState");
@@ -550,22 +621,27 @@ namespace Sistema_de_Gestion_Moras.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdStorage"));
 
-                    b.Property<DateTime?>("EntryDate")
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("EntryDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("HarvestsIdHarvests")
                         .HasColumnType("int");
 
-                    b.Property<int?>("IdHarvests")
+                    b.Property<int>("IdHarvests")
                         .HasColumnType("int");
 
-                    b.Property<bool?>("StateDelete")
+                    b.Property<bool>("StateDelete")
                         .HasColumnType("bit");
 
                     b.Property<string>("StorageName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Temperature")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IdStorage");
@@ -583,10 +659,14 @@ namespace Sistema_de_Gestion_Moras.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdSupplies"));
 
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("NameSupplies")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool?>("StateDelete")
+                    b.Property<bool>("StateDelete")
                         .HasColumnType("bit");
 
                     b.HasKey("IdSupplies");
@@ -602,13 +682,16 @@ namespace Sistema_de_Gestion_Moras.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdTracking"));
 
-                    b.Property<DateTime?>("DateTracking")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("IdState")
+                    b.Property<DateTime>("DateTracking")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("IdState")
                         .HasColumnType("int");
 
-                    b.Property<bool?>("StateDelete")
+                    b.Property<bool>("StateDelete")
                         .HasColumnType("bit");
 
                     b.Property<int>("StateIdState")
@@ -643,7 +726,8 @@ namespace Sistema_de_Gestion_Moras.Migrations
                     b.HasOne("Sistema_de_Gestion_Moras.Models.SalesDetails", "SalesDetails")
                         .WithMany()
                         .HasForeignKey("SalesDetailsIdSalesDetails")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Client");
 

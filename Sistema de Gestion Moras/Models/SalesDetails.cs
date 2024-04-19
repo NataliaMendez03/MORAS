@@ -6,9 +6,10 @@ namespace Sistema_de_Gestion_Moras.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdSalesDetails { get; set; }
-        public string? Amount { get; set; }
-        public string? SalePrice { get; set; }
-        public bool? StateDelete { get; set; }
+        public string Amount { get; set; }
+        public string SalePrice { get; set; }
+        public bool StateDelete { get; set; }
+        public DateTime? CreatedDate { get; set; }
 
     }
 }

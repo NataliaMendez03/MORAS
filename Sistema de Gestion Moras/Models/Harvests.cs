@@ -7,13 +7,14 @@ namespace Sistema_de_Gestion_Moras.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdHarvests { get; set; }
-        public DateTime? HarvestDate { get; set; }
-        public string? HarvestAmount { get; set; }
-        public int? Idemployees { get; set; }
+        public DateTime HarvestDate { get; set; }
+        public string HarvestAmount { get; set; }
+        public int Idemployees { get; set; }
         public Employees Employees { get; set; }
-        public int? IdQuality { get; set; }
+        public int IdQuality { get; set; }
         public Quality Quality { get; set; }
-        public bool? StateDelete { get; set; }
+        public bool StateDelete { get; set; }
+        public DateTime? CreatedDate { get; set; }
     }
 }
 

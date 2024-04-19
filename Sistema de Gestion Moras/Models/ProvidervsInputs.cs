@@ -6,10 +6,11 @@ namespace Sistema_de_Gestion_Moras.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdProvsInp { get; set; }
-        public int? IdProviders { get; set; }
+        public int IdProviders { get; set; }
         public Providers Providers { get; set; }
-        public int? IdSupplies { get; set; }
+        public int IdSupplies { get; set; }
         public Supplies Supplies { get; set; }
-        public bool? StateDelete { get; set; }
+        public bool StateDelete { get; set; }
+        public DateTime? CreatedDate { get; set; }
     }
 }

@@ -7,10 +7,11 @@ namespace Sistema_de_Gestion_Moras.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdTracking { get; set; }
-        public DateTime? DateTracking { get; set; }
-        public int? IdState { get; set; }
+        public DateTime DateTracking { get; set; }
+        public int IdState { get; set; }
         public State State { get; set; }
-        public bool? StateDelete { get; set; }
+        public bool StateDelete { get; set; }
+        public DateTime? CreatedDate { get; set; }
 
     }
 }

@@ -6,9 +6,10 @@ namespace Sistema_de_Gestion_Moras.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdContact { get; set; }
-        public string? Phone { get; set; }
-        public string? Email { get; set; }
-        public bool? StateDelete { get; set; }
+        public string Phone { get; set; }
+        public string Email { get; set; }
+        public bool StateDelete { get; set; }
+        public DateTime? CreatedDate { get; set; }
 
     }
 }

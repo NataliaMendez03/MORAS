@@ -7,8 +7,8 @@ namespace Sistema_de_Gestion_Moras.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdPerson { get; set; }
-        public string? Name { get; set; }
-        public string? LastName { get; set; }
+        public string Name { get; set; }
+        public string LastName { get; set; }
         public int IdContact { get; set; }
         public Contact Contact { get; set; }
         public int IdTypeIdentification { get; set; }
@@ -16,7 +16,8 @@ namespace Sistema_de_Gestion_Moras.Models
         public int NumberIdentification { get; set; }
         public int IdAddress { get; set; }
         public Address Address { get; set; }
-        public bool? StateDelete { get; set; }
+        public bool StateDelete { get; set; }
+        public DateTime? CreatedDate { get; set; }
 
     }
 }

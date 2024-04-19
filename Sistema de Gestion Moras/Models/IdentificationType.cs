@@ -5,7 +5,8 @@ public class IdentificationType
 {
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int IdIdentificationType { get; set; }
-    public string? IdentifiType { get; set; }
-    public bool? StateDelete { get; set; }
+    public string IdentifiType { get; set; }
+    public bool StateDelete { get; set; }
+    public DateTime? CreatedDate { get; set; }
 
 }
