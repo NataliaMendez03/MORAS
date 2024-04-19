@@ -9,7 +9,7 @@ namespace Sistema_de_Gestion_Moras.Services
         Task<List<Post>> GetAll();
         Task<Post> GetPost(int idPost);
         Task<Post> CreatePost(string namePost);
-        Task<Post> UpdatePost(int idPost, string? namePost = null);
+        Task<Post> UpdatePost(int idPost, string? namePost=null);
         Task<Post> DeletePost(int idPost);
     }
     public class PostService : IPostService
