@@ -13,7 +13,7 @@ namespace Sistema_de_Gestion_Moras.Repositories
         Task<Post> UpdatePost(Post post);
         Task<Post> DeletePost(Post post);
     }
-    public class PostRepository : IPostRepository
+    public class PostRepository: IPostRepository
     {
         private readonly berriesdbContext _db;
         public PostRepository(berriesdbContext db)
