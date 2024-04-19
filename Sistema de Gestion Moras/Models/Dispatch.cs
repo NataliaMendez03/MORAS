@@ -7,14 +7,14 @@ namespace Sistema_de_Gestion_Moras.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdDispatch {  get; set; }
-        public required int? IdEmployees { get; set; }
-        public required Employees Employees { get; set; }
-        public required int? IdSalesDetails { get; set; }
-        public required SalesDetails SalesDetails { get; set; }
-
-        public DateTime Date {  get; set; }
-        public required int? IdTracking { get; set; }
-        public required Tracking Tracking { get; set; }
+        public int? IdEmployees { get; set; }
+        public Employees Employees { get; set; }
+        public int? IdSalesDetails { get; set; }
+        public SalesDetails SalesDetails { get; set; }
+        public DateTime? Date {  get; set; }
+        public int? IdTracking { get; set; }
+        public Tracking Tracking { get; set; }
+        public bool? StateDelete { get; set; }
 
     }
 }

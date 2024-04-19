@@ -7,7 +7,8 @@ namespace Sistema_de_Gestion_Moras.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdAddress { get; set; }
         public string? Addres { get; set; }
-        public required int IdCity { get; set; }
-        public required City City { get; set; }
+        public int? IdCity { get; set; }
+        public City City { get; set; }
+        public bool? StateDelete { get; set; }
     }
 }

@@ -8,5 +8,7 @@ namespace Sistema_de_Gestion_Moras.Models
         public int IdQuality { get; set; }
         public string? NQuality { get; set; }
         public string? Quantity { get; set; }
+        public bool? StateDelete { get; set; }
+
     }
 }

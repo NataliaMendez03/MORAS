@@ -7,5 +7,7 @@ namespace Sistema_de_Gestion_Moras.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdPost { get; set; }
         public string? NamePost { get; set; }
+        public bool? StateDelete { get; set; }
+
     }
 }

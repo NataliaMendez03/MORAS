@@ -17,7 +17,8 @@ namespace Sistema_de_Gestion_Moras.Migrations
                 {
                     IdCity = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    NameCity = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    NameCity = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StateDelete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -31,7 +32,8 @@ namespace Sistema_de_Gestion_Moras.Migrations
                     IdContact = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StateDelete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -44,7 +46,8 @@ namespace Sistema_de_Gestion_Moras.Migrations
                 {
                     IdIdentificationType = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IdentifiType = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    IdentifiType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StateDelete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -57,7 +60,8 @@ namespace Sistema_de_Gestion_Moras.Migrations
                 {
                     IdPost = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    NamePost = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    NamePost = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StateDelete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -71,7 +75,8 @@ namespace Sistema_de_Gestion_Moras.Migrations
                     IdQuality = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     NQuality = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Quantity = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Quantity = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StateDelete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -85,7 +90,8 @@ namespace Sistema_de_Gestion_Moras.Migrations
                     IdSalesDetails = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Amount = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SalePrice = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    SalePrice = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StateDelete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -98,7 +104,8 @@ namespace Sistema_de_Gestion_Moras.Migrations
                 {
                     IdState = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    NameState = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    NameState = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StateDelete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -111,7 +118,8 @@ namespace Sistema_de_Gestion_Moras.Migrations
                 {
                     IdSupplies = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    NameSupplies = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    NameSupplies = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StateDelete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -125,8 +133,9 @@ namespace Sistema_de_Gestion_Moras.Migrations
                     IdAddress = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Addres = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IdCity = table.Column<int>(type: "int", nullable: false),
-                    CityIdCity = table.Column<int>(type: "int", nullable: false)
+                    IdCity = table.Column<int>(type: "int", nullable: true),
+                    CityIdCity = table.Column<int>(type: "int", nullable: false),
+                    StateDelete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -145,9 +154,10 @@ namespace Sistema_de_Gestion_Moras.Migrations
                 {
                     IdTracking = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    DateTracking = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdState = table.Column<int>(type: "int", nullable: false),
-                    StateIdState = table.Column<int>(type: "int", nullable: false)
+                    DateTracking = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IdState = table.Column<int>(type: "int", nullable: true),
+                    StateIdState = table.Column<int>(type: "int", nullable: false),
+                    StateDelete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -170,7 +180,8 @@ namespace Sistema_de_Gestion_Moras.Migrations
                     SuppliesIdSupplies = table.Column<int>(type: "int", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: true),
                     PurchasePrice = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Notes = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Notes = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StateDelete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -197,7 +208,8 @@ namespace Sistema_de_Gestion_Moras.Migrations
                     TypeIdentificationIdIdentificationType = table.Column<int>(type: "int", nullable: false),
                     NumberIdentification = table.Column<int>(type: "int", nullable: false),
                     IdAddress = table.Column<int>(type: "int", nullable: false),
-                    AddressIdAddress = table.Column<int>(type: "int", nullable: false)
+                    AddressIdAddress = table.Column<int>(type: "int", nullable: false),
+                    StateDelete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -228,8 +240,9 @@ namespace Sistema_de_Gestion_Moras.Migrations
                 {
                     IdClient = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IdPerson = table.Column<int>(type: "int", nullable: false),
-                    PersonIdPerson = table.Column<int>(type: "int", nullable: false)
+                    IdPerson = table.Column<int>(type: "int", nullable: true),
+                    PersonIdPerson = table.Column<int>(type: "int", nullable: false),
+                    StateDelete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -251,7 +264,8 @@ namespace Sistema_de_Gestion_Moras.Migrations
                     IdPost = table.Column<int>(type: "int", nullable: true),
                     PostIdPost = table.Column<int>(type: "int", nullable: false),
                     IdPerson = table.Column<int>(type: "int", nullable: true),
-                    PersonIdPerson = table.Column<int>(type: "int", nullable: false)
+                    PersonIdPerson = table.Column<int>(type: "int", nullable: false),
+                    StateDelete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -276,8 +290,9 @@ namespace Sistema_de_Gestion_Moras.Migrations
                 {
                     IdProviders = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IdPerson = table.Column<int>(type: "int", nullable: false),
-                    PersonIdPerson = table.Column<int>(type: "int", nullable: false)
+                    IdPerson = table.Column<int>(type: "int", nullable: true),
+                    PersonIdPerson = table.Column<int>(type: "int", nullable: false),
+                    StateDelete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -296,12 +311,13 @@ namespace Sistema_de_Gestion_Moras.Migrations
                 {
                     IdBillSale = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IdClient = table.Column<int>(type: "int", nullable: false),
+                    IdClient = table.Column<int>(type: "int", nullable: true),
                     ClientIdClient = table.Column<int>(type: "int", nullable: false),
-                    DateSale = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdSalesDetails = table.Column<int>(type: "int", nullable: false),
-                    SalesDetailsIdSalesDetails = table.Column<int>(type: "int", nullable: false),
-                    Notes = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    DateSale = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IdSalesDetails = table.Column<int>(type: "int", nullable: true),
+                    SalesDetailsIdSalesDetails = table.Column<int>(type: "int", nullable: true),
+                    Notes = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StateDelete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -330,9 +346,10 @@ namespace Sistema_de_Gestion_Moras.Migrations
                     EmployeesIdEmployees = table.Column<int>(type: "int", nullable: false),
                     IdSalesDetails = table.Column<int>(type: "int", nullable: true),
                     SalesDetailsIdSalesDetails = table.Column<int>(type: "int", nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IdTracking = table.Column<int>(type: "int", nullable: true),
-                    TrackingIdTracking = table.Column<int>(type: "int", nullable: false)
+                    TrackingIdTracking = table.Column<int>(type: "int", nullable: false),
+                    StateDelete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -368,7 +385,8 @@ namespace Sistema_de_Gestion_Moras.Migrations
                     Idemployees = table.Column<int>(type: "int", nullable: true),
                     EmployeesIdEmployees = table.Column<int>(type: "int", nullable: false),
                     IdQuality = table.Column<int>(type: "int", nullable: true),
-                    QualityIdQuality = table.Column<int>(type: "int", nullable: false)
+                    QualityIdQuality = table.Column<int>(type: "int", nullable: false),
+                    StateDelete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -393,10 +411,11 @@ namespace Sistema_de_Gestion_Moras.Migrations
                 {
                     IdProvsInp = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IdProviders = table.Column<int>(type: "int", nullable: false),
+                    IdProviders = table.Column<int>(type: "int", nullable: true),
                     ProvidersIdProviders = table.Column<int>(type: "int", nullable: false),
-                    IdSupplies = table.Column<int>(type: "int", nullable: false),
-                    SuppliesIdSupplies = table.Column<int>(type: "int", nullable: false)
+                    IdSupplies = table.Column<int>(type: "int", nullable: true),
+                    SuppliesIdSupplies = table.Column<int>(type: "int", nullable: false),
+                    StateDelete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -421,11 +440,12 @@ namespace Sistema_de_Gestion_Moras.Migrations
                 {
                     IdPurchase = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IdProviders = table.Column<int>(type: "int", nullable: false),
+                    IdProviders = table.Column<int>(type: "int", nullable: true),
                     ProvidersIdProviders = table.Column<int>(type: "int", nullable: false),
-                    DateProviders = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdPurchaseDetail = table.Column<int>(type: "int", nullable: false),
-                    PurchaseDetailIdPurchaseDetail = table.Column<int>(type: "int", nullable: false)
+                    DateProviders = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IdPurchaseDetail = table.Column<int>(type: "int", nullable: true),
+                    PurchaseDetailIdPurchaseDetail = table.Column<int>(type: "int", nullable: false),
+                    StateDelete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -454,7 +474,8 @@ namespace Sistema_de_Gestion_Moras.Migrations
                     IdHarvests = table.Column<int>(type: "int", nullable: true),
                     HarvestsIdHarvests = table.Column<int>(type: "int", nullable: false),
                     EntryDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Temperature = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Temperature = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StateDelete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {

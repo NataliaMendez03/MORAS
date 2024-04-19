@@ -6,10 +6,12 @@ namespace Sistema_de_Gestion_Moras.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdPurchase { get; set; }
-        public required int IdProviders { get; set; }
-        public required Providers Providers { get; set; }
-        public DateTime DateProviders { get; set; }
-        public required int IdPurchaseDetail { get; set; }
-        public required PurchaseDetail PurchaseDetail { get; set; }
+        public int? IdProviders { get; set; }
+        public Providers Providers { get; set; }
+        public DateTime? DateProviders { get; set; }
+        public int? IdPurchaseDetail { get; set; }
+        public PurchaseDetail PurchaseDetail { get; set; }
+        public bool? StateDelete { get; set; }
+
     }
 }

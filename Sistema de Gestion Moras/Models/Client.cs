@@ -7,7 +7,9 @@ namespace Sistema_de_Gestion_Moras.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdClient { get; set; }
 
-        public required int IdPerson { get; set; }
-        public required Person Person { get; set; }
+        public int? IdPerson { get; set; }
+        public Person Person { get; set; }
+        public bool? StateDelete { get; set; }
+
     }
 }
