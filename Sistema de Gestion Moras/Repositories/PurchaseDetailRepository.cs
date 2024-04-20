@@ -24,6 +24,7 @@ namespace Sistema_de_Gestion_Moras.Repositories
 
         public async Task<PurchaseDetail> CreatePurchaseDetail(int idSupplies, int quantity, string purchasePrice, string notes)
         {
+            Supplies? supplies = _db.Supplies.FirstOrDefault(ut => ut.IdSupplies == idSupplies);
             PurchaseDetail newPurchaseDetail = new PurchaseDetail
             {
                 IdSupplies = idSupplies,

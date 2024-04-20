@@ -23,6 +23,7 @@ namespace Sistema_de_Gestion_Moras.Repositories
 
         public async Task<Storage> CreateStorage(string storageName, int idHarvests, DateTime EntryDate, string Temperature)
         {
+            Harvests? harvests = _db.Harvests.FirstOrDefault(ut => ut.IdHarvests == idHarvests);
             Storage newStorage = new Storage
             {
                 StorageName = storageName,

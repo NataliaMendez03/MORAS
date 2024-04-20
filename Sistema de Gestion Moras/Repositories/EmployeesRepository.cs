@@ -23,6 +23,8 @@ namespace Sistema_de_Gestion_Moras.Repositories
 
         public async Task<Employees> CreateEmployees(int idPost, int idPerson)
         {
+            Post? post = _db.Post.FirstOrDefault(ut => ut.IdPost == idPost);
+            Person? person = _db.Person.FirstOrDefault(ut => ut.IdPerson == idPerson);
             Employees newEmployees = new Employees
             {
                 IdPost = idPost,
