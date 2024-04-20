@@ -9,7 +9,7 @@ namespace Sistema_de_Gestion_Moras.Services
     {
         Task<List<PurchaseDetail>> GetAll();
         Task<PurchaseDetail> GetPurchaseDetail(int idPurchaseDetail);
-        Task<PurchaseDetail> CreatePurchaseDetail(int idSupplies, string quantity, SqlMoney purchasePrice, string notes);
+        Task<PurchaseDetail> CreatePurchaseDetail(int idSupplies, int quantity, string purchasePrice, string notes);
         Task<PurchaseDetail> UpdatePurchaseDetail(int idPurchaseDetail, int? idSupplies=null, int? quantity=null, string? purchasePrice=null, string? notes=null);
         Task<PurchaseDetail> DeletePurchaseDetail(int idPurchaseDetail);
     }
@@ -21,7 +21,7 @@ namespace Sistema_de_Gestion_Moras.Services
             _purchaseDetailRepository = purchaseDetailRepository;
         }
 
-        public async Task<PurchaseDetail> CreatePurchaseDetail(int idSupplies, string quantity, SqlMoney purchasePrice, string notes)
+        public async Task<PurchaseDetail> CreatePurchaseDetail(int idSupplies, int quantity, string purchasePrice, string notes)
         {
             return await _purchaseDetailRepository.CreatePurchaseDetail(idSupplies, quantity, purchasePrice, notes);
         }
