@@ -7,13 +7,15 @@ namespace Sistema_de_Gestion_Moras.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdBillSale { get; set; }
         public int IdClient { get; set; }
+        [NotMapped]
         public Client Client { get; set; }
         public DateTime DateSale { get; set; }
         public int IdSalesDetails { get; set; }
+        [NotMapped]
         public SalesDetails SalesDetails { get; set; }
         public string Notes { get; set; }
         public bool StateDelete { get; set; }
-        public DateTime? CreatedDate { get; set; }
+        public DateTime? ModifyDate { get; set; }
 
     }
 }

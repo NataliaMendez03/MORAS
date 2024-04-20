@@ -9,9 +9,10 @@ namespace Sistema_de_Gestion_Moras.Models
         public int IdTracking { get; set; }
         public DateTime DateTracking { get; set; }
         public int IdState { get; set; }
+        [NotMapped]
         public State State { get; set; }
         public bool StateDelete { get; set; }
-        public DateTime? CreatedDate { get; set; }
+        public DateTime? ModifyDate { get; set; }
 
     }
 }

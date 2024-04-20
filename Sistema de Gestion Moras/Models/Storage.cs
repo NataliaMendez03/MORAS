@@ -8,11 +8,12 @@ namespace Sistema_de_Gestion_Moras.Models
         public int IdStorage { get; set; }
         public string StorageName { get; set; }
         public int IdHarvests { get; set; }
+        [NotMapped]
         public Harvests Harvests { get; set; }
         public DateTime EntryDate { get; set; }
         public string Temperature { get; set; }
         public bool StateDelete { get; set; }
-        public DateTime? CreatedDate { get; set; }
+        public DateTime? ModifyDate { get; set; }
 
 
     }

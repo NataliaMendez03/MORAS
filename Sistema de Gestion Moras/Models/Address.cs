@@ -8,8 +8,9 @@ namespace Sistema_de_Gestion_Moras.Models
         public int IdAddress { get; set; }
         public string Addres { get; set; }
         public int IdCity { get; set; }
+        [NotMapped]
         public City City { get; set; }
         public bool StateDelete { get; set; }
-        public DateTime? CreatedDate { get; set; }
+        public DateTime? ModifyDate { get; set; }
     }
 }

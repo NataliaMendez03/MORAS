@@ -10,14 +10,17 @@ namespace Sistema_de_Gestion_Moras.Models
         public string Name { get; set; }
         public string LastName { get; set; }
         public int IdContact { get; set; }
+        [NotMapped]
         public Contact Contact { get; set; }
         public int IdTypeIdentification { get; set; }
+        [NotMapped]
         public IdentificationType TypeIdentification { get; set; }
         public int NumberIdentification { get; set; }
         public int IdAddress { get; set; }
+        [NotMapped]
         public Address Address { get; set; }
         public bool StateDelete { get; set; }
-        public DateTime? CreatedDate { get; set; }
+        public DateTime? ModifyDate { get; set; }
 
     }
 }

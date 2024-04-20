@@ -8,7 +8,7 @@ namespace Sistema_de_Gestion_Moras.Models
         public int IdPost { get; set; }
         public string NamePost { get; set; }
         public bool StateDelete { get; set; }
-        public DateTime? CreatedDate { get; set; }
+        public DateTime? ModifyDate { get; set; }
 
     }
 }

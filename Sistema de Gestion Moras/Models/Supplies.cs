@@ -8,7 +8,7 @@ namespace Sistema_de_Gestion_Moras.Models
         public int IdSupplies { get; set; }
         public string NameSupplies { get; set;}
         public bool StateDelete { get; set; }
-        public DateTime? CreatedDate { get; set; }
+        public DateTime?[NotMapped] { get; set; }
 
     }
 }

@@ -9,7 +9,7 @@ namespace Sistema_de_Gestion_Moras.Models
         public string Phone { get; set; }
         public string Email { get; set; }
         public bool StateDelete { get; set; }
-        public DateTime? CreatedDate { get; set; }
+        public DateTime? ModifyDate { get; set; }
 
     }
 }

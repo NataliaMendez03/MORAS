@@ -9,7 +9,7 @@ namespace Sistema_de_Gestion_Moras.Models
         public string NQuality { get; set; }
         public string Quantity { get; set; }
         public bool StateDelete { get; set; }
-        public DateTime? CreatedDate { get; set; }
+        public DateTime? ModifyDate { get; set; }
 
     }
 }

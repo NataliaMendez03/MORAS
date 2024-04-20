@@ -8,9 +8,10 @@ namespace Sistema_de_Gestion_Moras.Models
         public int IdClient { get; set; }
 
         public int IdPerson { get; set; }
+        [NotMapped]
         public Person Person { get; set; }
         public bool StateDelete { get; set; }
-        public DateTime? CreatedDate { get; set; }
+        public DateTime? ModifyDate { get; set; }
 
     }
 }
