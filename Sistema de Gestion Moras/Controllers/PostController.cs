@@ -1,4 +1,4 @@
-﻿using HClinicalV2._0.Model;
+﻿/*using HClinicalV2._0.Model;
 using HClinicalV2._0.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -93,4 +93,4 @@ namespace HClinicalV2._0.Controllers
         }
     }
 
-}
+}*/
