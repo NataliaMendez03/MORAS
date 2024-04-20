@@ -10,7 +10,7 @@ namespace Sistema_de_Gestion_Moras.Services
         Task<List<PurchaseDetail>> GetAll();
         Task<PurchaseDetail> GetPurchaseDetail(int idPurchaseDetail);
         Task<PurchaseDetail> CreatePurchaseDetail(int idSupplies, string quantity, SqlMoney purchasePrice, string notes);
-        Task<PurchaseDetail> UpdatePurchaseDetail(int idPurchaseDetail, int? idSupplies=null, string? quantity=null, SqlMoney? purchasePrice=null, string? notes=null);
+        Task<PurchaseDetail> UpdatePurchaseDetail(int idPurchaseDetail, int? idSupplies=null, int? quantity=null, string? purchasePrice=null, string? notes=null);
         Task<PurchaseDetail> DeletePurchaseDetail(int idPurchaseDetail);
     }
     public class PurchaseDetailService: IPurchaseDetailService
@@ -49,7 +49,7 @@ namespace Sistema_de_Gestion_Moras.Services
             return await _purchaseDetailRepository.GetPurchaseDetail(idPurchaseDetail);
         }
 
-        public async Task<PurchaseDetail> UpdatePurchaseDetail(int idPurchaseDetail, int? idSupplies = null, string? quantity = null, SqlMoney? purchasePrice = null, string? notes = null)
+        public async Task<PurchaseDetail> UpdatePurchaseDetail(int idPurchaseDetail, int? idSupplies = null, int? quantity = null, string? purchasePrice = null, string? notes = null)
         {
             PurchaseDetail newPurchaseDetail = await _purchaseDetailRepository.GetPurchaseDetail(idPurchaseDetail);
             if (newPurchaseDetail != null)
@@ -60,11 +60,11 @@ namespace Sistema_de_Gestion_Moras.Services
                 }
                 if (quantity != null)
                 {
-                    newPurchaseDetail.Quantity = (string)quantity;
+                    newPurchaseDetail.Quantity = (int)quantity;
                 }
                 if (purchasePrice != null)
                 {
-                    newPurchaseDetail.PurchasePrice = (int)purchasePrice;
+                    newPurchaseDetail.PurchasePrice = (string)purchasePrice;
                 }
                 if (notes != null)
                 {
