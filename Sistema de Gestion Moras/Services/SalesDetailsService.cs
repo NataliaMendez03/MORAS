@@ -9,7 +9,7 @@ namespace Sistema_de_Gestion_Moras.Services
         Task<List<SalesDetails>> GetAll();
         Task<SalesDetails> GetSalesDetails(int idSalesDetails); 
         Task<SalesDetails> CreateSalesDetails(string amount, string salePrice);
-        Task<SalesDetails> UpdateSalesDetails(int idSalesDetails, string amount, string salePrice);
+        Task<SalesDetails> UpdateSalesDetails(int idSalesDetails, string? amount = null, string? salePrice = null);
         Task<SalesDetails> DeleteSalesDetails(int idSalesDetails);
     }
 public class SalesDetailsService: ISalesDetailsService
@@ -51,7 +51,7 @@ public class SalesDetailsService: ISalesDetailsService
             throw new NotImplementedException();
         }
 
-        public async Task<SalesDetails> UpdateSalesDetails(int idSalesDetails, string amount, string salePrice)
+        public async Task<SalesDetails> UpdateSalesDetails(int idSalesDetails, string? amount = null, string? salePrice = null)
         {
             SalesDetails newSalesDetails = await _salesDetailsRepository.GetSalesDetails(idSalesDetails);
             if (newSalesDetails != null)

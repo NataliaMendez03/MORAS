@@ -9,7 +9,7 @@ namespace Sistema_de_Gestion_Moras.Services
         Task<List<Person>> GetAll();
         Task<Person> GetPerson(int idPerson); 
         Task<Person> CreatePerson(string name, string lastName, int idContact, int idTypeIdentification, int numberIdentification, int idAddress);
-        Task<Person> UpdatePerson(int idPerson, string name, string lastName, int idContact, int idTypeIdentification, int numberIdentification, int idAddress);
+        Task<Person> UpdatePerson(int idPerson, string? name = null, string? lastName = null, int? idContact = null, int? idTypeIdentification = null,int? numberIdentification = null, int? idAddress = null);
         Task<Person> DeletePerson(int idPerson);
     }
     public class PersonService : IPersonService
@@ -51,7 +51,7 @@ namespace Sistema_de_Gestion_Moras.Services
             throw new NotImplementedException();
         }
 
-        public async Task<Person> UpdatePerson(int idPerson, string name, string lastName, int idContact, int idTypeIdentification, int numberIdentification, int idAddress)
+        public async Task<Person> UpdatePerson(int idPerson, string? name = null, string? lastName = null, int? idContact = null, int? idTypeIdentification = null, int? numberIdentification = null, int? idAddress = null)
         {
             Person newPerson = await _personRepository.GetPerson(idPerson);
             if (newPerson != null)
