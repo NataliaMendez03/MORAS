@@ -28,6 +28,14 @@ builder.Services.AddScoped<ISalesDetailsRepository, SalesDetailsRepository>();
 builder.Services.AddScoped<IStorageRepository, StorageRepository>();
 builder.Services.AddScoped<ISuppliesRepository, SuppliesRepository>();
 builder.Services.AddScoped<ITrackingRepository, TrackingRepository>();
+builder.Services.AddScoped<IAddressRepository, AddressRepository>();
+builder.Services.AddScoped<IBillSaleRepository, BillSaleRepository>();
+builder.Services.AddScoped<ICityRepository, CityRepository>();
+builder.Services.AddScoped<IProvidersRepository, ProvidersRepository>();
+builder.Services.AddScoped<IProvidervsInputsRepository, ProvidervsInputsRepository>();
+builder.Services.AddScoped<IPurchaseRepository, PurchaseRepository>();
+builder.Services.AddScoped<IQualityRepository, QualityRepository>();
+builder.Services.AddScoped<IStateRepository, StateRepository>();
 #endregion
 
 #region AppServices
@@ -44,6 +52,14 @@ builder.Services.AddScoped<ISalesDetailsService, SalesDetailsService>();
 builder.Services.AddScoped<IStorageService, StorageService>();
 builder.Services.AddScoped<ISuppliesService, SuppliesService>();
 builder.Services.AddScoped<ITrackingService, TrackingService>();
+builder.Services.AddScoped<IAddressService, AddressService>();
+builder.Services.AddScoped<IBillSaleService, BillSaleService>();
+builder.Services.AddScoped<ICityService, CityService>();
+builder.Services.AddScoped<IProvidersService, ProvidersService>();
+builder.Services.AddScoped<IProvidervsInputsService, ProvidervsInputsService>();
+builder.Services.AddScoped<IPurchaseService, PurchaseService>();
+builder.Services.AddScoped<IQualityService, QualityService>();
+builder.Services.AddScoped<IStateService, StateService>();
 #endregion
 
 var app = builder.Build();
