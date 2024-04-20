@@ -10,7 +10,7 @@ namespace Sistema_de_Gestion_Moras.Services
         Task<List<Supplies>> GetAll(); 
         Task<Supplies> GetSupplies(int idSupplies);
         Task<Supplies> CreateSupplies(string nameSupplies);
-        Task<Supplies> UpdateSupplies(int idSupplies, string nameSupplies);
+        Task<Supplies> UpdateSupplies(int idSupplies, string? nameSupplies = null);
         Task<Supplies> DeleteSupplies(int idSupplies);
     }
     public class SuppliesService : ISuppliesService
@@ -52,7 +52,7 @@ namespace Sistema_de_Gestion_Moras.Services
             throw new NotImplementedException();
         }
 
-        public async Task<Supplies> UpdateSupplies(int idSupplies, string nameSupplies)
+        public async Task<Supplies> UpdateSupplies(int idSupplies, string?  nameSupplies = null)
         {
             Supplies newSupplies = await _suppliesRepository.GetSupplies(idSupplies);
             if (newSupplies != null)

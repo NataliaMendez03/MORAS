@@ -9,7 +9,7 @@ namespace Sistema_de_Gestion_Moras.Services
         Task<List<Harvests>> GetAll();
         Task<Harvests> GetHarvests(int idHarvests); 
         Task<Harvests> CreateHarvests(DateTime harvestDate, string harvestAmount, int idemployees, int idQuality);
-        Task<Harvests> UpdateHarvests(int idHarvests,DateTime harvestDate, string harvestAmount, int idemployees, int idQuality);
+        Task<Harvests> UpdateHarvests(int idHarvests,DateTime? harvestDate = null, string? harvestAmount = null, int? idemployees = null, int? idQuality = null);
         Task<Harvests> DeleteHarvests(int idHarvests);
     }
     public class HarvestsService : IHarvestsService
@@ -51,7 +51,7 @@ namespace Sistema_de_Gestion_Moras.Services
             throw new NotImplementedException();
         }
 
-        public async Task<Harvests> UpdateHarvests(int idHarvests, DateTime harvestDate, string harvestAmount, int idemployees, int idQuality)
+        public async Task<Harvests> UpdateHarvests(int idHarvests, DateTime? harvestDate = null, string? harvestAmount = null, int? idemployees = null, int? idQuality = null)
         {
             Harvests newHarvests = await _harvestsRepository.GetHarvests(idHarvests);
             if (newHarvests != null)

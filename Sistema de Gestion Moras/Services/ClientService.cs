@@ -9,7 +9,7 @@ namespace Sistema_de_Gestion_Moras.Services
         Task<List<Client>> GetAll();
         Task<Client> GetClient(int idClient); 
         Task<Client> CreateClient(int idPerson);
-        Task<Client> UpdateClient(int idClient, int idPerson);
+        Task<Client> UpdateClient(int idClient, int? idPerson = null);
         Task<Client> DeleteClient(int idClient);
     }
     public class ClientService : IClientService
@@ -51,7 +51,7 @@ namespace Sistema_de_Gestion_Moras.Services
             throw new NotImplementedException();
         }
 
-        public async Task<Client> UpdateClient(int idClient, int idPerson)
+        public async Task<Client> UpdateClient(int idClient, int? idPerson = null)
         {
             Client newClient = await _clientRepository.GetClient(idClient);
             if (newClient != null)

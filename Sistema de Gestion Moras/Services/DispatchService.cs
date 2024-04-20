@@ -9,7 +9,7 @@ namespace Sistema_de_Gestion_Moras.Services
         Task<List<Dispatch>> GetAll();
         Task<Dispatch> GetDispatch(int idDispatch); 
         Task<Dispatch> CreateDispatch(int idEmployees, int idSalesDetails, DateTime date, int idTracking);
-        Task<Dispatch> UpdateDispatch(int idDispatch, int idEmployees, int idSalesDetails, DateTime date, int idTracking);
+        Task<Dispatch> UpdateDispatch(int idDispatch, int? idEmployees = null, int? idSalesDetails = null, DateTime? date = null, int? idTracking = null);
         Task<Dispatch> DeleteDispatch(int idDispatch);
     }
     public class DispatchService: IDispatchService
@@ -51,7 +51,7 @@ namespace Sistema_de_Gestion_Moras.Services
             throw new NotImplementedException();
         }
 
-        public async Task<Dispatch> UpdateDispatch(int idDispatch, int idEmployees, int idSalesDetails, DateTime date, int idTracking)
+        public async Task<Dispatch> UpdateDispatch(int idDispatch, int? idEmployees = null, int? idSalesDetails = null, DateTime? date = null, int? idTracking = null)
         {
             Dispatch newDispatch = await _dispatchRepository.GetDispatch(idDispatch);
             if (newDispatch != null)

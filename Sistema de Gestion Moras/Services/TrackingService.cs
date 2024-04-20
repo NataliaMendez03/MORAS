@@ -10,7 +10,7 @@ namespace Sistema_de_Gestion_Moras.Services
         Task<List<Tracking>> GetAll();
         Task<Tracking> GetTracking(int IdTracking);
         Task<Tracking> CreateTracking(DateTime datetracking, int idState);
-        Task<Tracking> UpdateTracking(int IdTracking, DateTime datetracking, int idState);
+        Task<Tracking> UpdateTracking(int IdTracking, DateTime? datetracking = null, int? idState = null);
         Task<Tracking> DeleteTracking(int IdTracking);
     }
     public class TrackingService : ITrackingService
@@ -52,7 +52,7 @@ namespace Sistema_de_Gestion_Moras.Services
             throw new NotImplementedException();
         }
 
-        public async Task<Tracking> UpdateTracking(int IdTracking, DateTime datetracking, int idState)
+        public async Task<Tracking> UpdateTracking(int IdTracking, DateTime? datetracking = null, int? idState = null)
         {
             Tracking newTracking = await _trackingService.GetTracking(IdTracking);
             if (newTracking != null)
