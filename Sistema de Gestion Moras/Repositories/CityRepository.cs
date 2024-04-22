@@ -57,7 +57,6 @@ namespace Sistema_de_Gestion_Moras.Repositories
             City CityUpdate = await _db.City.FindAsync(city.IdCity);
             if (CityUpdate != null)
             {
-                //?? ConsultUpdate.IdConsult = idConsult;
                 CityUpdate.NameCity = city.NameCity;
 
                 await _db.SaveChangesAsync();

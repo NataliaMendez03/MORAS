@@ -64,7 +64,6 @@ namespace Sistema_de_Gestion_Moras.Repositories
             PurchaseDetail PurchaseDetailUpdate = await _db.PurchaseDetail.FindAsync(purchaseDetail.IdPurchaseDetail);
             if (PurchaseDetailUpdate != null)
             {
-                //?? ConsultUpdate.IdConsult = idConsult;
                 PurchaseDetailUpdate.IdSupplies = purchaseDetail.IdSupplies;
                 PurchaseDetailUpdate.Quantity = purchaseDetail.Quantity;
                 PurchaseDetailUpdate.PurchasePrice = purchaseDetail.PurchasePrice;

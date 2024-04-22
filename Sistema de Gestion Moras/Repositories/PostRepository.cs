@@ -59,7 +59,6 @@ namespace Sistema_de_Gestion_Moras.Repositories
             Post PostUpdate = await _db.Post.FindAsync(post.IdPost);
             if (PostUpdate != null)
             {
-                //?? ConsultUpdate.IdConsult = idConsult;
                 PostUpdate.NamePost = post.NamePost;
 
 

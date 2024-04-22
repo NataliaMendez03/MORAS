@@ -59,7 +59,6 @@ namespace Sistema_de_Gestion_Moras.Repositories
             Contact ConsultUpdate = await _db.Contact.FindAsync(contact.IdContact);
             if (ConsultUpdate != null)
             {
-                //?? ConsultUpdate.IdConsult = idConsult;
                 ConsultUpdate.Phone = contact.Phone;
                 ConsultUpdate.Email = contact.Email;
 

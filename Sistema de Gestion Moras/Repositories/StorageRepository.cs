@@ -63,7 +63,6 @@ namespace Sistema_de_Gestion_Moras.Repositories
             Storage storageUpdate = await _db.Storage.FindAsync(storage.IdStorage);
             if (storageUpdate != null)
             {
-                //?? ConsultUpdate.IdConsult = idConsult ;
                 storageUpdate.StorageName = storage.StorageName;
                 storageUpdate.IdHarvests = storage.IdHarvests;
                 storageUpdate.EntryDate = storage.EntryDate;

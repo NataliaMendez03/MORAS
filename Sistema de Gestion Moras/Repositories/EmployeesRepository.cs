@@ -62,7 +62,6 @@ namespace Sistema_de_Gestion_Moras.Repositories
             Employees EmployeesUpdate = await _db.Employees.FindAsync(employees.IdEmployees);
             if (EmployeesUpdate != null)
             {
-                //?? ConsultUpdate.IdConsult = idConsult;
                 EmployeesUpdate.IdPost = employees.IdPost;
                 EmployeesUpdate.IdPerson = employees.IdPerson;
 

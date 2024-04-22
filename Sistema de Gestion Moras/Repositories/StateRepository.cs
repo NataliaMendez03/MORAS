@@ -59,7 +59,6 @@ namespace Sistema_de_Gestion_Moras.Repositories
             State StateUpdate = await _db.State.FindAsync(state.IdState);
             if (StateUpdate != null)
             {
-                //?? ConsultUpdate.IdConsult = idConsult;
                 StateUpdate.NameState = state.NameState;
 
                 await _db.SaveChangesAsync();

@@ -58,7 +58,6 @@ namespace Sistema_de_Gestion_Moras.Repositories
             Quality QualityUpdate = await _db.Quality.FindAsync(quality.IdQuality);
             if (QualityUpdate != null)
             {
-                //?? ConsultUpdate.IdConsult = idConsult;
                 QualityUpdate.NQuality = quality.NQuality;
                 QualityUpdate.Quantity = quality.Quantity;
 

@@ -58,7 +58,6 @@ namespace Sistema_de_Gestion_Moras.Repositories
             Address AddressUpdate = await _db.Address.FindAsync(address.IdAddress);
             if (AddressUpdate != null)
             {
-                //?? ConsultUpdate.IdConsult = idConsult;
                 AddressUpdate.Addres = address.Addres;
                 AddressUpdate.IdCity = address.IdCity;
 

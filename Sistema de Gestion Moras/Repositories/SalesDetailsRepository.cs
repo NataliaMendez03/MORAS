@@ -63,7 +63,6 @@ namespace Sistema_de_Gestion_Moras.Repositories
             SalesDetails ConsultUpdate = await _db.SalesDetails.FindAsync(salesDetails.IdSalesDetails);
             if (ConsultUpdate != null)
             {
-
                 ConsultUpdate.Amount = salesDetails.Amount;
                 ConsultUpdate.SalePrice = salesDetails.SalePrice;
 

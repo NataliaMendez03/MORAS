@@ -58,7 +58,6 @@ namespace Sistema_de_Gestion_Moras.Repositories
             Providers ProvidersUpdate = await _db.Providers.FindAsync(providers.IdProviders);
             if (ProvidersUpdate != null)
             {
-                //?? ConsultUpdate.IdConsult = idConsult;
                 ProvidersUpdate.IdPerson = providers.IdPerson;
 
                 await _db.SaveChangesAsync();
