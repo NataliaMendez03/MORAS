@@ -33,7 +33,7 @@ namespace Sistema_de_Gestion_Moras.Services
                 throw new Exception($"This Quality with the Id {idQuality} don´t exist. ");
             }
             QualityToDelete.StateDelete = true;
-            QualityToDelete.CreatedDate = DateTime.Now;
+            QualityToDelete.ModifyDate = DateTime.Now;
             return await _QualityRepository.DeleteQuality(QualityToDelete);
             throw new NotImplementedException();
         }

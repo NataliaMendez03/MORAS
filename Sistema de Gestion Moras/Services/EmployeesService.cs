@@ -34,7 +34,7 @@ namespace Sistema_de_Gestion_Moras.Services
                 throw new Exception($"This employees with the Id {idEmployees} don´t exist. ");
             }
             employeesToDelete.StateDelete = true;
-            employeesToDelete.CreatedDate = DateTime.Now;
+            employeesToDelete.ModifyDate = DateTime.Now;
             return await _employeesRepository.DeleteEmployees(employeesToDelete);
         }
 

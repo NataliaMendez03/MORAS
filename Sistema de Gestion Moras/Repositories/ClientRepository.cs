@@ -27,7 +27,7 @@ namespace Sistema_de_Gestion_Moras.Repositories
             {
                 IdPerson = idPerson,
                 StateDelete = false,
-                CreatedDate = null
+                ModifyDate = null
             };
 
             await _db.Client.AddAsync(newClient);

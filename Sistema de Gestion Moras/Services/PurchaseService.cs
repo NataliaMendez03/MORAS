@@ -33,7 +33,7 @@ namespace Sistema_de_Gestion_Moras.Services
                 throw new Exception($"This Purchase with the Id {idPurchase} doesn´t exist. ");
             }
             PurchaseToDelete.StateDelete = true;
-            PurchaseToDelete.CreatedDate = DateTime.Now;
+            PurchaseToDelete.ModifyDate = DateTime.Now;
             return await _PurchaseRepository.DeletePurchase(PurchaseToDelete);
             throw new NotImplementedException();
         }

@@ -35,7 +35,7 @@ namespace Sistema_de_Gestion_Moras.Repositories
                 NumberIdentification = numberIdentification,
                 IdAddress = idAddress,
                 StateDelete = false,
-                CreatedDate = null
+                ModifyDate = null
             };
 
             await _db.Person.AddAsync(newPerson);

@@ -32,7 +32,7 @@ namespace Sistema_de_Gestion_Moras.Repositories
                 IdSalesDetails = idSalesDetails,
                 Notes = notes,
                 StateDelete = false,
-                CreatedDate = null
+                ModifyDate = null
             };
 
             await _db.BillSale.AddAsync(newBillSale);

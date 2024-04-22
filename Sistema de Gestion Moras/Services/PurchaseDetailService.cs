@@ -35,7 +35,7 @@ namespace Sistema_de_Gestion_Moras.Services
                 throw new Exception($"This PurchaseDetail with the Id {idPurchaseDetail} don´t exist. ");
             }
             purchaseDetailsToDelete.StateDelete = true;
-            purchaseDetailsToDelete.CreatedDate = DateTime.Now;
+            purchaseDetailsToDelete.ModifyDate = DateTime.Now;
             return await _purchaseDetailRepository.DeletePurchaseDetail(purchaseDetailsToDelete);
         }
 

@@ -34,7 +34,7 @@ namespace Sistema_de_Gestion_Moras.Services
                 throw new Exception($"This state with the Id {idState} don´t exist. ");
             }
             stateToDelete.StateDelete = true;
-            stateToDelete.CreatedDate = DateTime.Now;
+            stateToDelete.ModifyDate = DateTime.Now;
             return await _stateRepository.DeleteState(stateToDelete);
         }
 

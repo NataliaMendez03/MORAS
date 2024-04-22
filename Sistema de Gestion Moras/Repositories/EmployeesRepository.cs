@@ -30,7 +30,7 @@ namespace Sistema_de_Gestion_Moras.Repositories
                 IdPost = idPost,
                 IdPerson = idPerson,
                 StateDelete = false,
-                CreatedDate = null
+                ModifyDate = null
             };
 
             await _db.Employees.AddAsync(newEmployees);

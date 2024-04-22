@@ -32,7 +32,7 @@ namespace Sistema_de_Gestion_Moras.Repositories
                 PurchasePrice = purchasePrice,
                 Notes = notes,
                 StateDelete = false,
-                CreatedDate = null
+                ModifyDate = null
             };
 
             await _db.PurchaseDetail.AddAsync(newPurchaseDetail);

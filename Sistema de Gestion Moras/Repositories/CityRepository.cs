@@ -25,7 +25,7 @@ namespace Sistema_de_Gestion_Moras.Repositories
             {
                 NameCity = nameCity,
                 StateDelete = false,
-                CreatedDate = null
+                ModifyDate = null
             };
 
             await _db.City.AddAsync(newCity);

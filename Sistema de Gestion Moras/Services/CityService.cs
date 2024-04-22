@@ -33,7 +33,7 @@ namespace Sistema_de_Gestion_Moras.Services
                 throw new Exception($"This City with the Id {idCity} don´t exist. ");
             }
             CityToDelete.StateDelete = true;
-            CityToDelete.CreatedDate = DateTime.Now;
+            CityToDelete.ModifyDate = DateTime.Now;
             return await _CityRepository.DeleteCity(CityToDelete);
         }
 

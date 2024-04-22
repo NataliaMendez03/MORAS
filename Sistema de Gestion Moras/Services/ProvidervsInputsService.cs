@@ -33,7 +33,7 @@ namespace Sistema_de_Gestion_Moras.Services
                 throw new Exception($"This ProvidervsInputs with the Id {idProvsInp} doesn´t exist. ");
             }
             ProvidervsInputsToDelete.StateDelete = true;
-            ProvidervsInputsToDelete.CreatedDate = DateTime.Now;
+            ProvidervsInputsToDelete.ModifyDate = DateTime.Now;
             return await _ProvidervsInputsRepository.DeleteProvidervsInputs(ProvidervsInputsToDelete);
             throw new NotImplementedException();
         }

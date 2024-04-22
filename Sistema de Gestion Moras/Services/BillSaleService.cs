@@ -33,7 +33,7 @@ namespace Sistema_de_Gestion_Moras.Services
                 throw new Exception($"This BillSale with the Id {idBillSale} doesn´t exist. ");
             }
             BillSaleToDelete.StateDelete = true;
-            BillSaleToDelete.CreatedDate = DateTime.Now;
+            BillSaleToDelete.ModifyDate = DateTime.Now;
             return await _BillSaleRepository.DeleteBillSale(BillSaleToDelete);
             throw new NotImplementedException();
         }

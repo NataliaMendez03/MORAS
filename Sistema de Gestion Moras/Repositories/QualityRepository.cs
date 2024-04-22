@@ -26,7 +26,7 @@ namespace Sistema_de_Gestion_Moras.Repositories
                 NQuality = nQuality,
                 Quantity = quantity,
                 StateDelete = false,
-                CreatedDate = null
+                ModifyDate = null
             };
 
             await _db.Quality.AddAsync(newQuality);

@@ -34,7 +34,7 @@ namespace Sistema_de_Gestion_Moras.Services
                 throw new Exception($"This harvests with the Id {idHarvests} don´t exist. ");
             }
             HarvestsToDelete.StateDelete = true;
-            HarvestsToDelete.CreatedDate = DateTime.Now;
+            HarvestsToDelete.ModifyDate = DateTime.Now;
             return await _harvestsRepository.DeleteHarvests(HarvestsToDelete);
             throw new NotImplementedException();
         }

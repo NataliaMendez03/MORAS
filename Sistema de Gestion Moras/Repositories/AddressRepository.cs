@@ -26,7 +26,7 @@ namespace Sistema_de_Gestion_Moras.Repositories
                 Addres = addres,
                 IdCity = idCity,
                 StateDelete = false,
-                CreatedDate = null
+                ModifyDate = null
             };
 
             await _db.Address.AddAsync(newAddress);

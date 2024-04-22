@@ -35,7 +35,7 @@ namespace Sistema_de_Gestion_Moras.Services
                 throw new Exception($"This tracking with the Id {IdTracking} don´t exist. ");
             }
             TrackingToDelete.StateDelete = true;
-            TrackingToDelete.CreatedDate = DateTime.Now; 
+            TrackingToDelete.ModifyDate = DateTime.Now; 
             return await _trackingService.DeleteTracking(TrackingToDelete);
             throw new NotImplementedException();
         }

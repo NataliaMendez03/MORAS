@@ -27,7 +27,7 @@ namespace Sistema_de_Gestion_Moras.Repositories
             {
                 NameState = nameState,
                 StateDelete = false,
-                CreatedDate = null
+                ModifyDate = null
             };
 
             await _db.State.AddAsync(newState);

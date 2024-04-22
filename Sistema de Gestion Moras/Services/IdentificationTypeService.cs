@@ -34,7 +34,7 @@ namespace Sistema_de_Gestion_Moras.Services
                 throw new Exception($"This identification type with the Id {idIdentificationType} don´t exist. ");
             }
             identificationTypeToDelete.StateDelete = true;
-            identificationTypeToDelete.CreatedDate = DateTime.Now;
+            identificationTypeToDelete.ModifyDate = DateTime.Now;
             return await _identiTypeRepository.DeleteIdentificationType(identificationTypeToDelete);
         }
 

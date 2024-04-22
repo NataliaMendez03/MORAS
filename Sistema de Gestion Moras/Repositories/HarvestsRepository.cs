@@ -32,7 +32,7 @@ namespace Sistema_de_Gestion_Moras.Repositories
                 Idemployees = idemployees,
                 IdQuality = idQuality,
                 StateDelete = false,
-                CreatedDate = null
+                ModifyDate = null
             };
 
             await _db.Harvests.AddAsync(newHarvests);

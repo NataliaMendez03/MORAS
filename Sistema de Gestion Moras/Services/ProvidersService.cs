@@ -32,7 +32,7 @@ namespace Sistema_de_Gestion_Moras.Services
                 throw new Exception($"This Providers with the Id {idProviders} doesn´t exist. ");
             }
             ProvidersToDelete.StateDelete = true;
-            ProvidersToDelete.CreatedDate = DateTime.Now;
+            ProvidersToDelete.ModifyDate = DateTime.Now;
             return await _ProvidersRepository.DeleteProviders(ProvidersToDelete);
             throw new NotImplementedException();
         }

@@ -26,7 +26,7 @@ namespace Sistema_de_Gestion_Moras.Repositories
             {
                 NameSupplies = nameSupplies,
                 StateDelete = false,
-                CreatedDate = null
+                ModifyDate = null
             };
 
             await _db.Supplies.AddAsync(newSupplies);

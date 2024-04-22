@@ -34,7 +34,7 @@ namespace Sistema_de_Gestion_Moras.Services
                 throw new Exception($"This Contact with the Id {idContact} don´t exist. ");
             }
             contactToDelete.StateDelete = true;
-            contactToDelete.CreatedDate = DateTime.Now;
+            contactToDelete.ModifyDate = DateTime.Now;
             return await _contactRepository.DeleteContact(contactToDelete);
         }
 

@@ -33,7 +33,7 @@ namespace Sistema_de_Gestion_Moras.Repositories
                 DateTracking = datetracking,
                 IdState = idState,
                 StateDelete = false,
-                CreatedDate = null
+                ModifyDate = null
             };
 
             await _db.Tracking.AddAsync(newTracking);

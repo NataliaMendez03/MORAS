@@ -27,7 +27,7 @@ namespace Sistema_de_Gestion_Moras.Repositories
                 Phone = phone,
                 Email = email,
                 StateDelete = false,
-                CreatedDate = null
+                ModifyDate = null
             };
 
             await _db.Contact.AddAsync(newContact);

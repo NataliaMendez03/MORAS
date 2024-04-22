@@ -34,7 +34,7 @@ namespace Sistema_de_Gestion_Moras.Services
                 throw new Exception($"This client with the Id {idClient} don´t exist. ");
             }
             ClientToDelete.StateDelete = true;
-            ClientToDelete.CreatedDate = DateTime.Now;
+            ClientToDelete.ModifyDate = DateTime.Now;
             return await _clientRepository.DeleteClient(ClientToDelete);
             throw new NotImplementedException();
         }

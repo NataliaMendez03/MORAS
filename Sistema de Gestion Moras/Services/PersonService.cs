@@ -34,7 +34,7 @@ namespace Sistema_de_Gestion_Moras.Services
                 throw new Exception($"This person with the Id {idPerson} doesn´t exist. ");
             }
             PersonToDelete.StateDelete = true;
-            PersonToDelete.CreatedDate = DateTime.Now;
+            PersonToDelete.ModifyDate = DateTime.Now;
             return await _personRepository.DeletePerson(PersonToDelete);
             throw new NotImplementedException();
         }

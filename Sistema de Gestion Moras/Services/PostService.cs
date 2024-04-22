@@ -33,7 +33,7 @@ namespace Sistema_de_Gestion_Moras.Services
                 throw new Exception($"This Post with the Id {idPost} don´t exist. ");
             }
             PostToDelete.StateDelete = true;
-            PostToDelete.CreatedDate = DateTime.Now;
+            PostToDelete.ModifyDate = DateTime.Now;
             return await _postRepository.DeletePost(PostToDelete);
         }
 

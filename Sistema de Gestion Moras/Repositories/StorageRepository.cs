@@ -31,7 +31,7 @@ namespace Sistema_de_Gestion_Moras.Repositories
                 EntryDate = EntryDate,
                 Temperature = Temperature,
                 StateDelete = false,
-                CreatedDate = null
+                ModifyDate = null
             };
 
             await _db.Storage.AddAsync(newStorage);

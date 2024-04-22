@@ -27,7 +27,7 @@ namespace Sistema_de_Gestion_Moras.Repositories
             {
                 IdentifiType = identifiType,
                 StateDelete = false,
-                CreatedDate = null
+                ModifyDate = null
             };
 
             await _db.IdentificationType.AddAsync(newIdentificationType);

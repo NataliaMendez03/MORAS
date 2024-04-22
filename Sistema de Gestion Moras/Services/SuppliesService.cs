@@ -35,7 +35,7 @@ namespace Sistema_de_Gestion_Moras.Services
                 throw new Exception($"This salesDetails with the Id {idSupplies} don´t exist. ");
             }
             SuppliesToDelete.StateDelete = true;
-            SuppliesToDelete.CreatedDate = DateTime.Now;
+            SuppliesToDelete.ModifyDate = DateTime.Now;
             return await _suppliesRepository.DeleteSupplies(SuppliesToDelete);
             throw new NotImplementedException(); 
         }

@@ -31,7 +31,7 @@ namespace Sistema_de_Gestion_Moras.Repositories
                 DateProviders = dateProviders,
                 IdPurchaseDetail = idPurchaseDetail,
                 StateDelete = false,
-                CreatedDate = null
+                ModifyDate = null
             };
 
             await _db.Purchase.AddAsync(newPurchase);

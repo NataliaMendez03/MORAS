@@ -34,7 +34,7 @@ public class SalesDetailsService: ISalesDetailsService
                 throw new Exception($"This salesDetails with the Id {idSalesDetails} don´t exist. ");
             }
             SalesDetailsToDelete.StateDelete = true;
-            SalesDetailsToDelete.CreatedDate = DateTime.Now;
+            SalesDetailsToDelete.ModifyDate = DateTime.Now;
             return await _salesDetailsRepository.DeleteSalesDetails(SalesDetailsToDelete);
             throw new NotImplementedException();
         }

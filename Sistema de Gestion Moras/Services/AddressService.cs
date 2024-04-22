@@ -33,7 +33,7 @@ namespace Sistema_de_Gestion_Moras.Services
                 throw new Exception($"This Address with the Id {idAddress} don´t exist. ");
             }
             AddressToDelete.StateDelete = true;
-            AddressToDelete.CreatedDate = DateTime.Now;
+            AddressToDelete.ModifyDate = DateTime.Now;
             return await _AddressRepository.DeleteAddress(AddressToDelete);
             throw new NotImplementedException();
         }

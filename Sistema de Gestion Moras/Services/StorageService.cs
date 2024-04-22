@@ -34,7 +34,7 @@ namespace Sistema_de_Gestion_Moras.Services
                 throw new Exception($"This Storage with the Id {idStorage} don´t exist. ");
             }
             consultToDelete.StateDelete = true;
-            consultToDelete.CreatedDate = DateTime.Now;
+            consultToDelete.ModifyDate = DateTime.Now;
             return await _storageRepository.DeleteStorage(consultToDelete);
         }
 

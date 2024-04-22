@@ -34,7 +34,7 @@ namespace Sistema_de_Gestion_Moras.Services
                 throw new Exception($"This dispatch with the Id {idDispatch} don´t exist. ");
             }
             DispatchToDelete.StateDelete = true;
-            DispatchToDelete.CreatedDate = DateTime.Now;
+            DispatchToDelete.ModifyDate = DateTime.Now;
             return await _dispatchRepository.DeleteDispatch(DispatchToDelete);
             throw new NotImplementedException();
         }
