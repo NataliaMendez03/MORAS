@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Sistema_de_Gestion_Moras.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -19,7 +19,7 @@ namespace Sistema_de_Gestion_Moras.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     NameCity = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     StateDelete = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    ModifyDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -35,7 +35,7 @@ namespace Sistema_de_Gestion_Moras.Migrations
                     Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     StateDelete = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    ModifyDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -50,7 +50,7 @@ namespace Sistema_de_Gestion_Moras.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     IdentifiType = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     StateDelete = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    ModifyDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -65,7 +65,7 @@ namespace Sistema_de_Gestion_Moras.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     NamePost = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     StateDelete = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    ModifyDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -81,7 +81,7 @@ namespace Sistema_de_Gestion_Moras.Migrations
                     NQuality = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Quantity = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     StateDelete = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    ModifyDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -97,7 +97,7 @@ namespace Sistema_de_Gestion_Moras.Migrations
                     Amount = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SalePrice = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     StateDelete = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    ModifyDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -112,7 +112,7 @@ namespace Sistema_de_Gestion_Moras.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     NameState = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     StateDelete = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    ModifyDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -127,7 +127,7 @@ namespace Sistema_de_Gestion_Moras.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     NameSupplies = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     StateDelete = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    ModifyDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -142,16 +142,15 @@ namespace Sistema_de_Gestion_Moras.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Addres = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IdCity = table.Column<int>(type: "int", nullable: false),
-                    CityIdCity = table.Column<int>(type: "int", nullable: false),
                     StateDelete = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    ModifyDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Address", x => x.IdAddress);
                     table.ForeignKey(
-                        name: "FK_Address_City_CityIdCity",
-                        column: x => x.CityIdCity,
+                        name: "FK_Address_City_IdCity",
+                        column: x => x.IdCity,
                         principalTable: "City",
                         principalColumn: "IdCity",
                         onDelete: ReferentialAction.Restrict);
@@ -165,16 +164,15 @@ namespace Sistema_de_Gestion_Moras.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DateTracking = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IdState = table.Column<int>(type: "int", nullable: false),
-                    StateIdState = table.Column<int>(type: "int", nullable: false),
                     StateDelete = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    ModifyDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Tracking", x => x.IdTracking);
                     table.ForeignKey(
-                        name: "FK_Tracking_State_StateIdState",
-                        column: x => x.StateIdState,
+                        name: "FK_Tracking_State_IdState",
+                        column: x => x.IdState,
                         principalTable: "State",
                         principalColumn: "IdState",
                         onDelete: ReferentialAction.Restrict);
@@ -187,19 +185,18 @@ namespace Sistema_de_Gestion_Moras.Migrations
                     IdPurchaseDetail = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     IdSupplies = table.Column<int>(type: "int", nullable: false),
-                    SuppliesIdSupplies = table.Column<int>(type: "int", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     PurchasePrice = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Notes = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     StateDelete = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    ModifyDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PurchaseDetail", x => x.IdPurchaseDetail);
                     table.ForeignKey(
-                        name: "FK_PurchaseDetail_Supplies_SuppliesIdSupplies",
-                        column: x => x.SuppliesIdSupplies,
+                        name: "FK_PurchaseDetail_Supplies_IdSupplies",
+                        column: x => x.IdSupplies,
                         principalTable: "Supplies",
                         principalColumn: "IdSupplies",
                         onDelete: ReferentialAction.Restrict);
@@ -214,33 +211,30 @@ namespace Sistema_de_Gestion_Moras.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IdContact = table.Column<int>(type: "int", nullable: false),
-                    ContactIdContact = table.Column<int>(type: "int", nullable: false),
                     IdTypeIdentification = table.Column<int>(type: "int", nullable: false),
-                    TypeIdentificationIdIdentificationType = table.Column<int>(type: "int", nullable: false),
                     NumberIdentification = table.Column<int>(type: "int", nullable: false),
                     IdAddress = table.Column<int>(type: "int", nullable: false),
-                    AddressIdAddress = table.Column<int>(type: "int", nullable: false),
                     StateDelete = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    ModifyDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Person", x => x.IdPerson);
                     table.ForeignKey(
-                        name: "FK_Person_Address_AddressIdAddress",
-                        column: x => x.AddressIdAddress,
+                        name: "FK_Person_Address_IdAddress",
+                        column: x => x.IdAddress,
                         principalTable: "Address",
                         principalColumn: "IdAddress",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Person_Contact_ContactIdContact",
-                        column: x => x.ContactIdContact,
+                        name: "FK_Person_Contact_IdContact",
+                        column: x => x.IdContact,
                         principalTable: "Contact",
                         principalColumn: "IdContact",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Person_IdentificationType_TypeIdentificationIdIdentificationType",
-                        column: x => x.TypeIdentificationIdIdentificationType,
+                        name: "FK_Person_IdentificationType_IdTypeIdentification",
+                        column: x => x.IdTypeIdentification,
                         principalTable: "IdentificationType",
                         principalColumn: "IdIdentificationType",
                         onDelete: ReferentialAction.Restrict);
@@ -253,16 +247,15 @@ namespace Sistema_de_Gestion_Moras.Migrations
                     IdClient = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     IdPerson = table.Column<int>(type: "int", nullable: false),
-                    PersonIdPerson = table.Column<int>(type: "int", nullable: false),
                     StateDelete = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    ModifyDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Client", x => x.IdClient);
                     table.ForeignKey(
-                        name: "FK_Client_Person_PersonIdPerson",
-                        column: x => x.PersonIdPerson,
+                        name: "FK_Client_Person_IdPerson",
+                        column: x => x.IdPerson,
                         principalTable: "Person",
                         principalColumn: "IdPerson",
                         onDelete: ReferentialAction.Restrict);
@@ -275,24 +268,22 @@ namespace Sistema_de_Gestion_Moras.Migrations
                     IdEmployees = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     IdPost = table.Column<int>(type: "int", nullable: false),
-                    PostIdPost = table.Column<int>(type: "int", nullable: false),
                     IdPerson = table.Column<int>(type: "int", nullable: false),
-                    PersonIdPerson = table.Column<int>(type: "int", nullable: false),
                     StateDelete = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    ModifyDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Employees", x => x.IdEmployees);
                     table.ForeignKey(
-                        name: "FK_Employees_Person_PersonIdPerson",
-                        column: x => x.PersonIdPerson,
+                        name: "FK_Employees_Person_IdPerson",
+                        column: x => x.IdPerson,
                         principalTable: "Person",
                         principalColumn: "IdPerson",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Employees_Post_PostIdPost",
-                        column: x => x.PostIdPost,
+                        name: "FK_Employees_Post_IdPost",
+                        column: x => x.IdPost,
                         principalTable: "Post",
                         principalColumn: "IdPost",
                         onDelete: ReferentialAction.Restrict);
@@ -305,16 +296,15 @@ namespace Sistema_de_Gestion_Moras.Migrations
                     IdProviders = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     IdPerson = table.Column<int>(type: "int", nullable: false),
-                    PersonIdPerson = table.Column<int>(type: "int", nullable: false),
                     StateDelete = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    ModifyDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Providers", x => x.IdProviders);
                     table.ForeignKey(
-                        name: "FK_Providers_Person_PersonIdPerson",
-                        column: x => x.PersonIdPerson,
+                        name: "FK_Providers_Person_IdPerson",
+                        column: x => x.IdPerson,
                         principalTable: "Person",
                         principalColumn: "IdPerson",
                         onDelete: ReferentialAction.Restrict);
@@ -327,26 +317,24 @@ namespace Sistema_de_Gestion_Moras.Migrations
                     IdBillSale = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     IdClient = table.Column<int>(type: "int", nullable: false),
-                    ClientIdClient = table.Column<int>(type: "int", nullable: false),
                     DateSale = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IdSalesDetails = table.Column<int>(type: "int", nullable: false),
-                    SalesDetailsIdSalesDetails = table.Column<int>(type: "int", nullable: false),
                     Notes = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     StateDelete = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    ModifyDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_BillSale", x => x.IdBillSale);
                     table.ForeignKey(
-                        name: "FK_BillSale_Client_ClientIdClient",
-                        column: x => x.ClientIdClient,
+                        name: "FK_BillSale_Client_IdClient",
+                        column: x => x.IdClient,
                         principalTable: "Client",
                         principalColumn: "IdClient",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_BillSale_SalesDetails_SalesDetailsIdSalesDetails",
-                        column: x => x.SalesDetailsIdSalesDetails,
+                        name: "FK_BillSale_SalesDetails_IdSalesDetails",
+                        column: x => x.IdSalesDetails,
                         principalTable: "SalesDetails",
                         principalColumn: "IdSalesDetails",
                         onDelete: ReferentialAction.Restrict);
@@ -359,33 +347,30 @@ namespace Sistema_de_Gestion_Moras.Migrations
                     IdDispatch = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     IdEmployees = table.Column<int>(type: "int", nullable: false),
-                    EmployeesIdEmployees = table.Column<int>(type: "int", nullable: false),
                     IdSalesDetails = table.Column<int>(type: "int", nullable: false),
-                    SalesDetailsIdSalesDetails = table.Column<int>(type: "int", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IdTracking = table.Column<int>(type: "int", nullable: false),
-                    TrackingIdTracking = table.Column<int>(type: "int", nullable: false),
                     StateDelete = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    ModifyDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Dispatch", x => x.IdDispatch);
                     table.ForeignKey(
-                        name: "FK_Dispatch_Employees_EmployeesIdEmployees",
-                        column: x => x.EmployeesIdEmployees,
+                        name: "FK_Dispatch_Employees_IdEmployees",
+                        column: x => x.IdEmployees,
                         principalTable: "Employees",
                         principalColumn: "IdEmployees",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Dispatch_SalesDetails_SalesDetailsIdSalesDetails",
-                        column: x => x.SalesDetailsIdSalesDetails,
+                        name: "FK_Dispatch_SalesDetails_IdSalesDetails",
+                        column: x => x.IdSalesDetails,
                         principalTable: "SalesDetails",
                         principalColumn: "IdSalesDetails",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Dispatch_Tracking_TrackingIdTracking",
-                        column: x => x.TrackingIdTracking,
+                        name: "FK_Dispatch_Tracking_IdTracking",
+                        column: x => x.IdTracking,
                         principalTable: "Tracking",
                         principalColumn: "IdTracking",
                         onDelete: ReferentialAction.Restrict);
@@ -400,24 +385,22 @@ namespace Sistema_de_Gestion_Moras.Migrations
                     HarvestDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     HarvestAmount = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Idemployees = table.Column<int>(type: "int", nullable: false),
-                    EmployeesIdEmployees = table.Column<int>(type: "int", nullable: false),
                     IdQuality = table.Column<int>(type: "int", nullable: false),
-                    QualityIdQuality = table.Column<int>(type: "int", nullable: false),
                     StateDelete = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    ModifyDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Harvests", x => x.IdHarvests);
                     table.ForeignKey(
-                        name: "FK_Harvests_Employees_EmployeesIdEmployees",
-                        column: x => x.EmployeesIdEmployees,
+                        name: "FK_Harvests_Employees_Idemployees",
+                        column: x => x.Idemployees,
                         principalTable: "Employees",
                         principalColumn: "IdEmployees",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Harvests_Quality_QualityIdQuality",
-                        column: x => x.QualityIdQuality,
+                        name: "FK_Harvests_Quality_IdQuality",
+                        column: x => x.IdQuality,
                         principalTable: "Quality",
                         principalColumn: "IdQuality",
                         onDelete: ReferentialAction.Restrict);
@@ -430,24 +413,22 @@ namespace Sistema_de_Gestion_Moras.Migrations
                     IdProvsInp = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     IdProviders = table.Column<int>(type: "int", nullable: false),
-                    ProvidersIdProviders = table.Column<int>(type: "int", nullable: false),
                     IdSupplies = table.Column<int>(type: "int", nullable: false),
-                    SuppliesIdSupplies = table.Column<int>(type: "int", nullable: false),
                     StateDelete = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    ModifyDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ProvidervsInputs", x => x.IdProvsInp);
                     table.ForeignKey(
-                        name: "FK_ProvidervsInputs_Providers_ProvidersIdProviders",
-                        column: x => x.ProvidersIdProviders,
+                        name: "FK_ProvidervsInputs_Providers_IdProviders",
+                        column: x => x.IdProviders,
                         principalTable: "Providers",
                         principalColumn: "IdProviders",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_ProvidervsInputs_Supplies_SuppliesIdSupplies",
-                        column: x => x.SuppliesIdSupplies,
+                        name: "FK_ProvidervsInputs_Supplies_IdSupplies",
+                        column: x => x.IdSupplies,
                         principalTable: "Supplies",
                         principalColumn: "IdSupplies",
                         onDelete: ReferentialAction.Restrict);
@@ -460,25 +441,23 @@ namespace Sistema_de_Gestion_Moras.Migrations
                     IdPurchase = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     IdProviders = table.Column<int>(type: "int", nullable: false),
-                    ProvidersIdProviders = table.Column<int>(type: "int", nullable: false),
-                    DateProviders = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DateProviders = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IdPurchaseDetail = table.Column<int>(type: "int", nullable: false),
-                    PurchaseDetailIdPurchaseDetail = table.Column<int>(type: "int", nullable: false),
                     StateDelete = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    ModifyDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Purchase", x => x.IdPurchase);
                     table.ForeignKey(
-                        name: "FK_Purchase_Providers_ProvidersIdProviders",
-                        column: x => x.ProvidersIdProviders,
+                        name: "FK_Purchase_Providers_IdProviders",
+                        column: x => x.IdProviders,
                         principalTable: "Providers",
                         principalColumn: "IdProviders",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Purchase_PurchaseDetail_PurchaseDetailIdPurchaseDetail",
-                        column: x => x.PurchaseDetailIdPurchaseDetail,
+                        name: "FK_Purchase_PurchaseDetail_IdPurchaseDetail",
+                        column: x => x.IdPurchaseDetail,
                         principalTable: "PurchaseDetail",
                         principalColumn: "IdPurchaseDetail",
                         onDelete: ReferentialAction.Restrict);
@@ -492,132 +471,131 @@ namespace Sistema_de_Gestion_Moras.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     StorageName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IdHarvests = table.Column<int>(type: "int", nullable: false),
-                    HarvestsIdHarvests = table.Column<int>(type: "int", nullable: false),
                     EntryDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Temperature = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     StateDelete = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    ModifyDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Storage", x => x.IdStorage);
                     table.ForeignKey(
-                        name: "FK_Storage_Harvests_HarvestsIdHarvests",
-                        column: x => x.HarvestsIdHarvests,
+                        name: "FK_Storage_Harvests_IdHarvests",
+                        column: x => x.IdHarvests,
                         principalTable: "Harvests",
                         principalColumn: "IdHarvests",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Address_CityIdCity",
+                name: "IX_Address_IdCity",
                 table: "Address",
-                column: "CityIdCity");
+                column: "IdCity");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BillSale_ClientIdClient",
+                name: "IX_BillSale_IdClient",
                 table: "BillSale",
-                column: "ClientIdClient");
+                column: "IdClient");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BillSale_SalesDetailsIdSalesDetails",
+                name: "IX_BillSale_IdSalesDetails",
                 table: "BillSale",
-                column: "SalesDetailsIdSalesDetails");
+                column: "IdSalesDetails");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Client_PersonIdPerson",
+                name: "IX_Client_IdPerson",
                 table: "Client",
-                column: "PersonIdPerson");
+                column: "IdPerson");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Dispatch_EmployeesIdEmployees",
+                name: "IX_Dispatch_IdEmployees",
                 table: "Dispatch",
-                column: "EmployeesIdEmployees");
+                column: "IdEmployees");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Dispatch_SalesDetailsIdSalesDetails",
+                name: "IX_Dispatch_IdSalesDetails",
                 table: "Dispatch",
-                column: "SalesDetailsIdSalesDetails");
+                column: "IdSalesDetails");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Dispatch_TrackingIdTracking",
+                name: "IX_Dispatch_IdTracking",
                 table: "Dispatch",
-                column: "TrackingIdTracking");
+                column: "IdTracking");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Employees_PersonIdPerson",
+                name: "IX_Employees_IdPerson",
                 table: "Employees",
-                column: "PersonIdPerson");
+                column: "IdPerson");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Employees_PostIdPost",
+                name: "IX_Employees_IdPost",
                 table: "Employees",
-                column: "PostIdPost");
+                column: "IdPost");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Harvests_EmployeesIdEmployees",
+                name: "IX_Harvests_Idemployees",
                 table: "Harvests",
-                column: "EmployeesIdEmployees");
+                column: "Idemployees");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Harvests_QualityIdQuality",
+                name: "IX_Harvests_IdQuality",
                 table: "Harvests",
-                column: "QualityIdQuality");
+                column: "IdQuality");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Person_AddressIdAddress",
+                name: "IX_Person_IdAddress",
                 table: "Person",
-                column: "AddressIdAddress");
+                column: "IdAddress");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Person_ContactIdContact",
+                name: "IX_Person_IdContact",
                 table: "Person",
-                column: "ContactIdContact");
+                column: "IdContact");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Person_TypeIdentificationIdIdentificationType",
+                name: "IX_Person_IdTypeIdentification",
                 table: "Person",
-                column: "TypeIdentificationIdIdentificationType");
+                column: "IdTypeIdentification");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Providers_PersonIdPerson",
+                name: "IX_Providers_IdPerson",
                 table: "Providers",
-                column: "PersonIdPerson");
+                column: "IdPerson");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProvidervsInputs_ProvidersIdProviders",
+                name: "IX_ProvidervsInputs_IdProviders",
                 table: "ProvidervsInputs",
-                column: "ProvidersIdProviders");
+                column: "IdProviders");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProvidervsInputs_SuppliesIdSupplies",
+                name: "IX_ProvidervsInputs_IdSupplies",
                 table: "ProvidervsInputs",
-                column: "SuppliesIdSupplies");
+                column: "IdSupplies");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Purchase_ProvidersIdProviders",
+                name: "IX_Purchase_IdProviders",
                 table: "Purchase",
-                column: "ProvidersIdProviders");
+                column: "IdProviders");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Purchase_PurchaseDetailIdPurchaseDetail",
+                name: "IX_Purchase_IdPurchaseDetail",
                 table: "Purchase",
-                column: "PurchaseDetailIdPurchaseDetail");
+                column: "IdPurchaseDetail");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PurchaseDetail_SuppliesIdSupplies",
+                name: "IX_PurchaseDetail_IdSupplies",
                 table: "PurchaseDetail",
-                column: "SuppliesIdSupplies");
+                column: "IdSupplies");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Storage_HarvestsIdHarvests",
+                name: "IX_Storage_IdHarvests",
                 table: "Storage",
-                column: "HarvestsIdHarvests");
+                column: "IdHarvests");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tracking_StateIdState",
+                name: "IX_Tracking_IdState",
                 table: "Tracking",
-                column: "StateIdState");
+                column: "IdState");
         }
 
         /// <inheritdoc />
