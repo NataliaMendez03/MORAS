@@ -34,9 +34,9 @@ namespace Sistema_de_Gestion_Moras.Controllers
         }
         // POST: api/Tracking
         [HttpPost]
-        public async Task<ActionResult<Tracking>> PostTracking(DateTime datetracking, int idState)
+        public async Task<ActionResult<Tracking>> PostTracking(DateTime dateTracking, int idState)
         {
-            var TrackingToPut = _trackingService.CreateTracking(datetracking, idState);
+            var TrackingToPut = _trackingService.CreateTracking(dateTracking, idState);
 
             if (TrackingToPut != null)
             {
@@ -52,9 +52,9 @@ namespace Sistema_de_Gestion_Moras.Controllers
         }
         // PUT: api/Tracking/5
         [HttpPut("Update/{idTracking}")]
-        public async Task<ActionResult<Address>> PutTracking(int idTracking, DateTime datetracking, int idState)
+        public async Task<ActionResult<Address>> PutTracking(int idTracking, DateTime dateTracking, int idState)
         {
-            var TrackingToPut = _trackingService.UpdateTracking(idTracking, datetracking,idState);
+            var TrackingToPut = _trackingService.UpdateTracking(idTracking, dateTracking,idState);
 
             if (TrackingToPut != null)
             {
