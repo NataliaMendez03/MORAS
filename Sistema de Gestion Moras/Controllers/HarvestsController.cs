@@ -33,7 +33,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
             return Ok(Harvests);
         }
         // POST: api/Harvests
-        [HttpPost("{harvestDate,harvestAmount,idemployees, idQuality }")]
+        [HttpPost]
         public async Task<ActionResult<Harvests>> PostHarvests(DateTime harvestDate, string harvestAmount, int idemployees, int idQuality)
         {
             var HarvestsToPut = _harvestsService.CreateHarvests(harvestDate, harvestAmount, idemployees, idQuality);

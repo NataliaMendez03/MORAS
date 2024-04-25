@@ -32,7 +32,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
             return Ok(supplies);
         }
         // POST: api/Supplies
-        [HttpPost("{idSupplies }")]
+        [HttpPost]
         public async Task<ActionResult<Supplies>> PostSupplies(string nameSupplies)
         {
             var SuppliesToPut = _suppliesService.CreateSupplies(nameSupplies);

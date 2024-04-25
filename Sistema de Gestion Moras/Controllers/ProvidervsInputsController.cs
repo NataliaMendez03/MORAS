@@ -33,7 +33,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
             return Ok(ProvidervsInputs);
         }
         // POST: api/ProvidervsInputs
-        [HttpPost("{idProviders, idSupplies}")]
+        [HttpPost]
         public async Task<ActionResult<ProvidervsInputs>> PostProvidervsInputs(int idProviders, int idSupplies)
         {
             var ProvidervsInputsToPut = _ProvidervsInputsService.CreateProvidervsInputs(idProviders, idSupplies);

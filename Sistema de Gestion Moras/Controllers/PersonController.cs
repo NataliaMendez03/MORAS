@@ -33,7 +33,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
             return Ok(Person);
         }
         // POST: api/Person
-        [HttpPost("{idPerson }")]
+        [HttpPost]
         public async Task<ActionResult<Person>> PostPerson(string name, string lastName, int idContact, int idTypeIdentification, int numberIdentification, int idAddress)
         {
             var PersonToPut = _personService.CreatePerson(name, lastName,idContact, idTypeIdentification, numberIdentification, idAddress);

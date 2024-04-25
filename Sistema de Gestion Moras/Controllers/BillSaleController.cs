@@ -33,7 +33,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
             return Ok(billSale);
         }
         // POST: api/BillSale
-        [HttpPost("{IdClient}")]
+        [HttpPost]
         public async Task<ActionResult<BillSale>> PostBillSale(int idClient, DateTime dateSale, int idSalesDetails, string notes)
         {
             var BillSaleToPut = _BillSaleService.CreateBillSale(idClient, dateSale, idSalesDetails, notes);

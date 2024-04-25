@@ -1,10 +1,7 @@
-﻿/*using HClinicalV2._0.Model;
-using HClinicalV2._0.Services;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Sistema_de_Gestion_Moras.Models;
 using Sistema_de_Gestion_Moras.Services;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -41,7 +38,7 @@ namespace HClinicalV2._0.Controllers
         }
 
         // POST: api/Post
-        [HttpPost("{namePost}")]
+        [HttpPost]
         public async Task<ActionResult<Post>> PostPost(string namePost)
         {
             var PostToPut = _postService.CreatePost(namePost);
@@ -93,4 +90,4 @@ namespace HClinicalV2._0.Controllers
         }
     }
 
-}*/
+}

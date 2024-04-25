@@ -33,7 +33,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
             return Ok(Client);
         }
         // POST: api/Client
-        [HttpPost("{idClient }")]
+        [HttpPost]
         public async Task<ActionResult<Client>> PostClient(int idClient)
         {
             var ClientToPut = _clientService.CreateClient(idClient);

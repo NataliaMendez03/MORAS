@@ -33,7 +33,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
             return Ok(Providers);
         }
         // POST: api/City
-        [HttpPost("{idPerson}")]
+        [HttpPost]
         public async Task<ActionResult<Providers>> PostProviders(int idPerson)
         {
             var ProvidersToPut = _ProvidersService.CreateProviders(idPerson);

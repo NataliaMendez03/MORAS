@@ -33,7 +33,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
             return Ok(tracking);
         }
         // POST: api/SalesDetails
-        [HttpPost("{amount,salePrice}")]
+        [HttpPost]
         public async Task<ActionResult<SalesDetails>> PostSalesDetails(string amount, string salePrice)
         {
             var SalesDetailsToPut = _salesDetailsService.CreateSalesDetails(amount, salePrice);

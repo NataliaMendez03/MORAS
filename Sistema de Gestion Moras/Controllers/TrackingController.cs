@@ -33,7 +33,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
             return Ok(tracking);
         }
         // POST: api/Tracking
-        [HttpPost("{datetracking, idstate}")]
+        [HttpPost]
         public async Task<ActionResult<Tracking>> PostTracking(DateTime datetracking, int idState)
         {
             var TrackingToPut = _trackingService.CreateTracking(datetracking, idState);

@@ -33,7 +33,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
             return Ok(Quality);
         }
         // POST: api/Contact
-        [HttpPost("{nQuality, quantity}")]
+        [HttpPost]
         public async Task<ActionResult<Quality>> PostQuality(string nQuality, string quantity)
         {
             var QualityToPut = _QualityService.CreateQuality(nQuality, quantity);

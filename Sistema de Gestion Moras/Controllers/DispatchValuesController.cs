@@ -32,7 +32,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
             return Ok(dispatch);
         }
         // POST: api/Dispatch
-        [HttpPost("{idDispatch }")]
+        [HttpPost]
         public async Task<ActionResult<Dispatch>> PostDispatch(int idEmployees, int idSalesDetails, DateTime date, int idTracking)
         {
             var DispatchToPut = _dispatchService.CreateDispatch(idEmployees,idSalesDetails,date,idTracking);

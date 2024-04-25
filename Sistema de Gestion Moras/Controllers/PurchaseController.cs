@@ -33,7 +33,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
             return Ok(purchase);
         }
         // POST: api/BillSale
-        [HttpPost("{IdPurchase}")]
+        [HttpPost]
         public async Task<ActionResult<Purchase>> PostPurchase(int idProviders, DateTime dateproviders, int IdPurchaseDetail)
         {
             var PurchaseToPut = _PurchaseService.CreatePurchase(idProviders, dateproviders, IdPurchaseDetail);
