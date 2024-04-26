@@ -36,7 +36,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
         [HttpPost]
         public async Task<ActionResult<Purchase>> PostPurchase(int idProviders, DateTime dateproviders, int IdPurchaseDetail)
         {
-            var PurchaseToPut = _PurchaseService.CreatePurchase(idProviders, dateproviders, IdPurchaseDetail);
+            var PurchaseToPut = await _PurchaseService.CreatePurchase(idProviders, dateproviders, IdPurchaseDetail);
 
             if (PurchaseToPut != null)
             {
@@ -52,7 +52,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
         [HttpPut("Update/{idPurchase}")]
         public async Task<ActionResult<Purchase>> PutPurchase(int idPurchase, int idProviders, DateTime datePurchase, int idPurchaseDetail)
         {
-            var PurchaseToPut = _PurchaseService.UpdatePurchase(idPurchase, idProviders, datePurchase, idPurchaseDetail);
+            var PurchaseToPut = await _PurchaseService.UpdatePurchase(idPurchase, idProviders, datePurchase, idPurchaseDetail);
 
             if (PurchaseToPut != null)
             {
@@ -67,7 +67,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
         [HttpPut("Delete/{idPurchase}")]
         public async Task<ActionResult<Purchase>> DeletePurchase(int idPurchase)
         {
-            var PurchaseToDelete = _PurchaseService.DeletePurchase(idPurchase);
+            var PurchaseToDelete = await _PurchaseService.DeletePurchase(idPurchase);
 
             if (PurchaseToDelete != null)
             {

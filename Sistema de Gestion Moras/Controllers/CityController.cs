@@ -36,7 +36,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
         [HttpPost]
         public async Task<ActionResult<City>> PostCity(string nameCity)
         {
-            var CityToPut = _CityService.CreateCity(nameCity);
+            var CityToPut = await _CityService.CreateCity(nameCity);
 
             if (CityToPut != null)
             {
@@ -51,7 +51,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
         [HttpPut("Update/{idCity}")]
         public async Task<ActionResult<City>> PutCity(int idCity, string nameCity)
         {
-            var CityToPut = _CityService.UpdateCity(idCity, nameCity);
+            var CityToPut = await _CityService.UpdateCity(idCity, nameCity);
 
             if (CityToPut != null)
             {
@@ -66,7 +66,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
         [HttpPut("Delete/{idCity}")]
         public async Task<ActionResult<City>> DeleteCity(int idCity)
         {
-            var CityToDelete = _CityService.DeleteCity(idCity);
+            var CityToDelete = await _CityService.DeleteCity(idCity);
 
             if (CityToDelete != null)
             {

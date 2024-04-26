@@ -36,7 +36,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
         [HttpPost]
         public async Task<ActionResult<Harvests>> PostHarvests(DateTime harvestDate, string harvestAmount, int idemployees, int idQuality)
         {
-            var HarvestsToPut = _harvestsService.CreateHarvests(harvestDate, harvestAmount, idemployees, idQuality);
+            var HarvestsToPut = await _harvestsService.CreateHarvests(harvestDate, harvestAmount, idemployees, idQuality);
 
             if (HarvestsToPut != null)
             {
@@ -54,7 +54,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
         [HttpPut("Update/{idHarvests}")]
         public async Task<ActionResult<Harvests>> PutHarvests(int idHarvests, DateTime harvestDate, string harvestAmount, int idemployees, int idQuality)
         {
-            var HarvestsToPut = _harvestsService.UpdateHarvests(idHarvests,harvestDate, harvestAmount, idemployees, idQuality);
+            var HarvestsToPut = await _harvestsService.UpdateHarvests(idHarvests,harvestDate, harvestAmount, idemployees, idQuality);
 
             if (HarvestsToPut != null)
             {
@@ -69,7 +69,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
         [HttpPut("Delete/{idHarvests}")]
         public async Task<ActionResult<Harvests>> DeleteHarvests(int idHarvests)
         {
-            var HarvestsToDelete = _harvestsService.DeleteHarvests(idHarvests);
+            var HarvestsToDelete = await _harvestsService.DeleteHarvests(idHarvests);
 
             if (HarvestsToDelete != null)
             {

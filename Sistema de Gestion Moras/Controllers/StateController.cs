@@ -41,7 +41,7 @@ namespace HClinicalV2._0.Controllers
         [HttpPost]
         public async Task<ActionResult<State>> StateState(string nameState)
         {
-            var StateToPut = _StateService.CreateState(nameState);
+            var StateToPut = await _StateService.CreateState(nameState);
 
             if (StateToPut != null)
             {

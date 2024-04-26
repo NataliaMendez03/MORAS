@@ -36,7 +36,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
         [HttpPost]
         public async Task<ActionResult<Person>> PostPerson(string name, string lastName, int idContact, int idTypeIdentification, int numberIdentification, int idAddress)
         {
-            var PersonToPut = _personService.CreatePerson(name, lastName,idContact, idTypeIdentification, numberIdentification, idAddress);
+            var PersonToPut = await _personService.CreatePerson(name, lastName,idContact, idTypeIdentification, numberIdentification, idAddress);
 
             if (PersonToPut != null)
             {
@@ -54,7 +54,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
         [HttpPut("Update/{idPerson}")]
         public async Task<ActionResult<Person>> PutPerson(int idPerson, string name, string lastName, int idContact, int idTypeIdentification, int numberIdentification, int idAddress)
         {
-            var PersonToPut = _personService.UpdatePerson(idPerson, name, lastName, idContact, idTypeIdentification, numberIdentification, idAddress);
+            var PersonToPut = await _personService.UpdatePerson(idPerson, name, lastName, idContact, idTypeIdentification, numberIdentification, idAddress);
 
             if (PersonToPut != null)
             {
@@ -69,7 +69,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
         [HttpPut("Delete/{idPerson}")]
         public async Task<ActionResult<Person>> DeletePerson(int idPerson)
         {
-            var PersonToDelete = _personService.DeletePerson(idPerson);
+            var PersonToDelete = await _personService.DeletePerson(idPerson);
 
             if (PersonToDelete != null)
             {

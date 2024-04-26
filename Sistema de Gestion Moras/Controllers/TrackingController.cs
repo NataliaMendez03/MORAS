@@ -36,7 +36,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
         [HttpPost]
         public async Task<ActionResult<Tracking>> PostTracking(DateTime dateTracking, int idState)
         {
-            var TrackingToPut = _trackingService.CreateTracking(dateTracking, idState);
+            var TrackingToPut = await _trackingService.CreateTracking(dateTracking, idState);
 
             if (TrackingToPut != null)
             {
@@ -54,7 +54,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
         [HttpPut("Update/{idTracking}")]
         public async Task<ActionResult<Address>> PutTracking(int idTracking, DateTime dateTracking, int idState)
         {
-            var TrackingToPut = _trackingService.UpdateTracking(idTracking, dateTracking,idState);
+            var TrackingToPut = await _trackingService.UpdateTracking(idTracking, dateTracking,idState);
 
             if (TrackingToPut != null)
             {
@@ -69,7 +69,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
         [HttpPut("Delete/{idTracking}")]
         public async Task<ActionResult<Tracking>> DeleteTracking(int idTracking)
         {
-            var TrackingToDelete = _trackingService.DeleteTracking(idTracking);
+            var TrackingToDelete = await _trackingService.DeleteTracking(idTracking);
 
             if (TrackingToDelete != null)
             {

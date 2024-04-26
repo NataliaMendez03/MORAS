@@ -35,7 +35,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
         [HttpPost]
         public async Task<ActionResult<Dispatch>> PostDispatch(int idEmployees, int idSalesDetails, DateTime date, int idTracking)
         {
-            var DispatchToPut = _dispatchService.CreateDispatch(idEmployees,idSalesDetails,date,idTracking);
+            var DispatchToPut = await _dispatchService.CreateDispatch(idEmployees,idSalesDetails,date,idTracking);
 
             if (DispatchToPut != null)
             {
@@ -53,7 +53,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
         [HttpPut("Update/{idDispatch}")]
         public async Task<ActionResult<Dispatch>> PutDispatch(int idDispatch, int idEmployees, int idSalesDetails, DateTime date, int idTracking)
         {
-            var DispatchToPut = _dispatchService.UpdateDispatch(idDispatch,idEmployees,idSalesDetails,date,idTracking);
+            var DispatchToPut = await _dispatchService.UpdateDispatch(idDispatch,idEmployees,idSalesDetails,date,idTracking);
 
             if (DispatchToPut != null)
             {
@@ -68,7 +68,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
         [HttpPut("Delete/{idDispatch}")]
         public async Task<ActionResult<Dispatch>> DeleteDispatch(int idDispatch)
         {
-            var DispatchToDelete = _dispatchService.DeleteDispatch(idDispatch);
+            var DispatchToDelete = await _dispatchService.DeleteDispatch(idDispatch);
             if (DispatchToDelete != null)
             {
                 return Ok(DispatchToDelete);

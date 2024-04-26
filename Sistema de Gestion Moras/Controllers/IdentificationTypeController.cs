@@ -41,7 +41,7 @@ namespace HClinicalV2._0.Controllers
         [HttpPost]
         public async Task<ActionResult<IdentificationType>> IdentificationTypeIdentificationType(string nameIdentificationType)
         {
-            var IdentificationTypeToPut = _IdentificationTypeService.CreateIdentificationType(nameIdentificationType);
+            var IdentificationTypeToPut = await _IdentificationTypeService.CreateIdentificationType(nameIdentificationType);
 
             if (IdentificationTypeToPut != null)
             {

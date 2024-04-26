@@ -36,7 +36,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
         [HttpPost]
         public async Task<ActionResult<SalesDetails>> PostSalesDetails(string amount, string salePrice)
         {
-            var SalesDetailsToPut = _salesDetailsService.CreateSalesDetails(amount, salePrice);
+            var SalesDetailsToPut = await _salesDetailsService.CreateSalesDetails(amount, salePrice);
 
             if (SalesDetailsToPut != null)
             {
@@ -54,7 +54,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
         [HttpPut("Update/{idSalesDetails, amount}")]
         public async Task<ActionResult<SalesDetails>> PutSalesDetails(int idSalesDetails, string amount, string salePrice)
         {
-            var SalesDetailsToPut = _salesDetailsService.UpdateSalesDetails(idSalesDetails, amount, salePrice);
+            var SalesDetailsToPut = await _salesDetailsService.UpdateSalesDetails(idSalesDetails, amount, salePrice);
 
             if (SalesDetailsToPut != null)
             {
@@ -69,7 +69,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
         [HttpPut("Delete/{idSalesDetails}")]
         public async Task<ActionResult<SalesDetails>> DeleteSalesDetails(int idSalesDetails)
         {
-            var SalesDetailsToDelete = _salesDetailsService.DeleteSalesDetails(idSalesDetails);
+            var SalesDetailsToDelete = await _salesDetailsService.DeleteSalesDetails(idSalesDetails);
 
             if (SalesDetailsToDelete != null)
             {

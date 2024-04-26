@@ -41,7 +41,7 @@ namespace HClinicalV2._0.Controllers
         [HttpPost]
         public async Task<ActionResult<Storage>> StorageStorage(string nameStorage, int idHarvests, DateTime entryDate, string temperature)
         {
-            var StorageToPut = _StorageService.CreateStorage(nameStorage, idHarvests, entryDate, temperature);
+            var StorageToPut = await _StorageService.CreateStorage(nameStorage, idHarvests, entryDate, temperature);
 
             if (StorageToPut != null)
             {

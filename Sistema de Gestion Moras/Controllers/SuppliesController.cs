@@ -35,7 +35,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
         [HttpPost]
         public async Task<ActionResult<Supplies>> PostSupplies(string nameSupplies)
         {
-            var SuppliesToPut = _suppliesService.CreateSupplies(nameSupplies);
+            var SuppliesToPut = await _suppliesService.CreateSupplies(nameSupplies);
 
             if (SuppliesToPut != null)
             {
@@ -53,7 +53,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
         [HttpPut("Update/{idSupplies}")]
         public async Task<ActionResult<Supplies>> PutSupplies(int idSupplies, string nameSupplies)
         {
-            var SuppliesToPut = _suppliesService.UpdateSupplies(idSupplies, nameSupplies);
+            var SuppliesToPut = await _suppliesService.UpdateSupplies(idSupplies, nameSupplies);
 
             if (SuppliesToPut != null)
             {
@@ -68,7 +68,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
         [HttpPut("Delete/{idSupplies}")]
         public async Task<ActionResult<Supplies>> DeleteSupplies(int idSupplies)
         {
-            var SuppliesToDelete = _suppliesService.DeleteSupplies(idSupplies);
+            var SuppliesToDelete = await _suppliesService.DeleteSupplies(idSupplies);
 
             if (SuppliesToDelete != null)
             {

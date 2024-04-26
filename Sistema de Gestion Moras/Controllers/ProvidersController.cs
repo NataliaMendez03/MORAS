@@ -36,7 +36,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
         [HttpPost]
         public async Task<ActionResult<Providers>> PostProviders(int idPerson)
         {
-            var ProvidersToPut = _ProvidersService.CreateProviders(idPerson);
+            var ProvidersToPut = await _ProvidersService.CreateProviders(idPerson);
 
             if (ProvidersToPut != null)
             {
@@ -52,7 +52,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
         [HttpPut("Update/{idProviders}")]
         public async Task<ActionResult<Providers>> PutProviders(int idProviders, int idPerson)
         {
-            var ProvidersToPut = _ProvidersService.UpdateProviders(idProviders, idPerson);
+            var ProvidersToPut = await _ProvidersService.UpdateProviders(idProviders, idPerson);
 
             if (ProvidersToPut != null)
             {
@@ -67,7 +67,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
         [HttpPut("Delete/{idProviders}")]
         public async Task<ActionResult<Providers>> DeleteProviders(int idProviders)
         {
-            var ProvidersToDelete = _ProvidersService.DeleteProviders(idProviders);
+            var ProvidersToDelete = await _ProvidersService.DeleteProviders(idProviders);
 
             if (ProvidersToDelete != null)
             {

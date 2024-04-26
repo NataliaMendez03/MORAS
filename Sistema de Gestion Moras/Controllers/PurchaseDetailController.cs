@@ -42,7 +42,7 @@ namespace HClinicalV2._0.Controllers
         [HttpPost]
         public async Task<ActionResult<PurchaseDetail>> PurchaseDetailPurchaseDetail(int idSupplies, int quantity, string purchasePrice, string notes)
         {
-            var PurchaseDetailToPut = _PurchaseDetailService.CreatePurchaseDetail(idSupplies, quantity, purchasePrice, notes);
+            var PurchaseDetailToPut = await _PurchaseDetailService.CreatePurchaseDetail(idSupplies, quantity, purchasePrice, notes);
 
             if (PurchaseDetailToPut != null)
             {

@@ -41,7 +41,7 @@ namespace HClinicalV2._0.Controllers
         [HttpPost]
         public async Task<ActionResult<Post>> PostPost(string namePost)
         {
-            var PostToPut = _postService.CreatePost(namePost);
+            var PostToPut = await _postService.CreatePost(namePost);
 
             if (PostToPut != null)
             {

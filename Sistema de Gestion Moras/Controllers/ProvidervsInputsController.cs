@@ -36,7 +36,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
         [HttpPost]
         public async Task<ActionResult<ProvidervsInputs>> PostProvidervsInputs(int idProviders, int idSupplies)
         {
-            var ProvidervsInputsToPut = _ProvidervsInputsService.CreateProvidervsInputs(idProviders, idSupplies);
+            var ProvidervsInputsToPut = await _ProvidervsInputsService.CreateProvidervsInputs(idProviders, idSupplies);
 
             if (ProvidervsInputsToPut != null)
             {
@@ -52,7 +52,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
         [HttpPut("Update/{idProvidervsInputs}")]
         public async Task<ActionResult<ProvidervsInputs>> PutProvidervsInputs(int idProvsInp, int idProviders, int idSupplies)
         {
-            var ProvidervsInputsToPut = _ProvidervsInputsService.UpdateProvidervsInputs(idProvsInp, idProviders, idSupplies);
+            var ProvidervsInputsToPut = await _ProvidervsInputsService.UpdateProvidervsInputs(idProvsInp, idProviders, idSupplies);
 
             if (ProvidervsInputsToPut != null)
             {
@@ -67,7 +67,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
         [HttpPut("Delete/{idProvsInp}")]
         public async Task<ActionResult<ProvidervsInputs>> DeleteProvidervsInputs(int idProvsInp)
         {
-            var ProvidervsInputsToDelete = _ProvidervsInputsService.DeleteProvidervsInputs(idProvsInp);
+            var ProvidervsInputsToDelete = await _ProvidervsInputsService.DeleteProvidervsInputs(idProvsInp);
 
             if (ProvidervsInputsToDelete != null)
             {

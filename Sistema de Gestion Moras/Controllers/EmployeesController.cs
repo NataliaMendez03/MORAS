@@ -41,7 +41,7 @@ namespace HClinicalV2._0.Controllers
         [HttpPost]
         public async Task<ActionResult<Employees>> EmployeesEmployees(int idPost, int idPerson)
         {
-            var EmployeesToPut = _EmployeesService.CreateEmployees(idPost, idPerson);
+            var EmployeesToPut = await _EmployeesService.CreateEmployees(idPost, idPerson);
 
             if (EmployeesToPut != null)
             {

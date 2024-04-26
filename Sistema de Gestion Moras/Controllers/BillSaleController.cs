@@ -36,7 +36,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
         [HttpPost]
         public async Task<ActionResult<BillSale>> PostBillSale(int idClient, DateTime dateSale, int idSalesDetails, string notes)
         {
-            var BillSaleToPut = _BillSaleService.CreateBillSale(idClient, dateSale, idSalesDetails, notes);
+            var BillSaleToPut = await _BillSaleService.CreateBillSale(idClient, dateSale, idSalesDetails, notes);
 
             if (BillSaleToPut != null)
             {
@@ -52,7 +52,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
         [HttpPut("Update/{idBillSale}")]
         public async Task<ActionResult<BillSale>> PutBillSale(int idBillSale, int idClient, DateTime dateSale, int idSalesDetails, string notes)
         {
-            var BillSaleToPut = _BillSaleService.UpdateBillSale(idBillSale, idClient, dateSale, idSalesDetails, notes);
+            var BillSaleToPut = await _BillSaleService.UpdateBillSale(idBillSale, idClient, dateSale, idSalesDetails, notes);
 
             if (BillSaleToPut != null)
             {
@@ -67,7 +67,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
         [HttpPut("Delete/{idBillSale}")]
         public async Task<ActionResult<BillSale>> DeleteBillSale(int idBillSale)
         {
-            var BillSaleToDelete = _BillSaleService.DeleteBillSale(idBillSale);
+            var BillSaleToDelete = await _BillSaleService.DeleteBillSale(idBillSale);
 
             if (BillSaleToDelete != null)
             {

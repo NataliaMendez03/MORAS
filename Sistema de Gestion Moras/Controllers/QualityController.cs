@@ -36,7 +36,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
         [HttpPost]
         public async Task<ActionResult<Quality>> PostQuality(string nQuality, string quantity)
         {
-            var QualityToPut = _QualityService.CreateQuality(nQuality, quantity);
+            var QualityToPut = await _QualityService.CreateQuality(nQuality, quantity);
 
             if (QualityToPut != null)
             {
@@ -52,7 +52,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
         [HttpPut("Update/{idQuality}")]
         public async Task<ActionResult<Quality>> PutQuality(int idQuality, string nQuality, string quantity)
         {
-            var QualityToPut = _QualityService.UpdateQuality(idQuality, nQuality, quantity);
+            var QualityToPut = await _QualityService.UpdateQuality(idQuality, nQuality, quantity);
 
             if (QualityToPut != null)
             {
@@ -67,7 +67,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
         [HttpPut("Delete/{idQuality}")]
         public async Task<ActionResult<Quality>> DeleteQuality(int idQuality)
         {
-            var QualityToDelete = _QualityService.DeleteQuality(idQuality);
+            var QualityToDelete = await _QualityService.DeleteQuality(idQuality);
 
             if (QualityToDelete != null)
             {

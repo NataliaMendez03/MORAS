@@ -36,7 +36,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
         [HttpPost]
         public async Task<ActionResult<Client>> PostClient(int idClient)
         {
-            var ClientToPut = _clientService.CreateClient(idClient);
+            var ClientToPut = await _clientService.CreateClient(idClient);
 
             if (ClientToPut != null)
             {
@@ -54,7 +54,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
         [HttpPut("Update/{idClient}")]
         public async Task<ActionResult<Client>> PutClient(int idClient, int idPerson)
         {
-            var ClientToPut = _clientService.UpdateClient(idClient,idPerson);
+            var ClientToPut = await _clientService.UpdateClient(idClient,idPerson);
 
             if (ClientToPut != null)
             {
@@ -69,7 +69,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
         [HttpPut("Delete/{idClient}")]
         public async Task<ActionResult<Client>> DeleteClient(int idClient)
         {
-            var ClientToDelete = _clientService.DeleteClient(idClient);
+            var ClientToDelete = await _clientService.DeleteClient(idClient);
 
             if (ClientToDelete != null)
             {

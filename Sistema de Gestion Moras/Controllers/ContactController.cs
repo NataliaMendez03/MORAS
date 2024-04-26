@@ -41,7 +41,7 @@ namespace HClinicalV2._0.Controllers
         [HttpPost]
         public async Task<ActionResult<Contact>> ContactContact(string phone, string email)
         {
-            var ContactToPut = _ContactService.CreateContact(phone, email);
+            var ContactToPut = await _ContactService.CreateContact(phone, email);
 
             if (ContactToPut != null)
             {
