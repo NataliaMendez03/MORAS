@@ -6,9 +6,9 @@ namespace Sistema_de_Gestion_Moras.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdArchievement {  get; set; }
-        public int IdUser { get; set; }
+        public int IdLogin { get; set; }
         [NotMapped]
-        public Users Users { get; set; }
+        public Login Login { get; set; }
         public int IdMission { get; set; }
         [NotMapped]
         public Missions Mission {  get; set; }

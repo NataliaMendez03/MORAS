@@ -2,10 +2,10 @@
 
 namespace Sistema_de_Gestion_Moras.Models
 {
-    public class Users
+    public class Login
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int IdUser { get; set; }
+        public int IdLogin { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
         public string Email { get; set; }

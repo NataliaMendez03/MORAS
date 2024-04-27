@@ -35,9 +35,11 @@ namespace Sistema_de_Gestion_Moras.Context
             modelBuilder.Entity<BillSale>().HasKey(e => e.IdBillSale);
             modelBuilder.Entity<Purchase>().HasKey(e => e.IdPurchase);
             modelBuilder.Entity<ProvidervsInputs>().HasKey(e => e.IdProvsInp);
-            modelBuilder.Entity<Users>().HasKey(e => e.IdUser);
+            modelBuilder.Entity<Login>().HasKey(e => e.IdLogin);
             modelBuilder.Entity<Missions>().HasKey(e => e.IdMission);
             modelBuilder.Entity<Achievements>().HasKey(e => e.IdArchievement);
+            modelBuilder.Entity<Levels>().HasKey(e => e.IdLevel);
+
 
 
             // Foreign Keys
@@ -77,7 +79,10 @@ namespace Sistema_de_Gestion_Moras.Context
             modelBuilder.Entity<Tracking>().HasOne(e => e.State).WithMany().HasForeignKey(e => e.IdState);
 
             modelBuilder.Entity<Achievements>().HasOne(e => e.Mission).WithMany().HasForeignKey(e => e.IdMission);
-            modelBuilder.Entity<Achievements>().HasOne(e => e.Users).WithMany().HasForeignKey(e => e.IdUser);
+            modelBuilder.Entity<Achievements>().HasOne(e => e.Login).WithMany().HasForeignKey(e => e.IdLogin);
+
+            modelBuilder.Entity<Missions>().HasOne(e => e.Levels).WithMany().HasForeignKey(e => e.IdLevel);
+
 
             foreach (var foreignKey in modelBuilder.Model.GetEntityTypes()
             .SelectMany(e => e.GetForeignKeys()))
@@ -109,7 +114,7 @@ namespace Sistema_de_Gestion_Moras.Context
         public DbSet<BillSale> BillSale { get; set; }
         public DbSet<Purchase> Purchase { get; set; }
         public DbSet<ProvidervsInputs> ProvidervsInputs { get; set; }
-        public DbSet<Users> Users { get; set; }
+        public DbSet<Login> Users { get; set; }
         public DbSet<Missions> Missions { get; set; }
         public DbSet<Achievements> Achievements { get; set; }
 
