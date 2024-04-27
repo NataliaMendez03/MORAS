@@ -12,8 +12,6 @@ namespace Sistema_de_Gestion_Moras.Models
         [NotMapped]
         public Harvests Harvests { get; set; }
         public DateTime DateLandmark { get; set; }
-        public bool StateDelete { get; set; }
-        public DateTime? ModifyDate { get; set; }
 
     }
 }

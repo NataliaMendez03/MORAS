@@ -124,6 +124,8 @@ namespace Sistema_de_Gestion_Moras.Context
         public DbSet<Login> Login { get; set; }
         public DbSet<Missions> Missions { get; set; }
         public DbSet<Achievements> Achievements { get; set; }
+        public DbSet<Levels> Levels { get; set; }
+        public DbSet<Landmarks> Landmarks { get; set; }
 
 
     }
