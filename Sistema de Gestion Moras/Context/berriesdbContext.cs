@@ -114,7 +114,7 @@ namespace Sistema_de_Gestion_Moras.Context
         public DbSet<BillSale> BillSale { get; set; }
         public DbSet<Purchase> Purchase { get; set; }
         public DbSet<ProvidervsInputs> ProvidervsInputs { get; set; }
-        public DbSet<Login> Users { get; set; }
+        public DbSet<Login> Login { get; set; }
         public DbSet<Missions> Missions { get; set; }
         public DbSet<Achievements> Achievements { get; set; }
 

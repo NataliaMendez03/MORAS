@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Sistema_de_Gestion_Moras.Context;
 
@@ -11,9 +12,11 @@ using Sistema_de_Gestion_Moras.Context;
 namespace Sistema_de_Gestion_Moras.Migrations
 {
     [DbContext(typeof(berriesdbContext))]
-    partial class berriesdbContextModelSnapshot : ModelSnapshot
+    [Migration("20240427034835_LoginKey")]
+    partial class LoginKey
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -359,8 +362,9 @@ namespace Sistema_de_Gestion_Moras.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("RegisterDate")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("RegisterDate")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("StateDelete")
                         .HasColumnType("bit");
@@ -371,7 +375,7 @@ namespace Sistema_de_Gestion_Moras.Migrations
 
                     b.HasKey("IdLogin");
 
-                    b.ToTable("Login");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Sistema_de_Gestion_Moras.Models.Missions", b =>
