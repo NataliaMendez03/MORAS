@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Sistema_de_Gestion_Moras.Context;
 
@@ -11,9 +12,11 @@ using Sistema_de_Gestion_Moras.Context;
 namespace Sistema_de_Gestion_Moras.Migrations
 {
     [DbContext(typeof(berriesdbContext))]
-    partial class berriesdbContextModelSnapshot : ModelSnapshot
+    [Migration("20240427003724_Missions")]
+    partial class Missions
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

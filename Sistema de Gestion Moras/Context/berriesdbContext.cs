@@ -35,8 +35,12 @@ namespace Sistema_de_Gestion_Moras.Context
             modelBuilder.Entity<BillSale>().HasKey(e => e.IdBillSale);
             modelBuilder.Entity<Purchase>().HasKey(e => e.IdPurchase);
             modelBuilder.Entity<ProvidervsInputs>().HasKey(e => e.IdProvsInp);
+            modelBuilder.Entity<Users>().HasKey(e => e.IdUser);
+            modelBuilder.Entity<Missions>().HasKey(e => e.IdMission);
+            modelBuilder.Entity<Achievements>().HasKey(e => e.IdArchievement);
 
-        // Foreign Keys
+
+            // Foreign Keys
             modelBuilder.Entity<Address>().HasOne(e => e.City).WithMany().HasForeignKey(e => e.IdCity);
 
             modelBuilder.Entity<BillSale>().HasOne(e => e.Client).WithMany().HasForeignKey(e => e.IdClient);
@@ -72,6 +76,8 @@ namespace Sistema_de_Gestion_Moras.Context
 
             modelBuilder.Entity<Tracking>().HasOne(e => e.State).WithMany().HasForeignKey(e => e.IdState);
 
+            modelBuilder.Entity<Achievements>().HasOne(e => e.Mission).WithMany().HasForeignKey(e => e.IdMission);
+            modelBuilder.Entity<Achievements>().HasOne(e => e.Users).WithMany().HasForeignKey(e => e.IdUser);
 
             foreach (var foreignKey in modelBuilder.Model.GetEntityTypes()
             .SelectMany(e => e.GetForeignKeys()))
@@ -103,6 +109,10 @@ namespace Sistema_de_Gestion_Moras.Context
         public DbSet<BillSale> BillSale { get; set; }
         public DbSet<Purchase> Purchase { get; set; }
         public DbSet<ProvidervsInputs> ProvidervsInputs { get; set; }
+        public DbSet<Users> Users { get; set; }
+        public DbSet<Missions> Missions { get; set; }
+        public DbSet<Achievements> Achievements { get; set; }
+
 
     }
 }
