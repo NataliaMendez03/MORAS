@@ -39,6 +39,8 @@ namespace Sistema_de_Gestion_Moras.Context
             modelBuilder.Entity<Missions>().HasKey(e => e.IdMission);
             modelBuilder.Entity<Achievements>().HasKey(e => e.IdArchievement);
             modelBuilder.Entity<Levels>().HasKey(e => e.IdLevel);
+            modelBuilder.Entity<Landmarks>().HasKey(e => e.IdLandmarks);
+
 
 
 
@@ -82,6 +84,11 @@ namespace Sistema_de_Gestion_Moras.Context
             modelBuilder.Entity<Achievements>().HasOne(e => e.Login).WithMany().HasForeignKey(e => e.IdLogin);
 
             modelBuilder.Entity<Missions>().HasOne(e => e.Levels).WithMany().HasForeignKey(e => e.IdLevel);
+
+            modelBuilder.Entity<Landmarks>().HasOne(e => e.Levels).WithMany().HasForeignKey(e => e.IdLevel);
+            modelBuilder.Entity<Landmarks>().HasOne(e => e.Harvests).WithMany().HasForeignKey(e => e.IdHarvests);
+
+
 
 
             foreach (var foreignKey in modelBuilder.Model.GetEntityTypes()
