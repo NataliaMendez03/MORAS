@@ -1,0 +1,82 @@
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Sistema_de_Gestion_Moras.Models;
+using Sistema_de_Gestion_Moras.Services;
+
+namespace Sistema_de_Gestion_Moras.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class LoginController : ControllerBase
+    {
+        public readonly ILoginService _loginService;
+        public LoginController(ILoginService LoginService)
+        {
+            _loginService = LoginService;
+        }
+
+        // GET: api/<LoginController>
+        [HttpGet]
+        public async Task<ActionResult<List<Login>>> GetAllLogin()
+        {
+            return Ok(await _loginService.GetAll());
+        }
+        // GET api/<LoginController>/5
+        [HttpGet("{idLogin}")]
+        public async Task<ActionResult<Login>> GetLogin(int idLogin)
+        {
+            var Login = await _loginService.GetLogin(idLogin);
+            if (Login == null)
+            {
+                return BadRequest("City not found");
+            }
+            return Ok(Login);
+        }
+        // POST: api/Login
+        [HttpPost]
+        public async Task<ActionResult<Login>> PostLogin(string userName, string password, string email, DateTime registerDate)
+        {
+            var LoginToPut = await _loginService.CreateLogin(userName, password, email, registerDate);
+
+            if (LoginToPut != null)
+            {
+                //return CreatedAtAction(nameof(GetEps), new { id = idEps }, epsToPut);
+                return Ok(LoginToPut);
+            }
+            else
+            {
+                return BadRequest("Error when inserting into the database");
+            }
+        }
+        // PUT: api/Login/5
+        [HttpPut("Update/{idLogin}")]
+        public async Task<ActionResult<Login>> PutLogin(int idLogin, string addres, int idCity)
+        {
+            var LoginToPut = await _loginService.UpdateLogin(idCity, addres, idCity);
+
+            if (LoginToPut != null)
+            {
+                return Ok(LoginToPut);
+            }
+            else
+            {
+                return BadRequest("Error updating the database");
+            }
+        }
+        // Delete: api/Login/5
+        [HttpPut("Delete/{idLogin}")]
+        public async Task<ActionResult<Login>> DeleteLogin(int idLogin)
+        {
+            var LoginToDelete = await _loginService.DeleteLogin(idLogin);
+
+            if (LoginToDelete != null)
+            {
+                return Ok(LoginToDelete);
+            }
+            else
+            {
+                return BadRequest("Error updating the database");
+            }
+        }
+    }
+}

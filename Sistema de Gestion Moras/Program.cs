@@ -36,6 +36,10 @@ builder.Services.AddScoped<IProvidervsInputsRepository, ProvidervsInputsReposito
 builder.Services.AddScoped<IPurchaseRepository, PurchaseRepository>();
 builder.Services.AddScoped<IQualityRepository, QualityRepository>();
 builder.Services.AddScoped<IStateRepository, StateRepository>();
+builder.Services.AddScoped<ILevelsRepository, LevelsRepository>();
+builder.Services.AddScoped<ILoginRepository, LoginRepository>();
+builder.Services.AddScoped<IMissionsRepository, MissionsRepository>();
+
 #endregion
 
 #region AppServices
@@ -60,6 +64,9 @@ builder.Services.AddScoped<IProvidervsInputsService, ProvidervsInputsService>();
 builder.Services.AddScoped<IPurchaseService, PurchaseService>();
 builder.Services.AddScoped<IQualityService, QualityService>();
 builder.Services.AddScoped<IStateService, StateService>();
+builder.Services.AddScoped<ILevelsService, LevelsService>();
+builder.Services.AddScoped<ILoginService, LoginService>();
+builder.Services.AddScoped<IMissionsService, MissionsService>();
 #endregion
 
 var app = builder.Build();

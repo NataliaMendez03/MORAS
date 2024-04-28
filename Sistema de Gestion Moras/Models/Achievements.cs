@@ -13,6 +13,9 @@ namespace Sistema_de_Gestion_Moras.Models
         [NotMapped]
         public Missions Mission {  get; set; }
         public DateTime DateAchievement { get; set; }
+        public bool StateDelete { get; set; }
+        public DateTime? ModifyDate { get; set; }
+
 
     }
 }
