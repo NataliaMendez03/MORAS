@@ -50,9 +50,9 @@ namespace Sistema_de_Gestion_Moras.Controllers
         }
         // PUT: api/Login/5
         [HttpPut("Update/{idLogin}")]
-        public async Task<ActionResult<Login>> PutLogin(int idLogin, string addres, int idCity)
+        public async Task<ActionResult<Login>> PutLogin(int idLogin, string userName, string password, string email, DateTime registerDate)
         {
-            var LoginToPut = await _loginService.UpdateLogin(idCity, addres, idCity);
+            var LoginToPut = await _loginService.UpdateLogin(idLogin, userName, password, email, registerDate);
 
             if (LoginToPut != null)
             {
