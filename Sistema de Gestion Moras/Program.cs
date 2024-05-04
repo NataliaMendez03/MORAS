@@ -3,6 +3,7 @@ using Sistema_de_Gestion_Moras.Models;
 using Microsoft.EntityFrameworkCore;
 using Sistema_de_Gestion_Moras.Repositories;
 using Sistema_de_Gestion_Moras.Services;
+using Microsoft.Extensions.Configuration;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
