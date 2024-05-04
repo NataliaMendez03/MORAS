@@ -64,7 +64,7 @@ namespace Sistema_de_Gestion_Moras.Repositories
             {
                 MissionsUpdate.NameMission = Missions.NameMission;
                 MissionsUpdate.Description = Missions.Description;
-                MissionsUpdate.IdLevel = MissionsUpdate.IdLevel;
+                MissionsUpdate.IdLevel = Missions.IdLevel;
 
                 await _db.SaveChangesAsync();
             }
