@@ -28,7 +28,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
             var Achievements = await _AchievementsService.GetAchievements(idAchievements);
             if (Achievements == null)
             {
-                return BadRequest("City not found");
+                return BadRequest("Achievements not found");
             }
             return Ok(Achievements);
         }

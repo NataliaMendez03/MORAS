@@ -10,7 +10,7 @@ namespace Sistema_de_Gestion_Moras.Services
     {
         Task<List<Achievements>> GetAll();
         Task<Achievements> GetAchievements(int idAchievements);
-        Task<Achievements> CreateAchievements(int IdAchievements, int IdMission, DateTime DateAchievement);
+        Task<Achievements> CreateAchievements(int IdLogin, int IdMission, DateTime DateAchievement);
         Task<Achievements> UpdateAchievements(int idAchievements, int? idLogin = null, int? IdMission = null, DateTime? DateAchievement = null);
         Task<Achievements> DeleteAchievements(int idAchievements);
     }

@@ -28,7 +28,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
             var Levels = await _levelsService.GetLevels(idLevels);
             if (Levels == null)
             {
-                return BadRequest("City not found");
+                return BadRequest("Level not found");
             }
             return Ok(Levels);
         }
