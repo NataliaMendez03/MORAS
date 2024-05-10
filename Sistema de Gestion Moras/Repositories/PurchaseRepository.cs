@@ -8,7 +8,7 @@ namespace Sistema_de_Gestion_Moras.Repositories
     {
         Task<List<Purchase>> GetAll();
         Task<Purchase> GetPurchase(int idPurchase);
-        Task<Purchase> CreatePurchase(int idProviders, DateTime dateProviders, int idPurchaseDetail);
+        Task<Purchase> CreatePurchase(int idProviders, int idPurchaseDetail);
         Task<Purchase> UpdatePurchase(Purchase purchase );
         Task<Purchase> DeletePurchase(Purchase purchase);
     }
@@ -20,7 +20,7 @@ namespace Sistema_de_Gestion_Moras.Repositories
             _db = db;
         }
 
-        public async Task<Purchase> CreatePurchase(int idProviders, DateTime dateProviders, int idPurchaseDetail)
+        public async Task<Purchase> CreatePurchase(int idProviders, int idPurchaseDetail)
         {
             Providers? providers = _db.Providers.FirstOrDefault(ut => ut.IdProviders == idProviders);
             PurchaseDetail? purchaseDetail = _db.PurchaseDetail.FirstOrDefault(ut => ut.IdPurchaseDetail == idPurchaseDetail);
@@ -28,7 +28,7 @@ namespace Sistema_de_Gestion_Moras.Repositories
             Purchase newPurchase = new Purchase
             {
                 IdProviders = idProviders,
-                DateProviders = dateProviders,
+                DateProviders = DateTime.Now,
                 IdPurchaseDetail = idPurchaseDetail,
                 StateDelete = false,
                 ModifyDate = null
@@ -67,7 +67,6 @@ namespace Sistema_de_Gestion_Moras.Repositories
             if (PurchaseUpdate != null)
             {
                 PurchaseUpdate.IdProviders = purchase.IdProviders;
-                PurchaseUpdate.DateProviders = purchase.DateProviders;
                 PurchaseUpdate.IdPurchaseDetail = purchase.IdPurchaseDetail;
                 await _db.SaveChangesAsync();
             }

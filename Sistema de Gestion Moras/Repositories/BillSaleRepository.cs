@@ -8,7 +8,7 @@ namespace Sistema_de_Gestion_Moras.Repositories
     {
         Task<List<BillSale>> GetAll();
         Task<BillSale> GetBillSale(int idBillSale);
-        Task<BillSale> CreateBillSale(int idClient, DateTime dateSale, int idSalesDetails, string notes);
+        Task<BillSale> CreateBillSale(int idClient, int idSalesDetails, string notes);
         Task<BillSale> UpdateBillSale(BillSale billSale);
         Task<BillSale> DeleteBillSale(BillSale billSale);
     }
@@ -20,7 +20,7 @@ namespace Sistema_de_Gestion_Moras.Repositories
             _db = db;
         }
 
-        public async Task<BillSale> CreateBillSale(int idClient, DateTime dateSale, int idSalesDetails, string notes)
+        public async Task<BillSale> CreateBillSale(int idClient, int idSalesDetails, string notes)
         {
             Client? client = _db.Client.FirstOrDefault(ut => ut.IdClient == idClient);
             SalesDetails? salesDetails = _db.SalesDetails.FirstOrDefault(ut => ut.IdSalesDetails == idSalesDetails);
@@ -28,7 +28,7 @@ namespace Sistema_de_Gestion_Moras.Repositories
             BillSale newBillSale = new BillSale
             {
                 IdClient = idClient,
-                DateSale = dateSale,
+                DateSale = DateTime.Now,
                 IdSalesDetails = idSalesDetails,
                 Notes = notes,
                 StateDelete = false,
@@ -68,7 +68,6 @@ namespace Sistema_de_Gestion_Moras.Repositories
             if (BillSaleUpdate != null)
             {
                 BillSaleUpdate.IdClient = billSale.IdClient;
-                BillSaleUpdate.DateSale = billSale.DateSale;
                 BillSaleUpdate.IdSalesDetails = billSale.IdSalesDetails;
                 BillSaleUpdate.Notes = billSale.Notes;
                 await _db.SaveChangesAsync();

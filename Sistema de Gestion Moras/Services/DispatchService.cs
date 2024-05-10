@@ -8,8 +8,8 @@ namespace Sistema_de_Gestion_Moras.Services
     {
         Task<List<Dispatch>> GetAll();
         Task<Dispatch> GetDispatch(int idDispatch); 
-        Task<Dispatch> CreateDispatch(int idEmployees, int idSalesDetails, DateTime date, int idTracking);
-        Task<Dispatch> UpdateDispatch(int idDispatch, int? idEmployees = null, int? idSalesDetails = null, DateTime? date = null, int? idTracking = null);
+        Task<Dispatch> CreateDispatch(int idEmployees, int idSalesDetails,  int idTracking);
+        Task<Dispatch> UpdateDispatch(int idDispatch, int? idEmployees = null, int? idSalesDetails = null,int? idTracking = null);
         Task<Dispatch> DeleteDispatch(int idDispatch);
     }
     public class DispatchService: IDispatchService
@@ -20,9 +20,9 @@ namespace Sistema_de_Gestion_Moras.Services
             _dispatchRepository = dispatchRepository;
         }
 
-        public async Task<Dispatch> CreateDispatch(int idEmployees, int idSalesDetails, DateTime date, int idTracking)
+        public async Task<Dispatch> CreateDispatch(int idEmployees, int idSalesDetails,int idTracking)
         {
-            return await _dispatchRepository.CreateDispatch(idEmployees, idSalesDetails, date, idTracking);
+            return await _dispatchRepository.CreateDispatch(idEmployees, idSalesDetails, idTracking);
             throw new NotImplementedException();
         }
 
@@ -51,7 +51,7 @@ namespace Sistema_de_Gestion_Moras.Services
             throw new NotImplementedException();
         }
 
-        public async Task<Dispatch> UpdateDispatch(int idDispatch, int? idEmployees = null, int? idSalesDetails = null, DateTime? date = null, int? idTracking = null)
+        public async Task<Dispatch> UpdateDispatch(int idDispatch, int? idEmployees = null, int? idSalesDetails = null,int? idTracking = null)
         {
             Dispatch newDispatch = await _dispatchRepository.GetDispatch(idDispatch);
             if (newDispatch != null)
@@ -65,10 +65,7 @@ namespace Sistema_de_Gestion_Moras.Services
                 {
                     newDispatch.IdSalesDetails = (int)idSalesDetails;
                 }
-                if (date != null)
-                {
-                    newDispatch.Date = (DateTime)date;
-                }
+                
                 if (idTracking != null)
                 {
                     newDispatch.IdTracking = (int)idTracking;

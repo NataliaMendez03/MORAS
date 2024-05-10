@@ -34,9 +34,9 @@ namespace Sistema_de_Gestion_Moras.Controllers
         }
         // POST: api/BillSale
         [HttpPost]
-        public async Task<ActionResult<Purchase>> PostPurchase(int idProviders, DateTime dateproviders, int IdPurchaseDetail)
+        public async Task<ActionResult<Purchase>> PostPurchase(int idProviders, int IdPurchaseDetail)
         {
-            var PurchaseToPut = await _PurchaseService.CreatePurchase(idProviders, dateproviders, IdPurchaseDetail);
+            var PurchaseToPut = await _PurchaseService.CreatePurchase(idProviders, IdPurchaseDetail);
 
             if (PurchaseToPut != null)
             {
@@ -50,9 +50,9 @@ namespace Sistema_de_Gestion_Moras.Controllers
         }
         // PUT: api/Purchase/5
         [HttpPut("Update/{idPurchase}")]
-        public async Task<ActionResult<Purchase>> PutPurchase(int idPurchase, int idProviders, DateTime datePurchase, int idPurchaseDetail)
+        public async Task<ActionResult<Purchase>> PutPurchase(int idPurchase, int idProviders, int idPurchaseDetail)
         {
-            var PurchaseToPut = await _PurchaseService.UpdatePurchase(idPurchase, idProviders, datePurchase, idPurchaseDetail);
+            var PurchaseToPut = await _PurchaseService.UpdatePurchase(idPurchase, idProviders, idPurchaseDetail);
 
             if (PurchaseToPut != null)
             {

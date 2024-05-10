@@ -33,9 +33,9 @@ namespace Sistema_de_Gestion_Moras.Controllers
         }
         // POST: api/Landmarks
         [HttpPost]
-        public async Task<ActionResult<Landmarks>> PostLandmarks(int idLevel, int idHarvest, DateTime dateLandmark)
+        public async Task<ActionResult<Landmarks>> PostLandmarks(int idLevel, int idHarvest)
         {
-            var LandmarksToPut = await _landmarksService.CreateLandmarks(idLevel, idHarvest, dateLandmark);
+            var LandmarksToPut = await _landmarksService.CreateLandmarks(idLevel, idHarvest);
 
             if (LandmarksToPut != null)
             {
@@ -48,9 +48,9 @@ namespace Sistema_de_Gestion_Moras.Controllers
         }
         // PUT: api/Landmarks/5
         [HttpPut("Update/{idLandmarks}")]
-        public async Task<ActionResult<Landmarks>> PutLandmarks(int idLandmarks, int idLevel, int idHarvest, DateTime dateLandmark)
+        public async Task<ActionResult<Landmarks>> PutLandmarks(int idLandmarks, int idLevel, int idHarvest)
         {
-            var LandmarksToPut = await _landmarksService.UpdateLandmarks(idLandmarks,idLevel, idHarvest, dateLandmark);
+            var LandmarksToPut = await _landmarksService.UpdateLandmarks(idLandmarks,idLevel, idHarvest);
 
             if (LandmarksToPut != null)
             {

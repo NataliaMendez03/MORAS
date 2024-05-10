@@ -34,9 +34,9 @@ namespace Sistema_de_Gestion_Moras.Controllers
         }
         // POST: api/Achievements
         [HttpPost]
-        public async Task<ActionResult<Achievements>> PostAchievements(int idLogin, int IdMission, DateTime DateAchievement)
+        public async Task<ActionResult<Achievements>> PostAchievements(int idLogin, int IdMission)
         {
-            var AchievementsToPut = await _AchievementsService.CreateAchievements(idLogin, IdMission, DateAchievement);
+            var AchievementsToPut = await _AchievementsService.CreateAchievements(idLogin, IdMission);
 
             if (AchievementsToPut != null)
             {
@@ -50,9 +50,9 @@ namespace Sistema_de_Gestion_Moras.Controllers
         }
         // PUT: api/Achievements/5
         [HttpPut("Update/{idAchievements}")]
-        public async Task<ActionResult<Achievements>> PutAchievements(int idAchievements, int IdLogin, int IdMission, DateTime DateAchievement)
+        public async Task<ActionResult<Achievements>> PutAchievements(int idAchievements, int IdLogin, int IdMission)
         {
-            var AchievementsToPut = await _AchievementsService.UpdateAchievements(idAchievements, IdLogin, IdMission, DateAchievement);
+            var AchievementsToPut = await _AchievementsService.UpdateAchievements(idAchievements, IdLogin, IdMission);
 
             if (AchievementsToPut != null)
             {

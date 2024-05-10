@@ -8,7 +8,7 @@ namespace Sistema_de_Gestion_Moras.Repositories
     {
         Task<List<Login>> GetAll();
         Task<Login> GetLogin(int idLogin);
-        Task<Login> CreateLogin(string userName, string password, string email, DateTime registerDate);
+        Task<Login> CreateLogin(string userName, string password, string email);
         Task<Login> UpdateLogin(Login login);
         Task<Login> DeleteLogin(Login login);
     }
@@ -19,16 +19,17 @@ namespace Sistema_de_Gestion_Moras.Repositories
         {
             _db = db;
         }
-        public async Task<Login> CreateLogin(string userName, string password, string email, DateTime registerDate)
+        public async Task<Login> CreateLogin(string userName, string password, string email)
         {
             Login newLogin = new Login
             {
                 UserName = userName,
                 Password = password,
                 Email = email,
-                RegisterDate = registerDate,
+                RegisterDate = DateTime.Now,
                 StateDelete = false,
-                ModifyDate = null
+                ModifyDate = null,
+                Verified = null
             };
 
             await _db.Login.AddAsync(newLogin);
@@ -63,7 +64,6 @@ namespace Sistema_de_Gestion_Moras.Repositories
                 LoginUpdate.UserName = Login.UserName;
                 LoginUpdate.Password = Login.Password;
                 LoginUpdate.Email = Login.Email;
-                LoginUpdate.RegisterDate = Login.RegisterDate;
 
                 await _db.SaveChangesAsync();
             }

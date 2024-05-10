@@ -7,10 +7,10 @@ namespace Sistema_de_Gestion_Moras.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DispatchValuesController : ControllerBase
+    public class DispatchController : ControllerBase
     {
         public readonly IDispatchService _dispatchService;
-        public DispatchValuesController(IDispatchService dispatchService)
+        public DispatchController(IDispatchService dispatchService)
         {
             _dispatchService = dispatchService;
         }
@@ -33,9 +33,9 @@ namespace Sistema_de_Gestion_Moras.Controllers
         }
         // POST: api/Dispatch
         [HttpPost]
-        public async Task<ActionResult<Dispatch>> PostDispatch(int idEmployees, int idSalesDetails, DateTime date, int idTracking)
+        public async Task<ActionResult<Dispatch>> PostDispatch(int idEmployees, int idSalesDetails, int idTracking)
         {
-            var DispatchToPut = await _dispatchService.CreateDispatch(idEmployees,idSalesDetails,date,idTracking);
+            var DispatchToPut = await _dispatchService.CreateDispatch(idEmployees,idSalesDetails,idTracking);
 
             if (DispatchToPut != null)
             {
@@ -51,9 +51,9 @@ namespace Sistema_de_Gestion_Moras.Controllers
         }
         // PUT: api/Dispatch/5
         [HttpPut("Update/{idDispatch}")]
-        public async Task<ActionResult<Dispatch>> PutDispatch(int idDispatch, int idEmployees, int idSalesDetails, DateTime date, int idTracking)
+        public async Task<ActionResult<Dispatch>> PutDispatch(int idDispatch, int idEmployees, int idSalesDetails, int idTracking)
         {
-            var DispatchToPut = await _dispatchService.UpdateDispatch(idDispatch,idEmployees,idSalesDetails,date,idTracking);
+            var DispatchToPut = await _dispatchService.UpdateDispatch(idDispatch,idEmployees,idSalesDetails,idTracking);
 
             if (DispatchToPut != null)
             {

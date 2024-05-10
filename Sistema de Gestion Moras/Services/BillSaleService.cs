@@ -7,8 +7,8 @@ namespace Sistema_de_Gestion_Moras.Services
     {
         Task<List<BillSale>> GetAll();
         Task<BillSale> GetBillSale(int idBillSale);
-        Task<BillSale> CreateBillSale(int idClient, DateTime dateSale, int idSalesDetails, string notes);
-        Task<BillSale> UpdateBillSale(int idBillSale, int? idClient=null, DateTime? dateSale=null, int? idSalesDetails = null, string? notes = null);
+        Task<BillSale> CreateBillSale(int idClient, int idSalesDetails, string notes);
+        Task<BillSale> UpdateBillSale(int idBillSale, int? idClient=null, int? idSalesDetails = null, string? notes = null);
         Task<BillSale> DeleteBillSale(int idBillSale);
     }
     public class BillSaleService : IBillSaleService
@@ -19,9 +19,9 @@ namespace Sistema_de_Gestion_Moras.Services
             _BillSaleRepository = BillSaleRepository;
         }
 
-        public async Task<BillSale> CreateBillSale(int idClient, DateTime dateSale, int idSalesDetails, string notes)
+        public async Task<BillSale> CreateBillSale(int idClient, int idSalesDetails, string notes)
         {
-            return await _BillSaleRepository.CreateBillSale(idClient, dateSale, idSalesDetails, notes);
+            return await _BillSaleRepository.CreateBillSale(idClient, idSalesDetails, notes);
             throw new NotImplementedException();
         }
 
@@ -50,7 +50,7 @@ namespace Sistema_de_Gestion_Moras.Services
             throw new NotImplementedException();
         }
 
-        public async Task<BillSale> UpdateBillSale(int idBillSale, int? idClient = null, DateTime? dateSale = null, int? idSalesDetails = null, string? notes = null)
+        public async Task<BillSale> UpdateBillSale(int idBillSale, int? idClient = null, int? idSalesDetails = null, string? notes = null)
         {
             BillSale newBillSale = await _BillSaleRepository.GetBillSale(idBillSale);
             if (newBillSale != null)
@@ -60,10 +60,7 @@ namespace Sistema_de_Gestion_Moras.Services
                 {
                     newBillSale.IdClient = (int)idClient;
                 }
-                if (dateSale != null)
-                {
-                    newBillSale.DateSale = (DateTime)dateSale;
-                }
+                
                 if (idSalesDetails != null)
                 {
                     newBillSale.IdSalesDetails = (int)idSalesDetails;

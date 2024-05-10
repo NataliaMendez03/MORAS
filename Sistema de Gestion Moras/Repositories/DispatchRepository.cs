@@ -8,7 +8,7 @@ namespace Sistema_de_Gestion_Moras.Repositories
     {
         Task<List<Dispatch>> GetAll();
         Task<Dispatch> GetDispatch(int idDispatch); 
-        Task<Dispatch> CreateDispatch(int idEmployees, int idSalesDetails, DateTime date, int idTracking);
+        Task<Dispatch> CreateDispatch(int idEmployees, int idSalesDetails, int idTracking);
         Task<Dispatch> UpdateDispatch(Dispatch dispatch);
         Task<Dispatch> DeleteDispatch(Dispatch dispatch);
     }
@@ -20,7 +20,7 @@ namespace Sistema_de_Gestion_Moras.Repositories
             _db = db;
         }
 
-        public async Task<Dispatch> CreateDispatch(int idEmployees, int idSalesDetails, DateTime date, int idTracking)
+        public async Task<Dispatch> CreateDispatch(int idEmployees, int idSalesDetails, int idTracking)
         {
             Employees? employees = _db.Employees.FirstOrDefault(ut => ut.IdEmployees == idEmployees);
             SalesDetails? salesDetails = _db.SalesDetails.FirstOrDefault(ut => ut.IdSalesDetails == idSalesDetails);
@@ -30,7 +30,7 @@ namespace Sistema_de_Gestion_Moras.Repositories
             {
                 IdEmployees = idEmployees,
                 IdSalesDetails = idSalesDetails,
-                Date = date,
+                Date = DateTime.Now,
                 IdTracking = idTracking,
                 StateDelete = false,
                 ModifyDate = null
@@ -69,7 +69,6 @@ namespace Sistema_de_Gestion_Moras.Repositories
             if (ConsultUpdate != null)
             {
                 ConsultUpdate.IdEmployees = dispatch.IdEmployees;
-                ConsultUpdate.Date = dispatch.Date;
                 ConsultUpdate.IdTracking = dispatch.IdTracking;
                 ConsultUpdate.IdSalesDetails = dispatch.IdSalesDetails;
 

@@ -10,9 +10,9 @@ namespace Sistema_de_Gestion_Moras.Models
         public string Password { get; set; }
         public string Email { get; set; }
         public DateTime RegisterDate {  get; set; }
+        public bool? Verified { get; set; }
         public bool StateDelete { get; set; }
         public DateTime? ModifyDate { get; set; }
-
 
     }
 }

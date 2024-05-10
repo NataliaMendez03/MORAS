@@ -34,9 +34,9 @@ namespace Sistema_de_Gestion_Moras.Controllers
         }
         // POST: api/BillSale
         [HttpPost]
-        public async Task<ActionResult<BillSale>> PostBillSale(int idClient, DateTime dateSale, int idSalesDetails, string notes)
+        public async Task<ActionResult<BillSale>> PostBillSale(int idClient, int idSalesDetails, string notes)
         {
-            var BillSaleToPut = await _BillSaleService.CreateBillSale(idClient, dateSale, idSalesDetails, notes);
+            var BillSaleToPut = await _BillSaleService.CreateBillSale(idClient, idSalesDetails, notes);
 
             if (BillSaleToPut != null)
             {
@@ -50,9 +50,9 @@ namespace Sistema_de_Gestion_Moras.Controllers
         }
         // PUT: api/BillSale/5
         [HttpPut("Update/{idBillSale}")]
-        public async Task<ActionResult<BillSale>> PutBillSale(int idBillSale, int idClient, DateTime dateSale, int idSalesDetails, string notes)
+        public async Task<ActionResult<BillSale>> PutBillSale(int idBillSale, int idClient, int idSalesDetails, string notes)
         {
-            var BillSaleToPut = await _BillSaleService.UpdateBillSale(idBillSale, idClient, dateSale, idSalesDetails, notes);
+            var BillSaleToPut = await _BillSaleService.UpdateBillSale(idBillSale, idClient, idSalesDetails, notes);
 
             if (BillSaleToPut != null)
             {

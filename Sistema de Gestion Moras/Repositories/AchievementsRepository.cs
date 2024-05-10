@@ -8,7 +8,7 @@ namespace Sistema_de_Gestion_Moras.Repositories
     {
         Task<List<Achievements>> GetAll();
         Task<Achievements> GetAchievements(int idAchievements);
-        Task<Achievements> CreateAchievements(int IdLogin, int IdMission, DateTime DateAchievement);
+        Task<Achievements> CreateAchievements(int IdLogin, int IdMission);
         Task<Achievements> UpdateAchievements(Achievements Achievements);
         Task<Achievements> DeleteAchievements(Achievements Achievements);
     }
@@ -19,7 +19,7 @@ namespace Sistema_de_Gestion_Moras.Repositories
         {
             _db = db;
         }
-        public async Task<Achievements> CreateAchievements(int IdLogin, int IdMission, DateTime DateAchievement)
+        public async Task<Achievements> CreateAchievements(int IdLogin, int IdMission)
         {
             Login? Login = _db.Login.FirstOrDefault(ut => ut.IdLogin == IdLogin);
             Missions? Missions = _db.Missions.FirstOrDefault(ut => ut.IdMission == IdMission);
@@ -28,7 +28,7 @@ namespace Sistema_de_Gestion_Moras.Repositories
             {
                 IdLogin = IdLogin,
                 IdMission = IdMission,
-                DateAchievement = DateAchievement,
+                DateAchievement = DateTime.Now,
                 StateDelete = false,
                 ModifyDate = null
             };
@@ -64,7 +64,6 @@ namespace Sistema_de_Gestion_Moras.Repositories
             {
                 AchievementsUpdate.IdLogin = Achievements.IdLogin;
                 AchievementsUpdate.IdMission = Achievements.IdMission;
-                AchievementsUpdate.DateAchievement = Achievements.DateAchievement;
 
                 await _db.SaveChangesAsync();
             }

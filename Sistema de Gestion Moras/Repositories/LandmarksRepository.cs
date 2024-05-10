@@ -9,7 +9,7 @@ namespace Sistema_de_Gestion_Moras.Repositories
     {
         Task<List<Landmarks>> GetAll();
         Task<Landmarks> GetLandmarks(int idLandmarks);
-        Task<Landmarks> CreateLandmarks(int idLevel, int idHarvest, DateTime dateLandmark );
+        Task<Landmarks> CreateLandmarks(int idLevel, int idHarvest);
         Task<Landmarks> UpdateLandmarks(Landmarks landmarks);
         Task<Landmarks> DeleteLandmarks(Landmarks landmarks);
     }
@@ -20,7 +20,7 @@ namespace Sistema_de_Gestion_Moras.Repositories
         {
             _db = db;
         }
-        public async Task<Landmarks> CreateLandmarks(int idLevel, int idHarvest, DateTime dateLandmark)
+        public async Task<Landmarks> CreateLandmarks(int idLevel, int idHarvest)
         {
             Harvests? harvests = _db.Harvests.FirstOrDefault(ut => ut.IdHarvests== idHarvest);
             Levels? levels = _db.Levels.FirstOrDefault(ut => ut.IdLevel == idLevel);
@@ -29,7 +29,7 @@ namespace Sistema_de_Gestion_Moras.Repositories
             {
                 IdHarvests = idHarvest,
                 IdLevel = idLevel,
-                DateLandmark = dateLandmark,
+                DateLandmark = DateTime.Now,
                 StateDelete = false,
                 ModifyDate = null
             };
@@ -65,7 +65,6 @@ namespace Sistema_de_Gestion_Moras.Repositories
             Landmarks LandmarksUpdate = await _db.Landmarks.FindAsync(landmarks.IdLandmarks);
             if (LandmarksUpdate != null)
             {
-                LandmarksUpdate.DateLandmark = landmarks.DateLandmark;
                 LandmarksUpdate.IdLevel = landmarks.IdLevel;
                 LandmarksUpdate.IdHarvests = landmarks.IdHarvests;
          

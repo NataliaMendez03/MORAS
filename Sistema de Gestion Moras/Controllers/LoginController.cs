@@ -34,9 +34,9 @@ namespace Sistema_de_Gestion_Moras.Controllers
         }
         // POST: api/Login
         [HttpPost]
-        public async Task<ActionResult<Login>> PostLogin(string userName, string password, string email, DateTime registerDate)
+        public async Task<ActionResult<Login>> PostLogin(string userName, string password, string email)
         {
-            var LoginToPut = await _loginService.CreateLogin(userName, password, email, registerDate);
+            var LoginToPut = await _loginService.CreateLogin(userName, password, email);
 
             if (LoginToPut != null)
             {
@@ -50,9 +50,9 @@ namespace Sistema_de_Gestion_Moras.Controllers
         }
         // PUT: api/Login/5
         [HttpPut("Update/{idLogin}")]
-        public async Task<ActionResult<Login>> PutLogin(int idLogin, string userName, string password, string email, DateTime registerDate)
+        public async Task<ActionResult<Login>> PutLogin(int idLogin, string userName, string password, string email)
         {
-            var LoginToPut = await _loginService.UpdateLogin(idLogin, userName, password, email, registerDate);
+            var LoginToPut = await _loginService.UpdateLogin(idLogin, userName, password, email);
 
             if (LoginToPut != null)
             {

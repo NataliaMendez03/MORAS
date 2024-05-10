@@ -8,8 +8,8 @@ namespace Sistema_de_Gestion_Moras.Services
     {
         Task<List<Login>> GetAll();
         Task<Login> GetLogin(int idLogin);
-        Task<Login> CreateLogin(string userName, string password, string email, DateTime registerDate);
-        Task<Login> UpdateLogin(int idLogin, string? userName = null, string? password =null, string? email=null, DateTime? registerDate=null);
+        Task<Login> CreateLogin(string userName, string password, string email);
+        Task<Login> UpdateLogin(int idLogin, string? userName = null, string? password =null, string? email=null);
         Task<Login> DeleteLogin(int idLogin);
     }
 
@@ -21,9 +21,9 @@ namespace Sistema_de_Gestion_Moras.Services
             _loginRepository = loginRepository;
         }
 
-        public async Task<Login> CreateLogin(string userName, string password, string email, DateTime registerDate)
+        public async Task<Login> CreateLogin(string userName, string password, string email)
         {
-            return await _loginRepository.CreateLogin(userName, password, email, registerDate);
+            return await _loginRepository.CreateLogin(userName, password, email);
             throw new NotImplementedException();
         }
 
@@ -52,7 +52,7 @@ namespace Sistema_de_Gestion_Moras.Services
             throw new NotImplementedException();
         }
 
-        public async Task<Login> UpdateLogin(int idLogin, string? userName = null, string? password = null, string? email = null, DateTime? registerDate = null)
+        public async Task<Login> UpdateLogin(int idLogin, string? userName = null, string? password = null, string? email = null)
         {
             Login newLogin = await _loginRepository.GetLogin(idLogin);
             if (newLogin != null)
@@ -70,10 +70,7 @@ namespace Sistema_de_Gestion_Moras.Services
                 {
                     newLogin.UserName = (string)email;
                 }
-                if (registerDate != null)
-                {
-                    newLogin.RegisterDate = (DateTime)registerDate;
-                }
+                
                 return await _loginRepository.UpdateLogin(newLogin);
             }
             throw new NotImplementedException();

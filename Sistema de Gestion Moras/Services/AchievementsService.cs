@@ -10,8 +10,8 @@ namespace Sistema_de_Gestion_Moras.Services
     {
         Task<List<Achievements>> GetAll();
         Task<Achievements> GetAchievements(int idAchievements);
-        Task<Achievements> CreateAchievements(int IdLogin, int IdMission, DateTime DateAchievement);
-        Task<Achievements> UpdateAchievements(int idAchievements, int? idLogin = null, int? IdMission = null, DateTime? DateAchievement = null);
+        Task<Achievements> CreateAchievements(int IdLogin, int IdMission);
+        Task<Achievements> UpdateAchievements(int idAchievements, int? idLogin = null, int? IdMission = null);
         Task<Achievements> DeleteAchievements(int idAchievements);
     }
 
@@ -22,9 +22,9 @@ namespace Sistema_de_Gestion_Moras.Services
         {
             _AchievementsRepository = AchievementsRepository;
         }
-        public async Task<Achievements> CreateAchievements(int idLogin, int IdMission, DateTime DateAchievement)
+        public async Task<Achievements> CreateAchievements(int idLogin, int IdMission)
         {
-            return await _AchievementsRepository.CreateAchievements(idLogin, IdMission, DateAchievement);
+            return await _AchievementsRepository.CreateAchievements(idLogin, IdMission);
             throw new NotImplementedException();
         }
 
@@ -53,7 +53,7 @@ namespace Sistema_de_Gestion_Moras.Services
             throw new NotImplementedException();
         }
 
-        public async Task<Achievements> UpdateAchievements(int idAchievements, int? idLogin = null, int? IdMission = null, DateTime? DateAchievement = null)
+        public async Task<Achievements> UpdateAchievements(int idAchievements, int? idLogin = null, int? IdMission = null)
         {
             Achievements newAchievements = await _AchievementsRepository.GetAchievements(idAchievements);
             if (newAchievements != null)
@@ -67,10 +67,7 @@ namespace Sistema_de_Gestion_Moras.Services
                 {
                     newAchievements.IdMission = (int)IdMission;
                 }
-                if (DateAchievement != null)
-                {
-                    newAchievements.DateAchievement = (DateTime)DateAchievement;
-                }
+
                 return await _AchievementsRepository.UpdateAchievements(newAchievements);
             }
             throw new NotImplementedException();

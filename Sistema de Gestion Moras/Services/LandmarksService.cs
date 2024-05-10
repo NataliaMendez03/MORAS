@@ -7,8 +7,8 @@ namespace Sistema_de_Gestion_Moras.Services
     {
         Task<List<Landmarks>> GetAll();
         Task<Landmarks> GetLandmarks(int idLandmarks);
-        Task<Landmarks> CreateLandmarks(int idLevel, int idHarvest, DateTime dateLandmark);
-        Task<Landmarks> UpdateLandmarks(int idLandmarks, int? idLevel = null, int? idHarvest = null, DateTime? dateLandmark = null);
+        Task<Landmarks> CreateLandmarks(int idLevel, int idHarvest);
+        Task<Landmarks> UpdateLandmarks(int idLandmarks, int? idLevel = null, int? idHarvest = null);
         Task<Landmarks> DeleteLandmarks(int idLandmarks);
     }
     public class LandmarksService : ILandmarksService
@@ -18,9 +18,9 @@ namespace Sistema_de_Gestion_Moras.Services
         {
             _landmarksRepository = landmarksRepository;
         }
-        public async Task<Landmarks> CreateLandmarks(int idLevel, int idHarvest, DateTime dateLandmark)
+        public async Task<Landmarks> CreateLandmarks(int idLevel, int idHarvest)
         {
-            return await _landmarksRepository.CreateLandmarks(idLevel, idHarvest, dateLandmark);
+            return await _landmarksRepository.CreateLandmarks(idLevel, idHarvest);
             throw new NotImplementedException();
         }
 
@@ -49,7 +49,7 @@ namespace Sistema_de_Gestion_Moras.Services
             throw new NotImplementedException();
         }
 
-        public async Task<Landmarks> UpdateLandmarks(int idLandmarks, int? idLevel = null, int? idHarvest = null, DateTime? dateLandmark = null)
+        public async Task<Landmarks> UpdateLandmarks(int idLandmarks, int? idLevel = null, int? idHarvest = null)
         {
             Landmarks newLandmarks = await _landmarksRepository.GetLandmarks(idLandmarks);
             if (newLandmarks != null)
@@ -63,10 +63,7 @@ namespace Sistema_de_Gestion_Moras.Services
                 {
                     newLandmarks.IdHarvests = (int)idHarvest;
                 }
-                if (dateLandmark != null)
-                {
-                    newLandmarks.DateLandmark = (DateTime)dateLandmark;
-                }
+                
                 return await _landmarksRepository.UpdateLandmarks(newLandmarks);
             }
             throw new NotImplementedException();

@@ -7,8 +7,8 @@ namespace Sistema_de_Gestion_Moras.Services
     {
         Task<List<Purchase>> GetAll();
         Task<Purchase> GetPurchase(int idPurchasen);
-        Task<Purchase> CreatePurchase(int idProviders, DateTime dateProviders, int idPurchaseDetail);
-        Task<Purchase> UpdatePurchase(int idPurchase, int? idProviders=null, DateTime? dateProviders=null, int? idPurchaseDetail=null);
+        Task<Purchase> CreatePurchase(int idProviders, int idPurchaseDetail);
+        Task<Purchase> UpdatePurchase(int idPurchase, int? idProviders=null, int? idPurchaseDetail=null);
         Task<Purchase> DeletePurchase(int idPurchase);
     }
     public class PurchaseService : IPurchaseService
@@ -19,9 +19,9 @@ namespace Sistema_de_Gestion_Moras.Services
             _PurchaseRepository = PurchasRepository;
         }
 
-        public async Task<Purchase> CreatePurchase(int idProviders, DateTime dateProviders, int idPurchaseDetail)
+        public async Task<Purchase> CreatePurchase(int idProviders, int idPurchaseDetail)
         {
-            return await _PurchaseRepository.CreatePurchase(idProviders, dateProviders, idPurchaseDetail);
+            return await _PurchaseRepository.CreatePurchase(idProviders, idPurchaseDetail);
             throw new NotImplementedException();
         }
 
@@ -50,7 +50,7 @@ namespace Sistema_de_Gestion_Moras.Services
             throw new NotImplementedException();
         }
 
-        public async Task<Purchase> UpdatePurchase(int idPurchase, int? idProviders = null, DateTime? dateProviders = null, int? idPurchaseDetail = null)
+        public async Task<Purchase> UpdatePurchase(int idPurchase, int? idProviders = null, int? idPurchaseDetail = null)
         {
             Purchase newPurchase = await _PurchaseRepository.GetPurchase(idPurchase);
             if (newPurchase != null)
@@ -60,10 +60,7 @@ namespace Sistema_de_Gestion_Moras.Services
                 {
                     newPurchase.IdProviders = (int)idProviders;
                 }
-                if (dateProviders != null)
-                {
-                    newPurchase.DateProviders = (DateTime)dateProviders;
-                }
+                
                 if (idPurchaseDetail != null)
                 {
                     newPurchase.IdPurchaseDetail = (int)idPurchaseDetail;
