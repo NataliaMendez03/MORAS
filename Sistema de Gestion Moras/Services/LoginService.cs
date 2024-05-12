@@ -1,4 +1,5 @@
-﻿using Sistema_de_Gestion_Moras.Models;
+﻿using Sistema_de_Gestion_Moras.Migrations;
+using Sistema_de_Gestion_Moras.Models;
 using Sistema_de_Gestion_Moras.Repositories;
 using System.Net;
 
@@ -11,6 +12,8 @@ namespace Sistema_de_Gestion_Moras.Services
         Task<Login> CreateLogin(string userName, string password, string email);
         Task<Login> UpdateLogin(int idLogin, string? userName = null, string? password =null, string? email=null);
         Task<Login> DeleteLogin(int idLogin);
+        Task<Login> Login(string userName, string password);
+
     }
 
     public class LoginService : ILoginService
@@ -50,6 +53,14 @@ namespace Sistema_de_Gestion_Moras.Services
         {
             return await _loginRepository.GetLogin(idLogin);
             throw new NotImplementedException();
+        }
+
+//AUTENTICACION----------------------------------------------------------------------------
+        public async Task<Login> Login(string userName, string password)
+        {
+            return await _loginRepository.Login(userName, password);
+            throw new NotImplementedException();
+
         }
 
         public async Task<Login> UpdateLogin(int idLogin, string? userName = null, string? password = null, string? email = null)

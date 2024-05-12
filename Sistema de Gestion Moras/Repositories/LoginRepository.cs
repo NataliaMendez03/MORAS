@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Sistema_de_Gestion_Moras.Context;
+using Sistema_de_Gestion_Moras.Migrations;
 using Sistema_de_Gestion_Moras.Models;
 
 namespace Sistema_de_Gestion_Moras.Repositories
@@ -11,6 +12,7 @@ namespace Sistema_de_Gestion_Moras.Repositories
         Task<Login> CreateLogin(string userName, string password, string email);
         Task<Login> UpdateLogin(Login login);
         Task<Login> DeleteLogin(Login login);
+        Task<Login> Login(string userName, string password);
     }
     public class LoginRepository : ILoginRepository
     {
@@ -54,6 +56,14 @@ namespace Sistema_de_Gestion_Moras.Repositories
         public async Task<Login> GetLogin(int idLogin)
         {
             return await _db.Login.FirstOrDefaultAsync(u => u.IdLogin == idLogin);
+        }
+
+
+// AUTENTICACION------------------------------------------------------------------------------
+        public async Task<Login> Login(string userName, string password)
+        {
+            return await _db.Login.FirstOrDefaultAsync(u => u.UserName == userName && u.Password == password);
+
         }
 
         public async Task<Login> UpdateLogin(Login Login)
