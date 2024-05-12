@@ -15,6 +15,27 @@ namespace Sistema_de_Gestion_Moras.Controllers
             _loginService = LoginService;
         }
 
+        // AUTENTICACION PRUEBA 1
+        [HttpPost("Login")]
+        public async Task<ActionResult<bool>> Login(string userName, string password)
+        {
+            if (string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(password))
+            {
+                return BadRequest("El nombre de usuario y la contraseña son obligatorios.");
+            }
+
+            var user = await _loginService.Login(userName, password);
+            if (user != null)
+            {
+                return Ok(true);
+            }
+            else
+            {
+                return Ok(false);
+            }
+        }
+
+
         // GET: api/<LoginController>
         [HttpGet]
         public async Task<ActionResult<List<Login>>> GetAllLogin()
@@ -40,7 +61,6 @@ namespace Sistema_de_Gestion_Moras.Controllers
 
             if (LoginToPut != null)
             {
-                //return CreatedAtAction(nameof(GetEps), new { id = idEps }, epsToPut);
                 return Ok(LoginToPut);
             }
             else
