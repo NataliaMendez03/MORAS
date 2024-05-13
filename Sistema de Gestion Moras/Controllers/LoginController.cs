@@ -54,7 +54,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
             return Ok(Login);
         }
         // POST: api/Login
-        [HttpPost]
+        [HttpPost("Create/")]
         public async Task<ActionResult<Login>> PostLogin(string userName, string password, string email)
         {
             var LoginToPut = await _loginService.CreateLogin(userName, password, email);
