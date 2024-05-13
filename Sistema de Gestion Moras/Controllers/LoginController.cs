@@ -15,7 +15,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
             _loginService = LoginService;
         }
 
-        // AUTENTICACION PRUEBA 1
+        // AUTENTICACION PRUEBA 
         [HttpPost("Login")]
         public async Task<ActionResult<bool>> Login(string userName, string password)
         {

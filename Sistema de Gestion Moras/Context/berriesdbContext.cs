@@ -40,7 +40,7 @@ namespace Sistema_de_Gestion_Moras.Context
             modelBuilder.Entity<Achievements>().HasKey(e => e.IdArchievement);
             modelBuilder.Entity<Levels>().HasKey(e => e.IdLevel);
             modelBuilder.Entity<Landmarks>().HasKey(e => e.IdLandmarks);
-
+            modelBuilder.Entity<SystemLogin>().HasKey(e => e.IdSystemLogin);
 
 
 
@@ -88,6 +88,8 @@ namespace Sistema_de_Gestion_Moras.Context
             modelBuilder.Entity<Landmarks>().HasOne(e => e.Levels).WithMany().HasForeignKey(e => e.IdLevel);
             modelBuilder.Entity<Landmarks>().HasOne(e => e.Harvests).WithMany().HasForeignKey(e => e.IdHarvests);
 
+            modelBuilder.Entity<SystemLogin>().HasOne(e => e.Person).WithMany().HasForeignKey(e => e.IdPerson);
+
 
 
 
@@ -126,6 +128,7 @@ namespace Sistema_de_Gestion_Moras.Context
         public DbSet<Achievements> Achievements { get; set; }
         public DbSet<Levels> Levels { get; set; }
         public DbSet<Landmarks> Landmarks { get; set; }
+        public DbSet<SystemLogin> SystemLogin { get; set; }
 
 
     }

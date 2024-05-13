@@ -42,6 +42,7 @@ builder.Services.AddScoped<ILoginRepository, LoginRepository>();
 builder.Services.AddScoped<IMissionsRepository, MissionsRepository>();
 builder.Services.AddScoped<ILandmarksRepository, LandmarksRepository>();
 builder.Services.AddScoped<IAchievementsRepository, AchievementsRepository>();
+builder.Services.AddScoped<ISystemLoginRepository, SystemLoginRepository>();
 
 
 #endregion
@@ -73,6 +74,8 @@ builder.Services.AddScoped<ILoginService, LoginService>();
 builder.Services.AddScoped<IMissionsService, MissionsService>();
 builder.Services.AddScoped<ILandmarksService, LandmarksService>();
 builder.Services.AddScoped<IAchievementsService, AchievementsService>();
+builder.Services.AddScoped<ISystemLoginService, SystemLoginService>();
+
 #endregion
 
 var app = builder.Build();
