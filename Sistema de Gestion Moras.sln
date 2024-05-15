@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sistema de Gestion Moras", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{50F2BEE7-219A-4524-BD43-F16CB73A3816}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrontBerries", "FrontBerries\FrontBerries.csproj", "{799A85F2-5B27-432F-85D7-435C7B015649}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,6 +19,10 @@ Global
 		{F8969264-A5BB-427B-9843-CD725898B05D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F8969264-A5BB-427B-9843-CD725898B05D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F8969264-A5BB-427B-9843-CD725898B05D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{799A85F2-5B27-432F-85D7-435C7B015649}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{799A85F2-5B27-432F-85D7-435C7B015649}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{799A85F2-5B27-432F-85D7-435C7B015649}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{799A85F2-5B27-432F-85D7-435C7B015649}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
