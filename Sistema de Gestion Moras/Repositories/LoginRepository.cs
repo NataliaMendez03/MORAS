@@ -9,10 +9,12 @@ namespace Sistema_de_Gestion_Moras.Repositories
     {
         Task<List<Login>> GetAll();
         Task<Login> GetLogin(int idLogin);
+        Task<int?> GetIdByUsername(string username);
         Task<Login> CreateLogin(string userName, string password, string email);
         Task<Login> UpdateLogin(Login login);
         Task<Login> DeleteLogin(Login login);
-        Task<Login> Login(string userName, string password);
+        Task<Login> AuthUser(string userName);
+
     }
     public class LoginRepository : ILoginRepository
     {
@@ -53,17 +55,22 @@ namespace Sistema_de_Gestion_Moras.Repositories
             return await _db.Login.ToListAsync();
         }
 
+        public async Task<int?> GetIdByUsername(string username)
+        {
+            var usuario = await _db.Login.FirstOrDefaultAsync(u => u.UserName == username);
+            return usuario?.IdLogin;
+        }
+
         public async Task<Login> GetLogin(int idLogin)
         {
             return await _db.Login.FirstOrDefaultAsync(u => u.IdLogin == idLogin);
         }
 
-
 // AUTENTICACION------------------------------------------------------------------------------
-        public async Task<Login> Login(string userName, string password)
+        public async Task<Login> AuthUser(string userName)
         {
-            return await _db.Login.FirstOrDefaultAsync(u => u.UserName == userName && u.Password == password);
-
+            //return _db.Login.FirstOrDefault(l => l.UserName == userName);
+            return await _db.Login.FirstOrDefaultAsync(u => u.UserName == userName);
         }
 
         public async Task<Login> UpdateLogin(Login Login)
@@ -79,5 +86,7 @@ namespace Sistema_de_Gestion_Moras.Repositories
             }
             return LoginUpdate;
         }
+
+
     }
 }
