@@ -22,6 +22,8 @@ namespace Sistema_de_Gestion_Moras.Repositories
         }
         public async Task<SystemLogin> CreateSystemLogin(string username, string password, int idPerson)
         {
+            Person? person = _db.Person.FirstOrDefault(ut => ut.IdPerson == idPerson);
+
             SystemLogin newSystemLogin = new SystemLogin
             {
                 Username = username,
