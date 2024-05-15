@@ -8,7 +8,10 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 </head>
 <body>
-    <img width="150" alt="Logo Proyecto" src="\moralipsisLogo.jpg">
+        <div class="image-container">
+        <img src="~/src/moralipsislogo.png"  width="150" height="150" />
+        <img src="~/src/picture1.png" align="right" width="150" height="150" />
+    </div>
 
     <div class="row mt-5 justify-content-center">
         <div class="col-sm-4">
@@ -17,11 +20,16 @@
                     <h1 style="color: mediumpurple; font-family:'Trebuchet MS',sans-serif; font-weight:bold;">Moralipsis</h1>
                 </div>
                 <div class="card-body">
-
+                    <div class="d-grid gap-2 mb-3">
+                        <style="color: black;" align="center">---------  Quick Sign in  ----------</>
+                    </div>
 
                     <form asp-controller="Acceso" asp-action="Login" method="post">
                         <input class="form-control mb-3" type="text" placeholder="User Name" required asp-for="UserName" />
                         <input class="form-control mb-3" type="password" placeholder="Password" required asp-for="Password" />
+                        <div class="d-grid gap-2 mb-3">
+                            <a asp-controller="Acceso" asp-action="Registro" style="color: rebeccapurple;">Forgot password?</a>
+                        </div>
                         <div class="d-grid gap-2 mb-3">
                             <!--<button class="btn btn-primary" type="submit">Iniciar Sesión</button>-->
                             <button style="background-color: mediumpurple; color: white;">Sign in</button>
@@ -33,7 +41,7 @@
                                 @ViewData["Mensaje"]
                             </div>
                         }
-                        Don't have an account?  <a asp-controller="Acceso" asp-action="Registro">Sign up</a>
+                        Don't have an account?  <a asp-controller="Acceso" asp-action="Registro" style="color: rebeccapurple;">Sign up</a>
                     </form>
                 </div>
             </div>
