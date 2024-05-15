@@ -17,7 +17,7 @@ namespace Sistema_de_Gestion_Moras.Services
         Task<Login> UpdateLogin(int idLogin, string? userName = null, string? password = null, string? email = null);
         Task<Login> DeleteLogin(int idLogin);
         Task<bool> Authentication(string userName, string password);
-        string EncriptarClave(string password);
+        string EncryptPassword(string password);
     }
 
     public class LoginService : ILoginService
@@ -30,7 +30,7 @@ namespace Sistema_de_Gestion_Moras.Services
 
         public async Task<Login> CreateLogin(string userName, string password, string email)
         {
-            password = EncriptarClave(password);
+            password = EncryptPassword(password);
             return await _loginRepository.CreateLogin(userName, password, email);
             throw new NotImplementedException();
         }
@@ -68,7 +68,7 @@ namespace Sistema_de_Gestion_Moras.Services
 
 
 // ENCRIPTAR CONTRASEÑA ----------------------------------------------------------------------------
-        public string EncriptarClave(string password)
+        public string EncryptPassword(string password)
         {
             SHA256 sha256 = SHA256Managed.Create();
             ASCIIEncoding encoding = new ASCIIEncoding();
@@ -82,7 +82,7 @@ namespace Sistema_de_Gestion_Moras.Services
         public async Task<bool> Authentication(string userName, string password)
         {
             var user = await _loginRepository.AuthUser(userName);
-            string hashedPassword = EncriptarClave(password);
+            string hashedPassword = EncryptPassword(password);
 
             if (user != null && (user.Password == hashedPassword))
                 return true;
