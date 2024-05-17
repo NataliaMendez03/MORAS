@@ -19,12 +19,14 @@ namespace FrontBerries.Controllers
         {
             List<LoginViewModel> Loginlist = new List<LoginViewModel>();
             HttpResponseMessage respone = _client.GetAsync(_client.BaseAddress + "/Login").Result;
-            if(respone.IsSuccessStatusCode)
-            {
-                string data = respone.Content.ReadAsStringAsync().Result;
-                Loginlist = JsonConvert.DeserializeObject<List<LoginViewModel>>(data);
-            }
-            return View(Loginlist);
+            if (respone.IsSuccessStatusCode)
+                {
+                    string data = respone.Content.ReadAsStringAsync().Result;
+                    Loginlist = JsonConvert.DeserializeObject<List<LoginViewModel>>(data);
+                }
+            var inactiveLogins = Loginlist.Where(login => !login.StateDelete).ToList();
+
+            return View(inactiveLogins);
         }
     }
 }

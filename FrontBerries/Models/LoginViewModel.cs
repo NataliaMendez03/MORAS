@@ -13,5 +13,7 @@ namespace FrontBerries.Models
 
         [DisplayName("Register Date")]
         public DateTime RegisterDate { get; set; }
+
+        public bool StateDelete { get; set; }
     }
 }
