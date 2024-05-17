@@ -57,5 +57,13 @@ namespace FrontBerries.Controllers
             }
             return View();
         }
+
+        /*[HttpGet]
+        public IActionResult Update()
+        {
+            LoginViewModel login = new LoginViewModel();
+            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Login/")
+            return View();
+        }*/
     }
 }
