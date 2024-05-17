@@ -9,6 +9,7 @@ namespace FrontBerries.Models
         public int IdLogin { get; set; }
         [DisplayName("User Name")]
         public string UserName { get; set; }
+        public string Password { get; set; }
         public string Email { get; set; }
 
         [DisplayName("Register Date")]

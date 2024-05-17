@@ -1,6 +1,8 @@
-﻿using FrontBerries.Models;
+﻿using Azure;
+using FrontBerries.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Text;
 
 namespace FrontBerries.Controllers
 {
@@ -27,6 +29,33 @@ namespace FrontBerries.Controllers
             var inactiveLogins = Loginlist.Where(login => !login.StateDelete).ToList();
 
             return View(inactiveLogins);
+        }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Create(LoginViewModel model)
+        {
+            try
+            {
+                String data = JsonConvert.SerializeObject(model);
+                StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = _client.PostAsync(_client.BaseAddress + $"/Login/Create?userName={model.UserName}&password={model.Password}&email={model.Email}", content).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    TempData["successMessage"] = "User Created";
+                    return RedirectToAction("LoginGet");
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["errorMessage"] = ex.Message;
+                return View();
+            }
+            return View();
         }
     }
 }
