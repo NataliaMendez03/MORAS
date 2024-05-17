@@ -16,7 +16,6 @@ namespace Sistema_de_Gestion_Moras.Controllers
             _loginService = LoginService;
         }
 
-        // GET: api/<LoginController>
         [HttpGet]
         public async Task<ActionResult<List<Login>>> GetAllLogin()
         {

@@ -87,7 +87,6 @@ namespace Sistema_de_Gestion_Moras.Services
             if (user != null && (user.Password == hashedPassword))
                 return true;
             return false;
-            //return await _loginRepository.AuthUsername(userName, password);
             throw new NotImplementedException();
 
         }
