@@ -36,7 +36,9 @@ namespace FrontBerries.Controllers
             {
                 UserName = modelo.UserName,
                 Email = modelo.Email,
-                Password = modelo.Password
+                Password = modelo.Password,
+                RegisterDate = DateTime.Now
+                
             };
 
             await _berriesdbContext.Login.AddAsync(login);
