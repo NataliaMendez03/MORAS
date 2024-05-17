@@ -58,12 +58,29 @@ namespace FrontBerries.Controllers
             return View();
         }
 
-        /*[HttpGet]
-        public IActionResult Update()
+        [HttpGet]
+        public IActionResult Update(int id)
         {
             LoginViewModel login = new LoginViewModel();
-            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Login/")
+            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Login/" + id).Result; 
+            if (response.IsSuccessStatusCode) 
+            {
+                string data = response.Content.ReadAsStringAsync().Result;
+                login = JsonConvert.DeserializeObject<LoginViewModel>(data);
+            }
+            return View(login);
+        }
+        [HttpPost]
+        public IActionResult Update(LoginViewModel model) 
+        {
+            string data = JsonConvert.SerializeObject(model);
+            StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = _client.PutAsync(_client.BaseAddress + $"/Login/Update/{model.IdLogin}?userName={model.UserName}&password={model.Password}&email={model.Email}", content).Result;
+            if (response.IsSuccessStatusCode) 
+            {
+                return RedirectToAction();
+            }
             return View();
-        }*/
+        }
     }
 }
