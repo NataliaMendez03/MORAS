@@ -64,7 +64,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
             }
         }
         // Delete: api/Address/5
-        [HttpPut("Delete/{idAddress}")]
+        [HttpDelete("Delete/{idAddress}")]
         public async Task<ActionResult<Address>> DeleteAddress(int idAddress)
         {
             var AddressToDelete = await _AddressService.DeleteAddress(idAddress);

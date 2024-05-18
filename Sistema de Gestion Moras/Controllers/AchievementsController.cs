@@ -64,7 +64,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
             }
         }
         // Delete: api/Achievements/5
-        [HttpPut("Delete/{idAchievements}")]
+        [HttpDelete("Delete/{idAchievements}")]
         public async Task<ActionResult<Achievements>> DeleteAchievements(int idAchievements)
         {
             var AchievementsToDelete = await _AchievementsService.DeleteAchievements(idAchievements);

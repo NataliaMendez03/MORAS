@@ -66,7 +66,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
             }
         }
         // Delete: api/Person/5
-        [HttpPut("Delete/{idPerson}")]
+        [HttpDelete("Delete/{idPerson}")]
         public async Task<ActionResult<Person>> DeletePerson(int idPerson)
         {
             var PersonToDelete = await _personService.DeletePerson(idPerson);

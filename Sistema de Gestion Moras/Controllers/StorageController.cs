@@ -73,7 +73,7 @@ namespace HClinicalV2._0.Controllers
         }
 
         // Delete: api/Storage/5
-        [HttpPut("Delete/{idStorage}")]
+        [HttpDelete("Delete/{idStorage}")]
         public async Task<ActionResult<Storage>> DeleteStorage(int idStorage)
         {
 

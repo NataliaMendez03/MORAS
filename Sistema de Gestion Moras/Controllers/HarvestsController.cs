@@ -66,7 +66,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
             }
         }
         // Delete: api/Harvests/5
-        [HttpPut("Delete/{idHarvests}")]
+        [HttpDelete("Delete/{idHarvests}")]
         public async Task<ActionResult<Harvests>> DeleteHarvests(int idHarvests)
         {
             var HarvestsToDelete = await _harvestsService.DeleteHarvests(idHarvests);

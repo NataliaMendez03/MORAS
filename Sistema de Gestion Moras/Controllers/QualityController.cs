@@ -64,7 +64,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
             }
         }
         // Delete: api/Quality/5
-        [HttpPut("Delete/{idQuality}")]
+        [HttpDelete("Delete/{idQuality}")]
         public async Task<ActionResult<Quality>> DeleteQuality(int idQuality)
         {
             var QualityToDelete = await _QualityService.DeleteQuality(idQuality);

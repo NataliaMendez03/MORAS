@@ -73,7 +73,7 @@ namespace HClinicalV2._0.Controllers
         }
 
         // Delete: api/Employees/5
-        [HttpPut("Delete/{idEmployees}")]
+        [HttpDelete("Delete/{idEmployees}")]
         public async Task<ActionResult<Employees>> DeleteEmployees(int idEmployees)
         {
 

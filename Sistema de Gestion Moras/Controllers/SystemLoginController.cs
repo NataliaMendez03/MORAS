@@ -84,7 +84,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
             }
         }
         // Delete: api/SystemLogin/5
-        [HttpPut("Delete/{idSystemLogin}")]
+        [HttpDelete("Delete/{idSystemLogin}")]
         public async Task<ActionResult<SystemLogin>> DeleteSystemLogin(int idSystemLogin)
         {
             var SystemLoginToDelete = await _SystemLoginService.DeleteSystemLogin(idSystemLogin);

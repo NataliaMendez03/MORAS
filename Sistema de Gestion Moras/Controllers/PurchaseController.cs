@@ -64,7 +64,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
             }
         }
         // Delete: api/Purchase/5
-        [HttpPut("Delete/{idPurchase}")]
+        [HttpDelete("Delete/{idPurchase}")]
         public async Task<ActionResult<Purchase>> DeletePurchase(int idPurchase)
         {
             var PurchaseToDelete = await _PurchaseService.DeletePurchase(idPurchase);

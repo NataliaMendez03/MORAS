@@ -73,7 +73,7 @@ namespace HClinicalV2._0.Controllers
         }
 
         // Delete: api/IdentificationType/5
-        [HttpPut("Delete/{idIdentificationType}")]
+        [HttpDelete("Delete/{idIdentificationType}")]
         public async Task<ActionResult<IdentificationType>> DeleteIdentificationType(int idIdentificationType)
         {
 

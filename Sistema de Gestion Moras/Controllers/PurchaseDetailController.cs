@@ -74,7 +74,7 @@ namespace HClinicalV2._0.Controllers
         }
 
         // Delete: api/PurchaseDetail/5
-        [HttpPut("Delete/{idPurchaseDetail}")]
+        [HttpDelete("Delete/{idPurchaseDetail}")]
         public async Task<ActionResult<PurchaseDetail>> DeletePurchaseDetail(int idPurchaseDetail)
         {
 

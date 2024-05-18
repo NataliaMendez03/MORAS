@@ -64,7 +64,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
             }
         }
         // Delete: api/Levels/5
-        [HttpPut("Delete/{idLevels}")]
+        [HttpDelete("Delete/{idLevels}")]
         public async Task<ActionResult<Levels>> DeleteLevels(int idLevels)
         {
             var LevelsToDelete = await _levelsService.DeleteLevels(idLevels);

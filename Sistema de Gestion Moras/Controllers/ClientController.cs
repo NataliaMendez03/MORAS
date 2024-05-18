@@ -66,7 +66,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
             }
         }
         // Delete: api/Client/5
-        [HttpPut("Delete/{idClient}")]
+        [HttpDelete("Delete/{idClient}")]
         public async Task<ActionResult<Client>> DeleteClient(int idClient)
         {
             var ClientToDelete = await _clientService.DeleteClient(idClient);

@@ -62,7 +62,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
             }
         }
         // Delete: api/Landmarks/5
-        [HttpPut("Delete/{idLandmarks}")]
+        [HttpDelete("Delete/{idLandmarks}")]
         public async Task<ActionResult<Landmarks>> DeleteLandmarks(int idLandmarks)
         {
             var LandmarksToDelete = await _landmarksService.DeleteLandmarks(idLandmarks);

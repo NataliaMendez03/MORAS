@@ -65,7 +65,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
             }
         }
         // Delete: api/Supplies/5
-        [HttpPut("Delete/{idSupplies}")]
+        [HttpDelete("Delete/{idSupplies}")]
         public async Task<ActionResult<Supplies>> DeleteSupplies(int idSupplies)
         {
             var SuppliesToDelete = await _suppliesService.DeleteSupplies(idSupplies);

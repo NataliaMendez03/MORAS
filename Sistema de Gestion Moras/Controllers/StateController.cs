@@ -73,7 +73,7 @@ namespace HClinicalV2._0.Controllers
         }
 
         // Delete: api/State/5
-        [HttpPut("Delete/{idState}")]
+        [HttpDelete("Delete/{idState}")]
         public async Task<ActionResult<State>> DeleteState(int idState)
         {
 

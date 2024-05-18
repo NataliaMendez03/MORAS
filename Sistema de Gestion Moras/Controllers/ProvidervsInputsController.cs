@@ -64,7 +64,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
             }
         }
         // Delete: api/ProvidervsInputs/5
-        [HttpPut("Delete/{idProvsInp}")]
+        [HttpDelete("Delete/{idProvsInp}")]
         public async Task<ActionResult<ProvidervsInputs>> DeleteProvidervsInputs(int idProvsInp)
         {
             var ProvidervsInputsToDelete = await _ProvidervsInputsService.DeleteProvidervsInputs(idProvsInp);

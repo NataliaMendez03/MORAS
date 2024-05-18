@@ -63,7 +63,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
             }
         }
         // Delete: api/Missions/5
-        [HttpPut("Delete/{idMissions}")]
+        [HttpDelete("Delete/{idMissions}")]
         public async Task<ActionResult<Missions>> DeleteMissions(int idMissions)
         {
             var MissionsToDelete = await _MissionsService.DeleteMissions(idMissions);

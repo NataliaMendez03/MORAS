@@ -65,7 +65,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
             }
         }
         // Delete: api/Dispatch/5
-        [HttpPut("Delete/{idDispatch}")]
+        [HttpDelete("Delete/{idDispatch}")]
         public async Task<ActionResult<Dispatch>> DeleteDispatch(int idDispatch)
         {
             var DispatchToDelete = await _dispatchService.DeleteDispatch(idDispatch);

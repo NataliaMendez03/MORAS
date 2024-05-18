@@ -63,7 +63,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
             }
         }
         // Delete: api/City/5
-        [HttpPut("Delete/{idCity}")]
+        [HttpDelete("Delete/{idCity}")]
         public async Task<ActionResult<City>> DeleteCity(int idCity)
         {
             var CityToDelete = await _CityService.DeleteCity(idCity);

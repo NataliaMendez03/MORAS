@@ -66,7 +66,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
             }
         }
         // Delete: api/Tracking/5
-        [HttpPut("Delete/{idTracking}")]
+        [HttpDelete("Delete/{idTracking}")]
         public async Task<ActionResult<Tracking>> DeleteTracking(int idTracking)
         {
             var TrackingToDelete = await _trackingService.DeleteTracking(idTracking);
