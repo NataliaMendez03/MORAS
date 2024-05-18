@@ -15,17 +15,13 @@ namespace FrontBerries.Controllers
     public class MainController : Controller
     {
         [HttpGet]
-        public IActionResult SystemLogin()
+        public IActionResult MainPage()
         {
             return View();
         }
 
-        [HttpGet]
-        public IActionResult UserLogin()
-        {
-            //if (User.Identity!.IsAuthenticated) return RedirectToAction("Index", "Home");
-            return View();
-        }
+
+
     }
 }
     
