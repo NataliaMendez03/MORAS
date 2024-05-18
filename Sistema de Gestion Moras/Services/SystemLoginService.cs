@@ -34,6 +34,7 @@ namespace Sistema_de_Gestion_Moras.Services
 
         public async Task<SystemLogin> CreateSystemLogin(string username, string password, int idPerson)
         {
+            password = EncryptPassword(password);
             return await _SystemLoginRepository.CreateSystemLogin(username, password, idPerson);
             throw new NotImplementedException();
         }
@@ -132,6 +133,7 @@ namespace Sistema_de_Gestion_Moras.Services
                 }
                 if (password != null)
                 {
+                    password = EncryptPassword(password);
                     newSystemLogin.Password = (string)password;
                 }
                 if (idPerson != null)
