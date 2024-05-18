@@ -100,5 +100,47 @@ namespace FrontBerries.Controllers
             }
             return View();
         }
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            try
+            {
+                LoginViewModel login = new LoginViewModel();
+                HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Login/" + id).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    string data = response.Content.ReadAsStringAsync().Result;
+                    login = JsonConvert.DeserializeObject<LoginViewModel>(data);
+                }
+                return View(login);
+            }
+            catch (Exception ex)
+            {
+                TempData["errorMessage"] = ex.Message;
+                return View();
+            }
+
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public IActionResult DeleteConfirmed(int id) 
+        {
+            try
+            {
+                HttpResponseMessage response = _client.DeleteAsync(_client.BaseAddress + $"/Login/Delete/{id}").Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    TempData["successMessage"] = "User details deleted";
+                    return RedirectToAction("LoginGet");
+                }   
+            }
+            catch (Exception ex)
+            {
+                TempData["errorMessage"] = ex.Message;
+                return View();
+            }
+            return View("LoginGet");
+                
+        }
     }
 }
