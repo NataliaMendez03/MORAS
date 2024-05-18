@@ -1,3 +1,3 @@
 ﻿setTimeout(function () {
-    $('.alert').alert('colse');
-}, 2000);
+    $('.alert').alert('close');
+}, 5000);
