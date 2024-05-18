@@ -61,24 +61,42 @@ namespace FrontBerries.Controllers
         [HttpGet]
         public IActionResult Update(int id)
         {
-            LoginViewModel login = new LoginViewModel();
-            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Login/" + id).Result; 
-            if (response.IsSuccessStatusCode) 
+            try
             {
-                string data = response.Content.ReadAsStringAsync().Result;
-                login = JsonConvert.DeserializeObject<LoginViewModel>(data);
+                LoginViewModel login = new LoginViewModel();
+                HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Login/" + id).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    string data = response.Content.ReadAsStringAsync().Result;
+                    login = JsonConvert.DeserializeObject<LoginViewModel>(data);
+                }
+                return View(login);
             }
-            return View(login);
+            catch (Exception ex)
+            {
+                TempData["errorMessage"] = ex.Message;
+                return View();
+            }
+            
         }
         [HttpPost]
         public IActionResult Update(LoginViewModel model) 
         {
-            string data = JsonConvert.SerializeObject(model);
-            StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = _client.PutAsync(_client.BaseAddress + $"/Login/Update/{model.IdLogin}?userName={model.UserName}&password={model.Password}&email={model.Email}", content).Result;
-            if (response.IsSuccessStatusCode) 
+            try
             {
-                return RedirectToAction();
+                string data = JsonConvert.SerializeObject(model);
+                StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = _client.PutAsync(_client.BaseAddress + $"/Login/Update/{model.IdLogin}?userName={model.UserName}&password={model.Password}&email={model.Email}", content).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    TempData["successMessage"] = "User details updated";
+                    return RedirectToAction("LoginGet");
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["errorMessage"] = ex.Message;
+                return View();
             }
             return View();
         }

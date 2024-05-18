@@ -6,7 +6,7 @@
 
 <h1>Update</h1>
 
-<h4>ViewData["Title"]</h4>
+<h4>Edit User</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -14,7 +14,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="IdLogin" class="control-label"></label>
-                <input asp-for="IdLogin" class="form-control" />
+                <input asp-for="IdLogin" class="form-control"/>
                 <span asp-validation-for="IdLogin" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -24,7 +24,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" />
+                @*<input asp-for="Password" class="form-control"/>*@
+                <input type="password" id="Password" name="Password" class="form-control" />
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -32,7 +33,7 @@
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            @*<div class="form-group">
                 <label asp-for="RegisterDate" class="control-label"></label>
                 <input asp-for="RegisterDate" class="form-control" />
                 <span asp-validation-for="RegisterDate" class="text-danger"></span>
@@ -41,7 +42,7 @@
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="StateDelete" /> @Html.DisplayNameFor(model => model.StateDelete)
                 </label>
-            </div>
+            </div>*@
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

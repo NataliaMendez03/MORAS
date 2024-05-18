@@ -75,9 +75,8 @@
                 @Html.DisplayFor(modelItem => item.RegisterDate)
             </td>
             <td>
-                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }, new { style = "color: rebeccapurple;" }) |
-                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }, new { style = "color: rebeccapurple;" }) |
-                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ }, new { style = "color: rebeccapurple;" })
+                    @Html.ActionLink("Update", "Update", new { id = item.IdLogin }, new { style = "color: rebeccapurple;" }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.IdLogin }, new { style = "color: rebeccapurple;" })
             </td>
         </tr>
 }
