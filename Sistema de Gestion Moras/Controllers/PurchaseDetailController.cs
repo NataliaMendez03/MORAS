@@ -6,9 +6,9 @@ using static Azure.Core.HttpHeader;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace HClinicalV2._0.Controllers
+namespace Sistema_de_Gestion_Moras.Controllers
 {
-    [Route("HClinical/[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class PurchaseDetailController : ControllerBase
     {
