@@ -5,25 +5,25 @@ using System.Text;
 
 namespace FrontBerries.Controllers
 {
-    public class ContactController : Controller
+    public class PersonController : Controller
     {
         Uri baseAddress = new Uri("http://berriessystemmanagement.somee.com/api");
         private readonly HttpClient _client;
 
-        public ContactController()
+        public PersonController()
         {
             _client = new HttpClient();
             _client.BaseAddress = baseAddress;
         }
         [HttpGet]
-        public IActionResult ContactGet()
+        public IActionResult PersonGet()
         {
-            List<ContactViewModel> Loginlist = new List<ContactViewModel>();
-            HttpResponseMessage respone = _client.GetAsync(_client.BaseAddress + "/Contact").Result;
+            List<PersonViewModel> Loginlist = new List<PersonViewModel>();
+            HttpResponseMessage respone = _client.GetAsync(_client.BaseAddress + "/Person").Result;
             if (respone.IsSuccessStatusCode)
             {
                 string data = respone.Content.ReadAsStringAsync().Result;
-                Loginlist = JsonConvert.DeserializeObject<List<ContactViewModel>>(data);
+                Loginlist = JsonConvert.DeserializeObject<List<PersonViewModel>>(data);
             }
             var inactiveLogins = Loginlist.Where(login => !login.StateDelete).ToList();
 
@@ -36,17 +36,17 @@ namespace FrontBerries.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Create(ContactViewModel model)
+        public IActionResult Create(PersonViewModel model)
         {
             try
             {
                 String data = JsonConvert.SerializeObject(model);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = _client.PostAsync(_client.BaseAddress + $"/Contact/Create?phone={model.Phone}&email={model.Email}", content).Result;
+                HttpResponseMessage response = _client.PostAsync(_client.BaseAddress + $"/Person?name={model.Name}&lastName={model.LastName}&idContact={model.IdContact}&idTypeIdentification={model.IdTypeIdentification}&numberIdentification={model.NumberIdentification}&idAddress={model.IdAddress}", content).Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    TempData["successMessage"] = "Contact Created";
-                    return RedirectToAction("ContactGet");
+                    TempData["successMessage"] = "Person Created";
+                    return RedirectToAction("PersonGet");
                 }
             }
             catch (Exception ex)
@@ -62,12 +62,12 @@ namespace FrontBerries.Controllers
         {
             try
             {
-                ContactViewModel login = new ContactViewModel();
-                HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Contact/" + id).Result;
+                PersonViewModel login = new PersonViewModel();
+                HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Person/" + id).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     string data = response.Content.ReadAsStringAsync().Result;
-                    login = JsonConvert.DeserializeObject<ContactViewModel>(data);
+                    login = JsonConvert.DeserializeObject<PersonViewModel>(data);
                 }
                 return View(login);
             }
@@ -79,17 +79,17 @@ namespace FrontBerries.Controllers
 
         }
         [HttpPost]
-        public IActionResult Update(ContactViewModel model)
+        public IActionResult Update(PersonViewModel model)
         {
             try
             {
                 string data = JsonConvert.SerializeObject(model);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = _client.PutAsync(_client.BaseAddress + $"/Contact/Update/{model.IdContact}?phone={model.Phone}&email={model.Email}", content).Result;
+                HttpResponseMessage response = _client.PutAsync(_client.BaseAddress + $"/Person/Update/{model.IdPerson}?name={model.Name}&lastName={model.LastName}&idContact={model.IdContact}&idTypeIdentification={model.IdTypeIdentification}&numberIdentification={model.NumberIdentification}&idAddress={model.IdAddress}", content).Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    TempData["successMessage"] = "Contact details updated";
-                    return RedirectToAction("ContactGet");
+                    TempData["successMessage"] = "Person details updated";
+                    return RedirectToAction("PersonGet");
                 }
             }
             catch (Exception ex)
@@ -104,12 +104,12 @@ namespace FrontBerries.Controllers
         {
             try
             {
-                ContactViewModel login = new ContactViewModel();
-                HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Contact/" + id).Result;
+                PersonViewModel login = new PersonViewModel();
+                HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Person/" + id).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     string data = response.Content.ReadAsStringAsync().Result;
-                    login = JsonConvert.DeserializeObject<ContactViewModel>(data);
+                    login = JsonConvert.DeserializeObject<PersonViewModel>(data);
                 }
                 return View(login);
             }
@@ -126,11 +126,11 @@ namespace FrontBerries.Controllers
         {
             try
             {
-                HttpResponseMessage response = _client.DeleteAsync(_client.BaseAddress + $"/Contact/Delete/{id}").Result;
+                HttpResponseMessage response = _client.DeleteAsync(_client.BaseAddress + $"/Person/Delete/{id}").Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    TempData["successMessage"] = "User details deleted";
-                    return RedirectToAction("ContactGet");
+                    TempData["successMessage"] = "Person details deleted";
+                    return RedirectToAction("PersonGet");
                 }
             }
             catch (Exception ex)
@@ -138,7 +138,7 @@ namespace FrontBerries.Controllers
                 TempData["errorMessage"] = ex.Message;
                 return View();
             }
-            return View("ContactGet");
+            return View("PersonGet");
 
         }
     }

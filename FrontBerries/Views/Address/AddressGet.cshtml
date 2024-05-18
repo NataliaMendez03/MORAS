@@ -1,0 +1,81 @@
+﻿@model IEnumerable<FrontBerries.Models.AddressViewModel>
+
+@{
+    ViewData["Title"] = "Address";
+}
+
+<h1 style="color: black; font-family:'Trebuchet MS',sans-serif; font-weight:bold;">Consult Address</h1>
+<p>
+    <a asp-action="Create" style="color: rebeccapurple;">Create New</a>
+</p>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabla Estilizada</title>
+    <style>
+        .table {
+            width: 100%;
+            border-collapse: collapse; /* Elimina los espacios entre celdas */
+            font-family: Arial, sans-serif; /* Define la fuente */
+            margin: 20px 0; /* Espaciado alrededor de la tabla */
+        }
+
+            .table th, .table td {
+                border: 1px solid #ddd; /* Borde alrededor de las celdas */
+                padding: 8px; /* Espaciado dentro de las celdas */
+                text-align: left; /* Alineación del texto */
+            }
+
+            .table th {
+                background-color: gray; /* Fondo para los encabezados */
+                font-weight: bold; /* Texto en negrita */
+            }
+
+            .table tr:nth-child(even) {
+                background-color: lightgray; /* Color de fondo para filas pares */
+            }
+
+            .table tr:hover {
+                background-color: darkgray; /* Color de fondo al pasar el ratón */
+            }
+    </style>
+</head>
+
+<table class="table" style="color: black;">
+    <thead style="color: black; background-color: lightgray;">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Addres)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdCity)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Addres)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdCity)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Update", "Update", new { id = item.IdAddress }, new { style = "color: rebeccapurple;" }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.IdAddress }, new { style = "color: rebeccapurple;" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
