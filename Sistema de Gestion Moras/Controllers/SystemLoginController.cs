@@ -16,22 +16,23 @@ namespace Sistema_de_Gestion_Moras.Controllers
         }
 
         // AUTENTICACION PRUEBA 
-        [HttpPost("SystemLogin")]
-        public async Task<ActionResult<bool>> SystemLogin(string userName, string password)
+        [HttpPost("Authentication")]
+        public async Task<ActionResult<string>> Login(string userName, string password)
         {
             if (string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(password))
             {
-                return BadRequest("El nombre de usuario y la contraseña son obligatorios.");
+                return BadRequest("Username and password are required.");
             }
 
-            var user = await _SystemLoginService.SystemLogin(userName, password);
-            if (user != null)
+            bool user = await _SystemLoginService.Authentication(userName, password);
+            if (user)
             {
-                return Ok(true);
+                string token = _SystemLoginService.GenerateToken(userName);
+                return Ok(token);
             }
             else
             {
-                return Ok(false);
+                return Ok("false");
             }
         }
 

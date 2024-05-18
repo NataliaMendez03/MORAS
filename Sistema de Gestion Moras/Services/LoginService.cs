@@ -21,7 +21,7 @@ namespace Sistema_de_Gestion_Moras.Services
         Task<Login> UpdateLogin(int idLogin, string? userName = null, string? password = null, string? email = null);
         Task<Login> DeleteLogin(int idLogin);
         Task<bool> Authentication(string userName, string password);
-        string GenerarToken(string username);
+        string GenerateToken(string username);
     }
 
     public class LoginService : ILoginService
@@ -98,7 +98,7 @@ namespace Sistema_de_Gestion_Moras.Services
 
         //TOKEN----------------------------------------------------------------------------
 
-        public string GenerarToken(string username)
+        public string GenerateToken(string username)
         {
             var key = _configuration.GetValue<string>("Jwt:key");
             var keyBytes = Encoding.ASCII.GetBytes(key);
@@ -159,4 +159,3 @@ namespace Sistema_de_Gestion_Moras.Services
     }
 
 }
-

@@ -76,7 +76,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
             bool user = await _loginService.Authentication(userName, password);
             if (user)
             {
-                string token = _loginService.GenerarToken(userName);
+                string token = _loginService.GenerateToken(userName);
                 return Ok(token);
             }
             else
