@@ -7,7 +7,7 @@ using Sistema_de_Gestion_Moras.Services;
 
 namespace HClinicalV2._0.Controllers
 {
-    [Route("HClinical/[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class ContactController : ControllerBase
     {
