@@ -147,7 +147,7 @@ namespace Sistema_de_Gestion_Moras.Services
                 }
                 if (email != null)
                 {
-                    newLogin.UserName = (string)email;
+                    newLogin.Email = (string)email;
                 }
 
                 return await _loginRepository.UpdateLogin(newLogin);
