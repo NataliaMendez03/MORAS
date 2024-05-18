@@ -19,9 +19,6 @@ namespace FrontBerries.Controllers
         {
             return View();
         }
-
-
-
     }
 }
     

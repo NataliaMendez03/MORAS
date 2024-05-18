@@ -48,7 +48,7 @@ namespace FrontBerries.Controllers
                     if (response.IsSuccessStatusCode)
                     {
                         TempData["successMessage"] = "User Created";
-                        return RedirectToAction("Login", "Acceso");
+                        return RedirectToAction("LoginS", "SystemAccess");
                     }
                 }
                 catch (Exception ex)

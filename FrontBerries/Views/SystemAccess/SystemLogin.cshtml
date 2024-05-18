@@ -1,12 +1,11 @@
 ﻿@model FrontBerries.ViewModels.LoginVM;
 @{
-    ViewData["Title"] = "LoginS";
+    Layout = null;
 }
-
 
 <html>
 <head>
-    <title>Login</title>
+    <title>SystemAccess</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 </head>
 <body>
@@ -19,18 +18,18 @@
         <div class="col-sm-4">
             <div class="card">
                 <div class="card-header  text-center">
-                    <h1 style="color: mediumpurple; font-family:'Trebuchet MS',sans-serif; font-weight:bold;">BerriesManagementSystem</h1>
+                    <h1 style="color: mediumpurple; font-family:'Trebuchet MS',sans-serif; font-weight:bold;">Management System</h1>
                 </div>
                 <div class="card-body">
                     <div class="d-grid gap-2 mb-3">
                         <style="color: black;" align="center">---------  Quick Sign in  ----------</>
                     </div>
 
-                    <form asp-controller="Acceso" asp-action="Login" method="post">
+                    <form asp-controller="SystemAccess" asp-action="SystemLogin" method="post">
                         <input class="form-control mb-3" type="text" placeholder="User Name" required asp-for="UserName" />
                         <input class="form-control mb-3" type="password" placeholder="Password" required asp-for="Password" />
                         <div class="d-grid gap-2 mb-3">
-                            <a asp-controller="Acceso" asp-action="Registro" style="color: rebeccapurple;">Forgot password?</a>
+                            <a asp-controller="SystemAccess" asp-action="SystemRegister" style="color: rebeccapurple;">Forgot password?</a>
                         </div>
                         <div class="d-grid gap-2 mb-3">
                             <!--<button class="btn btn-primary" type="submit">Iniciar Sesión</button>-->
@@ -43,16 +42,12 @@
                                 @ViewData["Mensaje"]
                             </div>
                         }
-                        Don't have an account?  <a asp-controller="Acceso" asp-action="Registro" style="color: rebeccapurple;">Sign up</a>
+                        Don't have an account?  <a asp-controller="SystemAccess" asp-action="SystemRegister" style="color: rebeccapurple;">Sign up</a>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-
-
-
-
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
