@@ -66,7 +66,7 @@ namespace Sistema_de_Gestion_Moras.Repositories
             return await _db.Login.FirstOrDefaultAsync(u => u.IdLogin == idLogin);
         }
 
-// AUTENTICACION------------------------------------------------------------------------------
+        // AUTENTICACION------------------------------------------------------------------------------
         public async Task<Login> AuthUser(string userName)
         {
             //return _db.Login.FirstOrDefault(l => l.UserName == userName);

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using Sistema_de_Gestion_Moras.Models;
@@ -17,12 +18,14 @@ namespace Sistema_de_Gestion_Moras.Controllers
         }
 
         [HttpGet]
+        //[Authorize(Roles = "User")]
         public async Task<ActionResult<List<Login>>> GetAllLogin()
         {
             return Ok(await _loginService.GetAll());
         }
-        // GET api/<LoginController>/5
+
         [HttpGet("{idLogin}")]
+        //[Authorize(Roles = "User")]
         public async Task<ActionResult<Login>> GetLogin(int idLogin)
         {
             var Login = await _loginService.GetLogin(idLogin);
@@ -32,6 +35,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
             }
             return Ok(Login);
         }
+
         // GET api/BYUSERNAME
         [HttpGet("IdByUsername/{username}")]
         public async Task<IActionResult> GetIdByUsername(string username)
@@ -43,8 +47,9 @@ namespace Sistema_de_Gestion_Moras.Controllers
             }
             return Ok(id);
         }
-        // POST: api/Login
+
         [HttpPost("Create")]
+        //[Authorize(Roles = "User")]
         public async Task<ActionResult<Login>> PostLogin(string userName, string password, string email)
         {
             var LoginToPut = await _loginService.CreateLogin(userName, password, email);
@@ -59,9 +64,9 @@ namespace Sistema_de_Gestion_Moras.Controllers
             }
         }
 
-        // AUTENTICACION BIENN 
+        // AUTENTICACION 
         [HttpPost("Authentication")]
-        public async Task<ActionResult<bool>> Login(string userName, string password)
+        public async Task<ActionResult<string>> Login(string userName, string password)
         {
             if (string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(password))
             {
@@ -71,17 +76,17 @@ namespace Sistema_de_Gestion_Moras.Controllers
             bool user = await _loginService.Authentication(userName, password);
             if (user)
             {
-                return Ok(true);
+                string token = _loginService.GenerarToken(userName);
+                return Ok(token);
             }
             else
             {
-                return Ok(false);
+                return Ok("false");
             }
         }
 
-
-        // PUT: api/Login/5
         [HttpPut("Update/{idLogin}")]
+        //[Authorize(Roles = "User")]
         public async Task<ActionResult<Login>> PutLogin(int idLogin, string userName, string password, string email)
         {
             var LoginToPut = await _loginService.UpdateLogin(idLogin, userName, password, email);
@@ -95,8 +100,9 @@ namespace Sistema_de_Gestion_Moras.Controllers
                 return BadRequest("Error updating the database");
             }
         }
-        // Delete: api/Login/5
-        [HttpPut("Delete/{idLogin}")]
+
+        [HttpDelete("Delete/{idLogin}")]
+        //[Authorize(Roles = "User")]
         public async Task<ActionResult<Login>> DeleteLogin(int idLogin)
         {
             var LoginToDelete = await _loginService.DeleteLogin(idLogin);

@@ -4,6 +4,10 @@ using Microsoft.EntityFrameworkCore;
 using Sistema_de_Gestion_Moras.Repositories;
 using Sistema_de_Gestion_Moras.Services;
 using Microsoft.Extensions.Configuration;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -12,8 +16,54 @@ builder.Services.AddDbContext<berriesdbContext>(options => options.UseSqlServer(
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminPolicy", policy => policy.RequireRole("Admin"));
+    options.AddPolicy("UserPolicy", policy => policy.RequireRole("User"));
+});
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminPolicy", policy => policy.RequireClaim("Role", "Admin"));
+    options.AddPolicy("UserPolicy", policy => policy.RequireClaim("Role", "User"));
+});
+
+
+builder.Services.AddSwaggerGen(swagger =>
+{
+    //This is to generate the Default UI of Swagger Documentation
+    swagger.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Version = "v1",
+        Title = "Agricultural Supply Chain Management System For a Blackberry Crop",
+        Description = ".NET 8 Web API"
+    });
+    // To Enable authorization using Swagger (JWT)
+    swagger.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+    {
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Description = "JWT Authorization header using the Bearer scheme. \r\n\r\n Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\nExample: \"Bearer 12345abcdef\"",
+    });
+    swagger.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                          new OpenApiSecurityScheme
+                            {
+                                Reference = new OpenApiReference
+                                {
+                                    Type = ReferenceType.SecurityScheme,
+                                    Id = "Bearer"
+                                }
+                            },
+                            new string[] {}
+
+                    }
+                });
+});
 
 #region AppRepositories
 builder.Services.AddScoped<IClientRepository, ClientRepository>();
@@ -78,6 +128,30 @@ builder.Services.AddScoped<ISystemLoginService, SystemLoginService>();
 
 #endregion
 
+
+var key = builder.Configuration.GetValue<string>("Jwt:key");
+var keyBytes = Encoding.ASCII.GetBytes(key);
+
+builder.Services.AddAuthentication(config =>
+{
+    config.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    config.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(config =>
+{
+    config.RequireHttpsMetadata = false;
+    config.SaveToken = true;
+    config.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(keyBytes),
+        ValidateIssuer = false,
+        ValidateAudience = false,
+        ValidateLifetime = true,
+        ClockSkew = TimeSpan.Zero
+    };
+});
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -86,11 +160,13 @@ if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
     //app.UseSwagger();
     //app.UseSwaggerUI();
-}
+} 
 app.UseSwagger();
 app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
