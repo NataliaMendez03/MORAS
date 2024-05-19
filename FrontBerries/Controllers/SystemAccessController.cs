@@ -14,12 +14,10 @@ namespace FrontBerries.Controllers
 {
     public class SystemAccessController : Controller
     {
-        private readonly berriesdbContext _berriesdbContext;
         Uri baseAddress = new Uri("http://berriessystemmanagement.somee.com/api");
         private readonly HttpClient _client;
         public SystemAccessController(berriesdbContext berriesdbContext)
         {
-            _berriesdbContext = berriesdbContext;
             _client = new HttpClient();
             _client.BaseAddress = baseAddress;
         }
@@ -59,6 +57,31 @@ namespace FrontBerries.Controllers
                 return View();
             }
         }
+            catch (Exception ex)
+            {
+                TempData["errorMessage"] = ex.Message;
+
+            }
+            model.Contacts = GetContactsSelectList();
+            model.TypeIdentifications = GetTypeIdentificationsSelectList();
+            model.Addresses = GetAddressesSelectList();
+
+            return View();
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         [HttpGet]

@@ -7,7 +7,6 @@ namespace FrontBerries.Models
     public class SystemLoginViewModel
     {
         [DisplayName("Id")]
-
         public int IdSystemLogin { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
