@@ -1,6 +1,4 @@
-﻿@using System.Security.Claims;
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -11,60 +9,70 @@
     <link rel="stylesheet" href="~/FrontBerries.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <div class="container-fluid p-2">
-        <div class="row justify-content-start">
-            <div class="col-md-2">
-                <div class="card">
-                    <div class="card-body">
-                        <img src="~/src/icondefault.png" alt="User Icon" style="width: 28px; height: 28px;" />
-                        <span style="color: #666666; font-weight: bold;">  @User.Claims.Where(c => c.Type == ClaimTypes.Name).Select(c => c.Value).SingleOrDefault()</span>
-                        <ul class="nav flex-column mt-3">
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="LoginGet">Game User</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Supplies" asp-action="SuppliesGet">Supplies</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Exit">Exit</a>
-                            </li>
-                        </ul>
-                    </div>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">BerriesManagementSystem</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="LoginGet">Game User</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Supplies" asp-action="SuppliesGet">Supplies</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Contact" asp-action="ContactGet">Contacts</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Address" asp-action="AddressGet">Address</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Person" asp-action="PersonGet">Person</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="IdentificationType" asp-action="IdentificationTypeGet">IdentificationType</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Exit">Exit</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
-            <div class="col-md-10">
-                <header class="text-center">
-                    <h1>BerriesManagementSystem</h1>
-                </header>
-                <main role="main" class="pb-3">
-                    @{
-                        var errorMessage = TempData["errorMessage"]?.ToString();
-                        var successMessage = TempData["successMessage"]?.ToString();
-                    }
-                    @if (!string.IsNullOrWhiteSpace(successMessage))
-                    {
-                        <div class=" alert alert-success">
-                            <b>Success : </b>@successMessage
-                            <button type="button" class="btn-close float-end" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    }
-                    else if (!string.IsNullOrWhiteSpace(errorMessage))
-                    {
-                        <div class=" alert alert-danger">
-                            <b>Error : </b>@errorMessage
-                            <button type="button" class="btn-close float-end" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    }
-                    @RenderBody()
-                </main>
-            </div>
-        </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @{
+                var errorMessage = TempData["errorMessage"]?.ToString();
+                var successMessage = TempData["successMessage"]?.ToString();
+            }
+            @if (!string.IsNullOrWhiteSpace(successMessage))
+            {
+                <div class=" alert alert-success">
+                    <b>Success : </b>@successMessage
+                    <button type="button" class="btn-close float-end" data-bs-dismiss="alert" arial-label="Close"></button>
+                </div>
+            }
+            else if (!string.IsNullOrWhiteSpace(errorMessage))
+            {
+                <div class=" alert alert-danger">
+                    <b>Error : </b>@errorMessage
+                    <button type="button" class="btn-close float-end" data-bs-dismiss="alert" arial-label="Close"></button>
+                </div>
+            }
+            @RenderBody()
+        </main>
     </div>
 
     <footer class="border-top footer text-muted">

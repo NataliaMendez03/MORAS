@@ -33,7 +33,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
             return Ok(city);
         }
         // POST: api/City
-        [HttpPost("Create")]
+        [HttpPost]
         public async Task<ActionResult<City>> PostCity(string nameCity)
         {
             var CityToPut = await _CityService.CreateCity(nameCity);

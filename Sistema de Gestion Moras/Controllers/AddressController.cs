@@ -33,7 +33,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
             return Ok(Address);
         }
         // POST: api/Address
-        [HttpPost("Create")]
+        [HttpPost]
         public async Task<ActionResult<Address>> PostAddress(string addres, int idCity)
         {
             var AddressToPut = await _AddressService.CreateAddress(addres, idCity);

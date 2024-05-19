@@ -33,7 +33,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
             return Ok(Achievements);
         }
         // POST: api/Achievements
-        [HttpPost("Create")]
+        [HttpPost]
         public async Task<ActionResult<Achievements>> PostAchievements(int idLogin, int IdMission)
         {
             var AchievementsToPut = await _AchievementsService.CreateAchievements(idLogin, IdMission);
