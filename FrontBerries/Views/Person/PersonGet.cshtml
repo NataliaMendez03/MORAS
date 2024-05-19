@@ -29,6 +29,7 @@
             .table th {
                 background-color: gray; /* Fondo para los encabezados */
                 font-weight: bold; /* Texto en negrita */
+                text-align: center; /* Alineación del texto */
             }
 
             .table tr:nth-child(even) {
@@ -54,16 +55,19 @@
                 @Html.DisplayNameFor(model => model.LastName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdContact)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdTypeIdentification)
+                @Html.DisplayNameFor(model => model.IdentifiType)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.NumberIdentification)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdAddress)
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Addres)
             </th>
             <th></th>
         </tr>
@@ -82,20 +86,23 @@
                     @Html.DisplayFor(modelItem => item.LastName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IdContact)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdTypeIdentification)
+                    @Html.DisplayFor(modelItem => item.IdentifiType)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.NumberIdentification)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IdAddress)
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Addres)
                 </td>
 
                 <td>
-                    @Html.ActionLink("Update", "Update", new { id = item.IdPerson }, new { style = "color: rebeccapurple;" }) |
+                    @Html.ActionLink("Update", "Update", new { id = item.IdPerson }, new { style = "color: rebeccapurple;" })
                     @Html.ActionLink("Delete", "Delete", new { id = item.IdPerson }, new { style = "color: rebeccapurple;" })
                 </td>
             </tr>

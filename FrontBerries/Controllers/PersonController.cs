@@ -1,6 +1,7 @@
 ﻿using FrontBerries.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Sistema_de_Gestion_Moras.Models;
 using System.Text;
 
 namespace FrontBerries.Controllers
@@ -24,11 +25,57 @@ namespace FrontBerries.Controllers
             {
                 string data = respone.Content.ReadAsStringAsync().Result;
                 Loginlist = JsonConvert.DeserializeObject<List<PersonViewModel>>(data);
+
+                // Obtener datos adicionales
+                List<Contact> contacts = GetContacts();
+                List<IdentificationType> typeIdentifications = GetTypeIdentifications();
+                List<Address> addresses = GetAddresses();
+
+                // Mapear datos relacionados
+                foreach (var person in Loginlist)
+                {
+                    person.Phone = contacts.FirstOrDefault(c => c.IdContact == person.IdContact)?.Phone;
+                    person.Email = contacts.FirstOrDefault(c => c.IdContact == person.IdContact)?.Email;
+                    person.IdentifiType = typeIdentifications.FirstOrDefault(ti => ti.IdIdentificationType == person.IdTypeIdentification)?.IdentifiType;
+                    person.Addres = addresses.FirstOrDefault(a => a.IdAddress == person.IdAddress)?.Addres;
+                }
             }
             var inactiveLogins = Loginlist.Where(login => !login.StateDelete).ToList();
 
             return View(inactiveLogins);
         }
+        private List<Contact> GetContacts()
+{
+    HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Contact").Result;
+    if (response.IsSuccessStatusCode)
+    {
+        string data = response.Content.ReadAsStringAsync().Result;
+        return JsonConvert.DeserializeObject<List<Contact>>(data);
+    }
+    return new List<Contact>();
+}
+
+        private List<IdentificationType> GetTypeIdentifications()
+        {
+            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/IdentificationType").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string data = response.Content.ReadAsStringAsync().Result;
+                return JsonConvert.DeserializeObject<List<IdentificationType>>(data);
+            }
+            return new List<IdentificationType>();
+        }
+
+        private List<Address> GetAddresses()
+{
+    HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Address").Result;
+    if (response.IsSuccessStatusCode)
+    {
+        string data = response.Content.ReadAsStringAsync().Result;
+        return JsonConvert.DeserializeObject<List<Address>>(data);
+    }
+    return new List<Address>();
+}
 
         [HttpGet]
         public IActionResult Create()
