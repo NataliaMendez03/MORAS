@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims;
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -9,75 +11,103 @@
     <link rel="stylesheet" href="~/FrontBerries.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">BerriesManagementSystem</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="LoginGet">Game User</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Supplies" asp-action="SuppliesGet">Supplies</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Contact" asp-action="ContactGet">Contacts</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Address" asp-action="AddressGet">Address</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Person" asp-action="PersonGet">Person</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="IdentificationType" asp-action="IdentificationTypeGet">IdentificationType</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Exit">Exit</a>
-                        </li>
-                    </ul>
+    <div class="container-fluid p-2">
+        <div class="row justify-content-start">
+            <div class="col-md-2">
+                <div class="card">
+                    <div class="card-body">
+                        <div style="display: flex; align-items: center;">
+                            <img src="~/src/icondefault.png" alt="User Icon" style="width: 28px; height: 28px;" />
+                            <span style="color: #666666; font-weight: bold; margin-left: 10px;">
+                                @User.Claims.Where(c => c.Type == ClaimTypes.Name).Select(c => c.Value).SingleOrDefault()
+                            </span>
+                        </div>
+                        <ul class="nav flex-column mt-3">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index" style="font-weight: bold; display: flex; align-items: center;">
+                                    <img src="~/src/home.png" alt="Home Icon" style="width: 20px; height: 20px; margin-right: 5px;" />Home
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy" style="font-weight: bold; display: flex; align-items: center;">
+                                    <img src="~/src/privacidad.png" alt="Privacy Icon" style="width: 20px; height: 20px; margin-right: 5px;" />Privacy
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="LoginGet" style="font-weight: bold; display: flex; align-items: center;">
+                                    Game User
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Supplies" asp-action="SuppliesGet" style="font-weight: bold; display: flex; align-items: center;">
+                                    Supplies
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="LoginGet" style="font-weight: bold; display: flex; align-items: center;">
+                                    Game User</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Supplies" asp-action="SuppliesGet" style="font-weight: bold; display: flex; align-items: center;">
+                                    Supplies</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Contact" asp-action="ContactGet" style="font-weight: bold; display: flex; align-items: center;">
+                                    Contacts</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Address" asp-action="AddressGet" style="font-weight: bold; display: flex; align-items: center;"> 
+                                    Address</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Person" asp-action="PersonGet" style="font-weight: bold; display: flex; align-items: center;">
+                                    Person</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="IdentificationType" asp-action="IdentificationTypeGet" style="font-weight: bold; display: flex; align-items: center;">
+                                    IdentificationType</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Exit" style="font-weight: bold; display: flex; align-items: center;">
+                                    <img src="~/src/salida.png" alt="Exit Icon" style="width: 20px; height: 20px; margin-right: 5px;" />Exit
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @{
-                var errorMessage = TempData["errorMessage"]?.ToString();
-                var successMessage = TempData["successMessage"]?.ToString();
-            }
-            @if (!string.IsNullOrWhiteSpace(successMessage))
-            {
-                <div class=" alert alert-success">
-                    <b>Success : </b>@successMessage
-                    <button type="button" class="btn-close float-end" data-bs-dismiss="alert" arial-label="Close"></button>
-                </div>
-            }
-            else if (!string.IsNullOrWhiteSpace(errorMessage))
-            {
-                <div class=" alert alert-danger">
-                    <b>Error : </b>@errorMessage
-                    <button type="button" class="btn-close float-end" data-bs-dismiss="alert" arial-label="Close"></button>
-                </div>
-            }
-            @RenderBody()
-        </main>
+            <div class="col-md-10">
+                <header class="text-center">
+                    <h1>BerriesManagementSystem</h1>
+                </header>
+                <main role="main" class="pb-3">
+                    @{
+                        var errorMessage = TempData["errorMessage"]?.ToString();
+                        var successMessage = TempData["successMessage"]?.ToString();
+                    }
+                    @if (!string.IsNullOrWhiteSpace(successMessage))
+                    {
+                        <div class="alert alert-success">
+                            <b>Success : </b>@successMessage
+                            <button type="button" class="btn-close float-end" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
+                    else if (!string.IsNullOrWhiteSpace(errorMessage))
+                    {
+                        <div class="alert alert-danger">
+                            <b>Error : </b>@errorMessage
+                            <button type="button" class="btn-close float-end" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
+                    @RenderBody()
+                </main>
+            </div>
+        </div>
     </div>
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2024 - FrontBerries - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2024 - FrontBerries - <a asp-area="" asp-controller="Home" asp-action="Privacy" style="font-weight: bold;">Privacy</a>
         </div>
     </footer>
     <script src="~/js/customjs.js"></script>
