@@ -1,5 +1,6 @@
 ﻿using FrontBerries.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using Sistema_de_Gestion_Moras.Models;
 using System.Text;
@@ -77,14 +78,29 @@ namespace FrontBerries.Controllers
     return new List<Address>();
 }
 
+/////////////////////////////Metodo Create///////////////////////////////////////////////////////////////
         [HttpGet]
         public IActionResult Create()
         {
+            var model = new PersonViewModel
+            {
+                Contacts = GetContactsSelectList(),
+                TypeIdentifications = GetTypeIdentificationsSelectList(),
+                Addresses = GetAddressesSelectList()
+            };
             return View();
         }
         [HttpPost]
         public IActionResult Create(PersonViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                // Repopulate the lists in case of validation error
+                model.Contacts = GetContactsSelectList();
+                model.TypeIdentifications = GetTypeIdentificationsSelectList();
+                model.Addresses = GetAddressesSelectList();
+                return View(model);
+            }
             try
             {
                 String data = JsonConvert.SerializeObject(model);
@@ -99,11 +115,65 @@ namespace FrontBerries.Controllers
             catch (Exception ex)
             {
                 TempData["errorMessage"] = ex.Message;
-                return View();
+
             }
+            model.Contacts = GetContactsSelectList();
+            model.TypeIdentifications = GetTypeIdentificationsSelectList();
+            model.Addresses = GetAddressesSelectList();
+
             return View();
         }
 
+        private List<SelectListItem> GetContactsSelectList()
+        {
+            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Contact").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string data = response.Content.ReadAsStringAsync().Result;
+                var contacts = JsonConvert.DeserializeObject<List<Contact>>(data);
+                return contacts.Select(c => new SelectListItem
+                {
+                    Value = c.IdContact.ToString(),
+                    Text = $"{c.Phone} - {c.Email}"
+                }).ToList();
+            }
+            return new List<SelectListItem>();
+        }
+
+        private List<SelectListItem> GetTypeIdentificationsSelectList()
+        {
+            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/IdentificationType").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string data = response.Content.ReadAsStringAsync().Result;
+                var typeIdentifications = JsonConvert.DeserializeObject<List<IdentificationType>>(data);
+                return typeIdentifications.Select(ti => new SelectListItem
+                {
+                    Value = ti.IdIdentificationType.ToString(),
+                    Text = ti.IdentifiType
+                }).ToList();
+            }
+            return new List<SelectListItem>();
+        }
+
+        private List<SelectListItem> GetAddressesSelectList()
+        {
+            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Address").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string data = response.Content.ReadAsStringAsync().Result;
+                var addresses = JsonConvert.DeserializeObject<List<Address>>(data);
+                return addresses.Select(a => new SelectListItem
+                {
+                    Value = a.IdAddress.ToString(),
+                    Text = a.Addres
+                }).ToList();
+            }
+            return new List<SelectListItem>();
+        }
+
+
+        /////////////////////////////Metodo Update///////////////////////////////////////////////////////////////
         [HttpGet]
         public IActionResult Update(int id)
         {
@@ -146,6 +216,9 @@ namespace FrontBerries.Controllers
             }
             return View();
         }
+
+
+        /////////////////////////////Metodo Delete///////////////////////////////////////////////////////////////
         [HttpGet]
         public IActionResult Delete(int id)
         {
