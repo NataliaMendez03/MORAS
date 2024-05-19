@@ -1,4 +1,5 @@
-﻿using Sistema_de_Gestion_Moras.Models;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using Sistema_de_Gestion_Moras.Models;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -10,7 +11,28 @@ namespace FrontBerries.Models
         public int IdSystemLogin { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
+
+        public IEnumerable<SelectListItem> Person { get; set; }
+        [DisplayName("Person")]
         public int IdPerson { get; set; }
+        public string Name { get; set; }
+        public string LastName { get; set; }
+        public IEnumerable<SelectListItem> Contacts { get; set; }
+        public string Phone { get; set; } // Propiedad para mostrar el nombre del contacto
+        public string Email { get; set; } // Propiedad para mostrar el nombre del contacto
+        
+        [DisplayName("Type Identification")]
+        public int IdTypeIdentification { get; set; }
+        public IEnumerable<SelectListItem> TypeIdentifications { get; set; }
+        public string IdentifiType { get; set; } // Propiedad para mostrar el nombre del tipo de identificación
+
+        [DisplayName("Number Identification")]
+        public int NumberIdentification { get; set; }
+
+        [DisplayName("Adress")]
+        public int IdAddress { get; set; }
+        public string Addres { get; set; } // Propiedad para mostrar el nombre de la dirección
+        public IEnumerable<SelectListItem> Addresses { get; set; }
 
         [DisplayName("Register Date")]
         public DateTime RegisterDate { get; set; }

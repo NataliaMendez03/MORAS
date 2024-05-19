@@ -51,7 +51,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
 
         }
         // PUT: api/SalesDetails/5
-        [HttpPut("Update/{idSalesDetails, amount}")]
+        [HttpPut("Update/{idSalesDetails}")]
         public async Task<ActionResult<SalesDetails>> PutSalesDetails(int idSalesDetails, string amount, string salePrice)
         {
             var SalesDetailsToPut = await _salesDetailsService.UpdateSalesDetails(idSalesDetails, amount, salePrice);
