@@ -12,12 +12,12 @@ using System.Text;
 
 namespace FrontBerries.Controllers
 {
-    public class AccesoController : Controller
+    public class SystemAccessController : Controller
     {
         private readonly berriesdbContext _berriesdbContext;
         Uri baseAddress = new Uri("http://berriessystemmanagement.somee.com/api");
         private readonly HttpClient _client;
-        public AccesoController(berriesdbContext berriesdbContext)
+        public SystemAccessController(berriesdbContext berriesdbContext)
         {
             _berriesdbContext = berriesdbContext;
             _client = new HttpClient();
@@ -25,13 +25,13 @@ namespace FrontBerries.Controllers
         }
 
         [HttpGet]
-        public IActionResult Registro()
+        public IActionResult SystemRegister()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Registro(UsuarioVM model)
+        public async Task<IActionResult> SystemRegister(UsuarioVM model)
         {
             if (model.Password != model.ConfirmPassword)
             {
@@ -44,11 +44,11 @@ namespace FrontBerries.Controllers
                 {
                     String data = JsonConvert.SerializeObject(model);
                     StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                    HttpResponseMessage response = _client.PostAsync(_client.BaseAddress + $"/Login/Create?userName={model.UserName}&password={model.Password}&email={model.Email}", content).Result;
+                    HttpResponseMessage response = _client.PostAsync(_client.BaseAddress + $"/SystemLogin/CreateuserName={model.UserName}&password={model.Password}&email={model.Email}", content).Result;
                     if (response.IsSuccessStatusCode)
                     {
                         TempData["successMessage"] = "User Created";
-                        return RedirectToAction("Login", "Acceso");
+                        return RedirectToAction("LoginS", "SystemAccess");
                     }
                 }
                 catch (Exception ex)
@@ -62,14 +62,14 @@ namespace FrontBerries.Controllers
 
 
         [HttpGet]
-        public IActionResult Login()
+        public IActionResult SystemLogin()
         {
             //if (User.Identity!.IsAuthenticated) return RedirectToAction("Index", "Home");
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(LoginVM model)
+        public async Task<IActionResult> SystemLogin(LoginVM model)
         {
             try
             {
@@ -77,7 +77,7 @@ namespace FrontBerries.Controllers
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
 
                 HttpResponseMessage response = await _client.PostAsync(
-                    _client.BaseAddress + $"/Login/Authentication?userName={model.UserName}&password={model.Password}", content);
+                    _client.BaseAddress + $"/SystemLogin/Authentication?userName={model.UserName}&password={model.Password}", content);
 
                 string token = await response.Content.ReadAsStringAsync();
 
@@ -93,7 +93,6 @@ namespace FrontBerries.Controllers
                         var claims = new List<Claim>
                         {
                             new Claim(ClaimTypes.Name, model.UserName),
-                            //new Claim(ClaimTypes., model.UserName),
                             new Claim("Token", token)
                         };
 

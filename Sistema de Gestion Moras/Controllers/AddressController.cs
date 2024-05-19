@@ -52,7 +52,7 @@ namespace Sistema_de_Gestion_Moras.Controllers
         [HttpPut("Update/{idAddress}")]
         public async Task<ActionResult<Address>> PutAddress(int idAddress, string addres, int idCity)
         {
-            var AddressToPut = await _AddressService.UpdateAddress(idCity, addres, idCity);
+            var AddressToPut = await _AddressService.UpdateAddress(idAddress, addres, idCity);
 
             if (AddressToPut != null)
             {

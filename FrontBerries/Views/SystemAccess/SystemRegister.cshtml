@@ -1,0 +1,66 @@
+﻿@model FrontBerries.ViewModels.SystemLoginVM
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+</head>
+<body>
+    <div class="image-container" style="margin-bottom: 0px;">
+        <img src="~/src/moralipsislogo.png" width="150" height="150" />
+        <img src="~/src/picture1.png" align="right" width="150" height="150" />
+    </div>
+    <div class="row mt-5 justify-content-center">
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h1 style="color: mediumpurple; font-family:'Trebuchet MS', sans-serif; font-weight: bold; font-size: 2rem;">Create your Account</h1>
+                </div>
+                <div class="card-body">
+                    <div class="d-grid gap-2 mb-3">
+                        <p style="color: black; text-align: center; font-size: 1rem;">to continue to the management system</p>
+                    </div>
+                    <form asp-controller="Acceso" asp-action="Registro" method="post">
+                        <div class="row mb-3">
+                            <div class="col-6">
+                                <input class="form-control mb-3" type="text" placeholder="Name" required asp-for="Name" />
+                                <input class="form-control mb-3" type="text" placeholder="TipoIden" required asp-for="TypeIdentification" />
+                                <input class="form-control mb-3" type="text" placeholder="Email" required asp-for="Email" />
+                                <input class="form-control mb-3" type="text" placeholder="Address" required asp-for="Address" />
+                            </div>
+                            <div class="col-6">
+                                <input class="form-control mb-3" type="text" placeholder="Last Name" required asp-for="LastName" />
+                                <input class="form-control mb-3" type="text" placeholder="N° Identification" required asp-for="NumberIdentification" />
+                                <input class="form-control mb-3" type="text" placeholder="Phone" required asp-for="Phone" />
+                                <input class="form-control mb-3" type="text" placeholder="City" required asp-for="City" />
+                            </div>
+                        </div>
+                        <input class="form-control mb-3" type="text" placeholder="User Name" required asp-for="UserName" />
+                        <input class="form-control mb-3" type="password" placeholder="Password" required asp-for="Password" />
+                        <input class="form-control mb-3" type="password" placeholder="Confirm Password" required asp-for="ConfirmPassword" />
+                        <div class="d-grid gap-2 mb-3">
+                            <button style="background-color: mediumpurple; color: white;">Create Account</button>
+                        </div>
+                        @if (ViewData["Mensaje"] != null)
+                        {
+                            <div class="alert alert-danger" role="alert">
+                                @ViewData["Mensaje"]
+                            </div>
+                        }
+                        Management System <a asp-controller="SystemAccess" asp-action="SystemLogin" style="color: rebeccapurple;"> Sign In </a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
