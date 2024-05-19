@@ -31,7 +31,7 @@ namespace FrontBerries.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SystemRegister(UsuarioVM model)
+        public async Task<IActionResult> SystemRegister(SystemLoginVM model)
         {
             if (model.Password != model.ConfirmPassword)
             {
@@ -69,7 +69,7 @@ namespace FrontBerries.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SystemLogin(LoginVM model)
+        public async Task<IActionResult> SystemLogin(LogSystemVM model)
         {
             try
             {
