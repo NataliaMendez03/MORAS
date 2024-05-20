@@ -1,6 +1,7 @@
 ﻿using FrontBerries.Models;
 using FrontBerries.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 using Sistema_de_Gestion_Moras.Models;
@@ -89,7 +90,9 @@ namespace FrontBerries.Controllers
                 PersonModel = new PersonVM(),
                 ContactModel = new ContactVM(),
                 AddressModel = new AddressVM(),
-                CityModel = new CityVM()
+                CityModel = new CityVM(),
+                IdentTypeModel = new IdentificationTypeVM(),
+                TypeIdentifications = GetTypeIdentificationsSelectList(),
             };     
 
             return View(createClientVM);
@@ -98,8 +101,15 @@ namespace FrontBerries.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateClientVM createClientVM)
         {
+            if (!ModelState.IsValid)
+            {
+                // Repopulate the lists in case of validation error
+                createClientVM.TypeIdentifications = GetTypeIdentificationsSelectList();
+                return View(createClientVM);
+            }
             try
             {
+                createClientVM.TypeIdentifications = GetTypeIdentificationsSelectList();
                 // Crear Ciudad
                 var cityData = JsonConvert.SerializeObject(createClientVM.CityModel);
                 var cityContent = new StringContent(cityData, Encoding.UTF8, "application/json");
@@ -179,6 +189,23 @@ namespace FrontBerries.Controllers
                 return View();
             }
         }
+
+        private List<SelectListItem> GetTypeIdentificationsSelectList()
+        {
+            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/IdentificationType").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string data = response.Content.ReadAsStringAsync().Result;
+                var typeIdentifications = JsonConvert.DeserializeObject<List<IdentificationType>>(data);
+                return typeIdentifications.Select(ti => new SelectListItem
+                {
+                    Value = ti.IdIdentificationType.ToString(),
+                    Text = ti.IdentifiType
+                }).ToList();
+            }
+            return new List<SelectListItem>();
+        }
+
         #endregion
     }
 

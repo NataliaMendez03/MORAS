@@ -3,61 +3,95 @@
     ViewData["Title"] = "Create Client";
 }
 
-<h1>Create New Client</h1>
+<div class="row">
+    <div class="col-md-6" style="color: black;">
+        <form asp-action="Create" method="post">
+            <div>
+                <h3>Person Details</h3>
+                <div class="form-group">
+                    <label asp-for="PersonModel.Name" class="control-label">Name</label>
+                    <input asp-for="PersonModel.Name" class="form-control" />
+                    <span asp-validation-for="PersonModel.Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PersonModel.LastName" class="control-label">Last Name</label>
+                    <input asp-for="PersonModel.LastName" class="form-control" />
+                    <span asp-validation-for="PersonModel.LastName" class="text-danger"></span>
+                </div>
 
-<form asp-action="Create" method="post">
-    <div>
-        <h3>Person Details</h3>
-        <div class="form-group">
-            <label asp-for="PersonModel.Name" class="control-label"></label>
-            <input asp-for="PersonModel.Name" class="form-control" />
-            <span asp-validation-for="PersonModel.Name" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="PersonModel.LastName" class="control-label"></label>
-            <input asp-for="PersonModel.LastName" class="form-control" />
-            <span asp-validation-for="PersonModel.LastName" class="text-danger"></span>
-        </div>
+                <div class="form-group form-group-inline">
+                    <label asp-for="IdentTypeModel.IdIdentificationType" class="control-label">Identification Type</label>
+                    <select asp-for="IdentTypeModel.IdIdentificationType" class="form-control" style="border-color: black;" asp-items="Model.TypeIdentifications"></select>
+                    <span asp-validation-for="IdentTypeModel.IdIdentificationType" class="text-danger"></span>
+                </div>
 
+                <div class="form-group">
+                    <label asp-for="PersonModel.NumberIdentification" class="control-label">Identification Number</label>
+                    <input asp-for="PersonModel.NumberIdentification" class="form-control" />
+                    <span asp-validation-for="PersonModel.NumberIdentification" class="text-danger"></span>
+                </div>
+            </div>
 
+            <div>
+                <h3>Contact Details</h3>
+                <div class="form-group">
+                    <label asp-for="ContactModel.Email" class="control-label">Email</label>
+                    <input asp-for="ContactModel.Email" class="form-control" />
+                    <span asp-validation-for="ContactModel.Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ContactModel.Phone" class="control-label">Phone</label>
+                    <input asp-for="ContactModel.Phone" class="form-control" />
+                    <span asp-validation-for="ContactModel.Phone" class="text-danger"></span>
+                </div>
+            </div>
 
-        <div class="form-group">
-            <label asp-for="PersonModel.NumberIdentification" class="control-label"></label>
-            <input asp-for="PersonModel.NumberIdentification" class="form-control" />
-            <span asp-validation-for="PersonModel.NumberIdentification" class="text-danger"></span>
-        </div>
+            <div>
+                <h3>Address Details</h3>
+                <div class="form-group">
+                    <label asp-for="AddressModel.Addres" class="control-label">Address</label>
+                    <input asp-for="AddressModel.Addres" class="form-control" />
+                    <span asp-validation-for="AddressModel.Addres" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CityModel.NameCity" class="control-label">City</label>
+                    <input asp-for="CityModel.NameCity" class="form-control" />
+                    <span asp-validation-for="CityModel.NameCity" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group mt-2">
+                <input type="submit" value="Create" class="btn" style="background-color: mediumpurple; color: white;" />
+            </div>
+            <div>
+                <a asp-action="ClientGet" style="color: rebeccapurple;">Back</a>
+            </div>
+        </form>
     </div>
+</div>
 
-    <div>
-        <h3>Contact Details</h3>
-        <div class="form-group">
-            <label asp-for="ContactModel.Email" class="control-label"></label>
-            <input asp-for="ContactModel.Email" class="form-control" />
-            <span asp-validation-for="ContactModel.Email" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="ContactModel.Phone" class="control-label"></label>
-            <input asp-for="ContactModel.Phone" class="form-control" />
-            <span asp-validation-for="ContactModel.Phone" class="text-danger"></span>
-        </div>
-    </div>
 
-    <div>
-        <h3>Address Details</h3>
-        <div class="form-group">
-            <label asp-for="AddressModel.Addres" class="control-label"></label>
-            <input asp-for="AddressModel.Addres" class="form-control" />
-            <span asp-validation-for="AddressModel.Addres" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="CityModel.NameCity" class="control-label"></label>
-            <input asp-for="CityModel.NameCity" class="form-control" />
-            <span asp-validation-for="CityModel.NameCity" class="text-danger"></span>
-        </div>
+<style>
+    .form-group-inline {
+        display: flex;
+        align-items: center;
+    }
 
-    </div>
+        .form-group-inline label {
+            margin-right: 10px; /* Espacio entre la etiqueta y el campo de entrada */
+            min-width: 100px; /* Ancho mínimo para las etiquetas */
+        }
 
-    <div class="form-group">
-        <input type="submit" value="Create" class="btn btn-primary" />
-    </div>
-</form>
+        .form-group-inline input {
+            flex-grow: 1; /* Permite que el campo de entrada tome todo el espacio restante */
+        }
+
+        .form-group-inline span {
+            margin-left: 10px; /* Espacio entre el campo de entrada y el mensaje de validación */
+        }
+
+        /* Añadimos estilos adicionales para organizar los campos */
+        .form-group-inline + .form-group-inline {
+            margin-left: 20px; /* Espacio entre campos adyacentes */
+        }
+</style>
