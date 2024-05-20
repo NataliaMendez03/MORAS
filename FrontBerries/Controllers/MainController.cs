@@ -4,6 +4,7 @@ using Sistema_de_Gestion_Moras.Models;
 using Microsoft.EntityFrameworkCore;
 using FrontBerries.ViewModels;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Newtonsoft.Json;
