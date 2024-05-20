@@ -1,6 +1,7 @@
 ﻿using FrontBerries.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Sistema_de_Gestion_Moras.Models;
 using System.Text;
 
 namespace FrontBerries.Controllers
@@ -24,12 +25,59 @@ namespace FrontBerries.Controllers
             {
                 string data = respone.Content.ReadAsStringAsync().Result;
                 Loginlist = JsonConvert.DeserializeObject<List<EmployeesViewModel>>(data);
+
+                // Obtener datos adicionales
+                List<Person> person = GetPerson();
+                List<Post> post = GetPost();
+                List<IdentificationType> typeIdentifications = GetTypeIdentifications();
+
+
+                // Mapear datos relacionados
+                foreach (var employees in Loginlist)
+                {
+                    employees.NamePost = post.FirstOrDefault(c => c.IdPost == employees.IdPost)?.NamePost;
+                    employees.Name = person.FirstOrDefault(p => p.IdPerson == employees.IdPerson)?.Name;
+                    employees.LastName = person.FirstOrDefault(p => p.IdPerson == employees.IdPerson)?.LastName;
+                    employees.IdentifiType = typeIdentifications.FirstOrDefault(ti => ti.IdIdentificationType == employees.IdTypeIdentification)?.IdentifiType;
+                    employees.NumberIdentification = person.FirstOrDefault(ni => ni.IdPerson == employees.IdPerson).NumberIdentification;
+                }
             }
             var inactiveLogins = Loginlist.Where(login => !login.StateDelete).ToList();
 
             return View(inactiveLogins);
         }
+        private List<Person> GetPerson()
+        {
+            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Person").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string data = response.Content.ReadAsStringAsync().Result;
+                return JsonConvert.DeserializeObject<List<Person>>(data);
+            }
+            return new List<Person>();
+        }
+        private List<Post> GetPost()
+        {
+            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Post").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string data = response.Content.ReadAsStringAsync().Result;
+                return JsonConvert.DeserializeObject<List<Post>>(data);
+            }
+            return new List<Post>();
+        }
+        private List<IdentificationType> GetTypeIdentifications()
+        {
+            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/IdentificationType").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string data = response.Content.ReadAsStringAsync().Result;
+                return JsonConvert.DeserializeObject<List<IdentificationType>>(data);
+            }
+            return new List<IdentificationType>();
+        }
 
+        ///-///////////---------------------------------------------------------------------------------------------------------------------/
         [HttpGet]
         public IActionResult Create()
         {

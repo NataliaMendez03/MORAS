@@ -16,22 +16,26 @@ namespace FrontBerries.Models
 
         [DisplayName("Id")]
         public int IdEmployees { get; set; }
+
         public int IdPost { get; set; }
         public IEnumerable<SelectListItem> Post { get; set; }
 
         [DisplayName ("Post")]
         public string NamePost { get; set; }
+
+
         public int IdPerson { get; set; }
         public IEnumerable<SelectListItem> Person { get; set; }
         public string Name { get; set; }
         public string LastName { get; set; }
 
-        [DisplayName("Type Identification")]
+
         public int IdTypeIdentification { get; set; }
         public IEnumerable<SelectListItem> TypeIdentifications { get; set; }
+        [DisplayName("Identification Type")]
         public string IdentifiType { get; set; } 
 
-        [DisplayName("Number Identification")]
+        [DisplayName("Identification Number")]
         public int NumberIdentification { get; set; }
 
         public bool StateDelete { get; set; }

@@ -48,9 +48,18 @@
                 @Html.DisplayNameFor(model => model.IdClient)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdPerson)
+                @Html.DisplayNameFor(model => model.Name)
             </th>
-            
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdentifiType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumberIdentification)
+            </th>
+
             <th></th>
         </tr>
     </thead>
@@ -62,7 +71,16 @@
                     @Html.DisplayFor(modelItem => item.IdClient)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IdPerson)
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdentifiType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumberIdentification)
                 </td>
 
 

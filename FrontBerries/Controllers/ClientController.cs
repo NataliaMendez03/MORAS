@@ -1,19 +1,21 @@
 ﻿using FrontBerries.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
+using Sistema_de_Gestion_Moras.Models;
 using System.Text;
 
 namespace FrontBerries.Controllers
 {
     public class ClientController : Controller
     {
-        Uri BaseAddress = new Uri("http://berriessystemmanagement.somee.com/api");
+        Uri baseAddress = new Uri("http://berriessystemmanagement.somee.com/api");
         private readonly HttpClient _client;
 
         public ClientController()
         {
             _client = new HttpClient();
-            _client.BaseAddress = BaseAddress;
+            _client.BaseAddress = baseAddress;
         }
         [HttpGet]
         public IActionResult ClientGet()
@@ -24,11 +26,51 @@ namespace FrontBerries.Controllers
             {
                 string data = respone.Content.ReadAsStringAsync().Result;
                 Loginlist = JsonConvert.DeserializeObject<List<ClientViewModel>>(data);
+
+                // Obtener datos adicionales
+                List<Person> person = GetPerson();
+                List<IdentificationType> typeIdentifications = GetTypeIdentifications();
+
+                // Mapear datos relacionados
+                foreach (var client in Loginlist)
+                {
+                    client.Name = person.FirstOrDefault(p => p.IdPerson == client.IdPerson)?.Name;
+                    client.LastName = person.FirstOrDefault(p => p.IdPerson == client.IdPerson)?.LastName;
+                   // client.IdentifiType = typeIdentifications.FirstOrDefault(ti => ti.IdIdentificationType == client.IdTypeIdentification)?.IdentifiType;
+                    client.NumberIdentification = person.FirstOrDefault(ni => ni.IdPerson == client.IdPerson).NumberIdentification;
+                }
+                foreach (var personTI in Loginlist)
+                {
+                    personTI.IdentifiType = typeIdentifications.FirstOrDefault(ti => ti.IdIdentificationType == personTI.IdTypeIdentification)?.IdentifiType;
+                }
             }
             var inactiveLogins = Loginlist.Where(login => !login.StateDelete).ToList();
 
             return View(inactiveLogins);
         }
+        private List<Person> GetPerson()
+        {
+            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Person").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string data = response.Content.ReadAsStringAsync().Result;
+                return JsonConvert.DeserializeObject<List<Person>>(data);
+            }
+            return new List<Person>();
+        }
+        private List<IdentificationType> GetTypeIdentifications()
+        {
+            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/IdentificationType").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string data = response.Content.ReadAsStringAsync().Result;
+                return JsonConvert.DeserializeObject<List<IdentificationType>>(data);
+            }
+            return new List<IdentificationType>();
+        }
+
+
+
 
         [HttpGet]
         public IActionResult Create()
