@@ -82,8 +82,6 @@ namespace FrontBerries.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            // Optional: Load additional data for dropdowns, etc.
-            ViewBag.IdentificationTypes = GetTypeIdentifications();
             return View();
         }
 
@@ -149,25 +147,6 @@ namespace FrontBerries.Controllers
         }
         #endregion
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }
 
