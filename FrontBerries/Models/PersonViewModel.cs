@@ -22,6 +22,7 @@ namespace FrontBerries.Models
         [DisplayName("Contact")]
         public int IdContact { get; set; }
         public IEnumerable<SelectListItem> Contacts { get; set; }
+        
         public string Phone { get; set; } // Propiedad para mostrar el nombre del contacto
         public string Email { get; set; } // Propiedad para mostrar el nombre del contacto
 

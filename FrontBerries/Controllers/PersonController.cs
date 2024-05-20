@@ -88,7 +88,7 @@ namespace FrontBerries.Controllers
                 TypeIdentifications = GetTypeIdentificationsSelectList(),
                 Addresses = GetAddressesSelectList()
             };
-            return View();
+            return View(model);
         }
         [HttpPost]
         public IActionResult Create(PersonViewModel model)
@@ -103,6 +103,11 @@ namespace FrontBerries.Controllers
             }
             try
             {
+                Console.WriteLine($"IdContact: {model.Name}");
+                Console.WriteLine($"IdContact: {model.IdContact}");
+                Console.WriteLine($"IdTypeIdentification: {model.IdTypeIdentification}");
+                Console.WriteLine($"IdAddress: {model.IdAddress}");
+
                 String data = JsonConvert.SerializeObject(model);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
                 HttpResponseMessage response = _client.PostAsync(_client.BaseAddress + $"/Person?name={model.Name}&lastName={model.LastName}&idContact={model.IdContact}&idTypeIdentification={model.IdTypeIdentification}&numberIdentification={model.NumberIdentification}&idAddress={model.IdAddress}", content).Result;
@@ -121,7 +126,7 @@ namespace FrontBerries.Controllers
             model.TypeIdentifications = GetTypeIdentificationsSelectList();
             model.Addresses = GetAddressesSelectList();
 
-            return View();
+            return View(model);
         }
 
         private List<SelectListItem> GetContactsSelectList()
