@@ -76,94 +76,100 @@ namespace FrontBerries.Controllers
             }
             return new List<IdentificationType>();
         }
-    #endregion
+        #endregion
 
-
-
-
+        #region CreateClient
         [HttpGet]
-        public IActionResult Update(int id)
+        public IActionResult Create()
         {
-            try
-            {
-                ClientViewModel login = new ClientViewModel();
-                HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Client/" + id).Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    string data = response.Content.ReadAsStringAsync().Result;
-                    login = JsonConvert.DeserializeObject<ClientViewModel>(data);
-                }
-                return View(login);
-            }
-            catch (Exception ex)
-            {
-                TempData["errorMessage"] = ex.Message;
-                return View();
-            }
-
-        }
-        [HttpPost]
-        public IActionResult Update(ClientViewModel model)
-        {
-            try
-            {
-                string data = JsonConvert.SerializeObject(model);
-                StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = _client.PutAsync(_client.BaseAddress + $"/Client/Update/{model.IdPerson}", content).Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    TempData["successMessage"] = "Client details updated";
-                    return RedirectToAction("ClientGet");
-                }
-            }
-            catch (Exception ex)
-            {
-                TempData["errorMessage"] = ex.Message;
-                return View();
-            }
+            // Optional: Load additional data for dropdowns, etc.
+            ViewBag.IdentificationTypes = GetTypeIdentifications();
             return View();
         }
-        [HttpGet]
-        public IActionResult Delete(int id)
+
+        [HttpPost]
+        public IActionResult Create(ClientViewModel client, Person person, Contact contact, Address address)
         {
-            try
+            if (ModelState.IsValid)
             {
-                ClientViewModel login = new ClientViewModel();
-                HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Client/" + id).Result;
-                if (response.IsSuccessStatusCode)
+                // Crear la persona
+                string personData = JsonConvert.SerializeObject(person);
+                StringContent personContent = new StringContent(personData, Encoding.UTF8, "application/json");
+                HttpResponseMessage personResponse = _client.PostAsync(_client.BaseAddress + "/Person", personContent).Result;
+                if (!personResponse.IsSuccessStatusCode)
                 {
-                    string data = response.Content.ReadAsStringAsync().Result;
-                    login = JsonConvert.DeserializeObject<ClientViewModel>(data);
+                    ModelState.AddModelError(string.Empty, "Error al crear la persona. Por favor contacte al administrador.");
+                    ViewBag.IdentificationTypes = GetTypeIdentifications();
+                    return View(client);
                 }
-                return View(login);
-            }
-            catch (Exception ex)
-            {
-                TempData["errorMessage"] = ex.Message;
-                return View();
-            }
+                person = JsonConvert.DeserializeObject<Person>(personResponse.Content.ReadAsStringAsync().Result);
 
-        }
-
-        [HttpPost, ActionName("Delete")]
-        public IActionResult DeleteConfirmed(int id)
-        {
-            try
-            {
-                HttpResponseMessage response = _client.DeleteAsync(_client.BaseAddress + $"/Client/Delete/{id}").Result;
-                if (response.IsSuccessStatusCode)
+                // Crear el cliente
+                client.IdPerson = person.IdPerson;
+                string clientData = JsonConvert.SerializeObject(client);
+                StringContent clientContent = new StringContent(clientData, Encoding.UTF8, "application/json");
+                HttpResponseMessage clientResponse = _client.PostAsync(_client.BaseAddress + "/Client", clientContent).Result;
+                if (!clientResponse.IsSuccessStatusCode)
                 {
-                    TempData["successMessage"] = "User details deleted";
-                    return RedirectToAction("ClientGet");
+                    ModelState.AddModelError(string.Empty, "Error al crear el cliente. Por favor contacte al administrador.");
+                    ViewBag.IdentificationTypes = GetTypeIdentifications();
+                    return View(client);
                 }
-            }
-            catch (Exception ex)
-            {
-                TempData["errorMessage"] = ex.Message;
-                return View();
-            }
-            return View("ClientGet");
 
+                // Crear el contacto
+                contact.IdContact = person.IdContact;
+                string contactData = JsonConvert.SerializeObject(contact);
+                StringContent contactContent = new StringContent(contactData, Encoding.UTF8, "application/json");
+                HttpResponseMessage contactResponse = _client.PostAsync(_client.BaseAddress + "/Contact", contactContent).Result;
+                if (!contactResponse.IsSuccessStatusCode)
+                {
+                    ModelState.AddModelError(string.Empty, "Error al crear el contacto. Por favor contacte al administrador.");
+                    ViewBag.IdentificationTypes = GetTypeIdentifications();
+                    return View(client);
+                }
+
+                // Crear la dirección
+                address.IdAddress = person.IdAddress;
+                string addressData = JsonConvert.SerializeObject(address);
+                StringContent addressContent = new StringContent(addressData, Encoding.UTF8, "application/json");
+                HttpResponseMessage addressResponse = _client.PostAsync(_client.BaseAddress + "/Address", addressContent).Result;
+                if (!addressResponse.IsSuccessStatusCode)
+                {
+                    ModelState.AddModelError(string.Empty, "Error al crear la dirección. Por favor contacte al administrador.");
+                    ViewBag.IdentificationTypes = GetTypeIdentifications();
+                    return View(client);
+                }
+
+                return RedirectToAction("ClientGet");
+            }
+
+            // Optional: Reload additional data for dropdowns, etc. in case of error
+            ViewBag.IdentificationTypes = GetTypeIdentifications();
+            return View(client);
         }
+        #endregion
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
+
+
+

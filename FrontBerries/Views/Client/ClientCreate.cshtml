@@ -1,0 +1,82 @@
+﻿@model FrontBerries.Models.ClientViewModel
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1 style="color: black; font-family:'Trebuchet MS',sans-serif; font-weight:bold;">New Register</h1>
+<h4 style="color: black; font-family:'Trebuchet MS',sans-serif; font-weight:bold;">Client</h4>
+<hr />
+<head>
+    <title>Inline Form Elements Example</title>
+    <!-- Incluir el CSS de Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Incluir tu propio archivo CSS -->
+    <link href="~/css/site.css" rel="stylesheet" />
+    <style>
+        .form-group-inline {
+            display: flex;
+            align-items: center;
+        }
+
+            .form-group-inline label {
+                margin-right: 10px; /* Espacio entre la etiqueta y el campo de entrada */
+                min-width: 100px; /* Ancho mínimo para las etiquetas */
+            }
+
+            .form-group-inline input {
+                flex-grow: 1; /* Permite que el campo de entrada tome todo el espacio restante */
+            }
+
+            .form-group-inline span {
+                margin-left: 10px; /* Espacio entre el campo de entrada y el mensaje de validación */
+            }
+    </style>
+</head>
+<body>
+    <div class="row">
+        <div class="col-md-4" style="color: black;">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group form-group-inline">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" style="border-color: black;" placeholder="Name" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group form-group-inline">
+                    <label asp-for="LastName" class="control-label"></label>
+                    <input asp-for="LastName" class="form-control" style="border-color: black;" placeholder="LastName" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+                <div class="form-group form-group-inline">
+                    <label asp-for="IdentifiType" class="control-label"></label>
+                    <input asp-for="IdentifiType" class="form-control" style="border-color: black;" placeholder="Identification Type" />
+                    <span asp-validation-for="IdentifiType" class="text-danger"></span>
+                </div>
+                <div class="form-group form-group-inline">
+                    <label asp-for="NumberIdentification" class="control-label"></label>
+                    <input asp-for="NumberIdentification" class="form-control" style="border-color: black;" placeholder="Identification Number" />
+                    <span asp-validation-for="NumberIdentification" class="text-danger"></span>
+                </div>
+                
+                <div class="form-group mt-2">
+                    <input type="submit" value="Create" class="btn" style="background-color: mediumpurple; color: white;" />
+                </div>
+                <div>
+                    <a asp-action="ClientsGet" style="color: rebeccapurple;">Back</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>
+</body>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
