@@ -17,6 +17,8 @@ namespace FrontBerries.Controllers
             _client = new HttpClient();
             _client.BaseAddress = baseAddress;
         }
+
+    #region GetClient
         [HttpGet]
         public IActionResult ClientGet()
         {
@@ -38,11 +40,18 @@ namespace FrontBerries.Controllers
                     client.LastName = person.FirstOrDefault(p => p.IdPerson == client.IdPerson)?.LastName;
                    // client.IdentifiType = typeIdentifications.FirstOrDefault(ti => ti.IdIdentificationType == client.IdTypeIdentification)?.IdentifiType;
                     client.NumberIdentification = person.FirstOrDefault(ni => ni.IdPerson == client.IdPerson).NumberIdentification;
+
+                    var personInfo = person.FirstOrDefault(p => p.IdPerson == client.IdPerson);
+                    if (personInfo != null)
+                    {
+                        var identificationType = typeIdentifications.FirstOrDefault(ti => ti.IdIdentificationType == personInfo.IdTypeIdentification);
+                        if (identificationType != null)
+                        {
+                            client.IdentifiType = identificationType.IdentifiType;
+                        }
+                    }
                 }
-                foreach (var personTI in Loginlist)
-                {
-                    personTI.IdentifiType = typeIdentifications.FirstOrDefault(ti => ti.IdIdentificationType == personTI.IdTypeIdentification)?.IdentifiType;
-                }
+                
             }
             var inactiveLogins = Loginlist.Where(login => !login.StateDelete).ToList();
 
@@ -68,7 +77,7 @@ namespace FrontBerries.Controllers
             }
             return new List<IdentificationType>();
         }
-
+    #endregion
 
 
 

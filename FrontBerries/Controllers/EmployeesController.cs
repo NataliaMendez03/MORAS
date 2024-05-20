@@ -38,8 +38,18 @@ namespace FrontBerries.Controllers
                     employees.NamePost = post.FirstOrDefault(c => c.IdPost == employees.IdPost)?.NamePost;
                     employees.Name = person.FirstOrDefault(p => p.IdPerson == employees.IdPerson)?.Name;
                     employees.LastName = person.FirstOrDefault(p => p.IdPerson == employees.IdPerson)?.LastName;
-                    employees.IdentifiType = typeIdentifications.FirstOrDefault(ti => ti.IdIdentificationType == employees.IdTypeIdentification)?.IdentifiType;
                     employees.NumberIdentification = person.FirstOrDefault(ni => ni.IdPerson == employees.IdPerson).NumberIdentification;
+
+                    var personInfo = person.FirstOrDefault(p => p.IdPerson == employees.IdPerson);
+                    if (personInfo != null)
+                    {
+                        var identificationType = typeIdentifications.FirstOrDefault(ti => ti.IdIdentificationType == personInfo.IdTypeIdentification);
+                        if (identificationType != null)
+                        {
+                            employees.IdentifiType = identificationType.IdentifiType;
+                        }
+                    }
+
                 }
             }
             var inactiveLogins = Loginlist.Where(login => !login.StateDelete).ToList();
