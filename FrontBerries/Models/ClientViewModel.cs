@@ -7,7 +7,6 @@ namespace FrontBerries.Models
     {
         public int IdClient { get; set; }
 
-        public int IdPerson { get; set; }
         public bool StateDelete { get; set; }
 
     }
