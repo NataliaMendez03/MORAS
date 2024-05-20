@@ -38,7 +38,6 @@ namespace FrontBerries.Controllers
                 {
                     client.Name = person.FirstOrDefault(p => p.IdPerson == client.IdPerson)?.Name;
                     client.LastName = person.FirstOrDefault(p => p.IdPerson == client.IdPerson)?.LastName;
-                   // client.IdentifiType = typeIdentifications.FirstOrDefault(ti => ti.IdIdentificationType == client.IdTypeIdentification)?.IdentifiType;
                     client.NumberIdentification = person.FirstOrDefault(ni => ni.IdPerson == client.IdPerson).NumberIdentification;
 
                     var personInfo = person.FirstOrDefault(p => p.IdPerson == client.IdPerson);
