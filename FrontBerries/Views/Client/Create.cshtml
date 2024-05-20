@@ -1,0 +1,66 @@
+﻿@model Tuple<
+    FrontBerries.Models.ClientViewModel,   
+    FrontBerries.Models.PersonViewModel, 
+    FrontBerries.Models.ContactViewModel, 
+    FrontBerries.Models.AddressViewModel
+>
+
+@{
+    ViewData["Title"] = "Create Client";
+}
+
+<h1>Create New Client</h1>
+
+<form asp-action="Create" method="post">
+    <div>
+        <h3>Person Details</h3>
+        <div class="form-group">
+            <label asp-for="Item2.Name" class="control-label"></label>
+            <input asp-for="Item2.Name" class="form-control" />
+            <span asp-validation-for="Item2.Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Item2.LastName" class="control-label"></label>
+            <input asp-for="Item2.LastName" class="form-control" />
+            <span asp-validation-for="Item2.LastName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Item2.NumberIdentification" class="control-label"></label>
+            <input asp-for="Item2.NumberIdentification" class="form-control" />
+            <span asp-validation-for="Item2.NumberIdentification" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div>
+        <h3>Contact Details</h3>
+        <div class="form-group">
+            <label asp-for="Item3.Email" class="control-label"></label>
+            <input asp-for="Item3.Email" class="form-control" />
+            <span asp-validation-for="Item3.Email" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Item3.Phone" class="control-label"></label>
+            <input asp-for="Item3.Phone" class="form-control" />
+            <span asp-validation-for="Item3.Phone" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div>
+        <h3>Address Details</h3>
+        <div class="form-group">
+            <label asp-for="Item4.Addres" class="control-label"></label>
+            <input asp-for="Item4.Addres" class="form-control" />
+            <span asp-validation-for="Item4.Addres" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Item4.City" class="control-label"></label>
+            <input asp-for="Item4.City" class="form-control" />
+            <span asp-validation-for="Item4.City" class="text-danger"></span>
+        </div>
+
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+</form>

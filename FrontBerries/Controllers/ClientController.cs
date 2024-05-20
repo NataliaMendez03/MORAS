@@ -18,7 +18,7 @@ namespace FrontBerries.Controllers
             _client.BaseAddress = baseAddress;
         }
 
-    #region GetClient
+        #region GetClient
         [HttpGet]
         public IActionResult ClientGet()
         {
@@ -50,7 +50,7 @@ namespace FrontBerries.Controllers
                         }
                     }
                 }
-                
+
             }
             var inactiveLogins = Loginlist.Where(login => !login.StateDelete).ToList();
 
@@ -86,69 +86,81 @@ namespace FrontBerries.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(ClientViewModel client, Person person, Contact contact, Address address)
+        public async Task<IActionResult> Create(ClientViewModel clientModel, PersonViewModel personModel, ContactViewModel contactModel, AddressViewModel addressModel)
         {
-            if (ModelState.IsValid)
+            try
             {
-                // Crear la persona
-                string personData = JsonConvert.SerializeObject(person);
-                StringContent personContent = new StringContent(personData, Encoding.UTF8, "application/json");
-                HttpResponseMessage personResponse = _client.PostAsync(_client.BaseAddress + "/Person", personContent).Result;
-                if (!personResponse.IsSuccessStatusCode)
-                {
-                    ModelState.AddModelError(string.Empty, "Error al crear la persona. Por favor contacte al administrador.");
-                    ViewBag.IdentificationTypes = GetTypeIdentifications();
-                    return View(client);
-                }
-                person = JsonConvert.DeserializeObject<Person>(personResponse.Content.ReadAsStringAsync().Result);
-
-                // Crear el cliente
-                client.IdPerson = person.IdPerson;
-                string clientData = JsonConvert.SerializeObject(client);
-                StringContent clientContent = new StringContent(clientData, Encoding.UTF8, "application/json");
-                HttpResponseMessage clientResponse = _client.PostAsync(_client.BaseAddress + "/Client", clientContent).Result;
-                if (!clientResponse.IsSuccessStatusCode)
-                {
-                    ModelState.AddModelError(string.Empty, "Error al crear el cliente. Por favor contacte al administrador.");
-                    ViewBag.IdentificationTypes = GetTypeIdentifications();
-                    return View(client);
-                }
-
-                // Crear el contacto
-                contact.IdContact = person.IdContact;
-                string contactData = JsonConvert.SerializeObject(contact);
-                StringContent contactContent = new StringContent(contactData, Encoding.UTF8, "application/json");
-                HttpResponseMessage contactResponse = _client.PostAsync(_client.BaseAddress + "/Contact", contactContent).Result;
-                if (!contactResponse.IsSuccessStatusCode)
-                {
-                    ModelState.AddModelError(string.Empty, "Error al crear el contacto. Por favor contacte al administrador.");
-                    ViewBag.IdentificationTypes = GetTypeIdentifications();
-                    return View(client);
-                }
-
-                // Crear la dirección
-                address.IdAddress = person.IdAddress;
-                string addressData = JsonConvert.SerializeObject(address);
-                StringContent addressContent = new StringContent(addressData, Encoding.UTF8, "application/json");
-                HttpResponseMessage addressResponse = _client.PostAsync(_client.BaseAddress + "/Address", addressContent).Result;
+                // Crear Dirección
+                var addressData = JsonConvert.SerializeObject(addressModel);
+                var addressContent = new StringContent(addressData, Encoding.UTF8, "application/json");
+                var addressResponse = await _client.PostAsync(_client.BaseAddress + $"/Address?addres={addressModel.Addres}&idCity={5}", addressContent);
                 if (!addressResponse.IsSuccessStatusCode)
                 {
-                    ModelState.AddModelError(string.Empty, "Error al crear la dirección. Por favor contacte al administrador.");
-                    ViewBag.IdentificationTypes = GetTypeIdentifications();
-                    return View(client);
+                    TempData["errorMessage"] = "Error creating address";
+                    return View();
+                }
+                var addressResponseData = await addressResponse.Content.ReadAsStringAsync();
+                var createdAddress = JsonConvert.DeserializeObject<AddressViewModel>(addressResponseData);
+                int addressId = createdAddress.IdAddress;
+
+                // Crear Contacto
+                var contactData = JsonConvert.SerializeObject(contactModel);
+                var contactContent = new StringContent(contactData, Encoding.UTF8, "application/json");
+                var contactResponse = await _client.PostAsync(_client.BaseAddress + $"/Contact?phone={contactModel.Phone}&email={contactModel.Email}", contactContent);
+                if (!contactResponse.IsSuccessStatusCode)
+                {
+                    TempData["errorMessage"] = "Error creating contact";
+                    return View();
+                }
+                var contactResponseData = await contactResponse.Content.ReadAsStringAsync();
+                var createdContact = JsonConvert.DeserializeObject<ContactViewModel>(contactResponseData);
+                int contactId = createdContact.IdContact;
+
+                // Crear Persona
+                //personModel.IdAddress = addressId;
+                personModel.IdContact = contactId;
+                var personData = JsonConvert.SerializeObject(personModel);
+                var personContent = new StringContent(personData, Encoding.UTF8, "application/json");
+                var personResponse = await _client.PostAsync(_client.BaseAddress + $"/Person?name={personModel.Name}&lastName={personModel.LastName}" +
+                    $"&idContact={personModel.IdContact}&idTypeIdentification={personModel.IdTypeIdentification}&numberIdentification={personModel.NumberIdentification}" +
+                    $"&idAddress={20}", personContent);
+
+                if (!personResponse.IsSuccessStatusCode)
+                {
+                    TempData["errorMessage"] = "Error creating person";
+                    return View();
+                }
+                var personResponseData = await personResponse.Content.ReadAsStringAsync();
+                var createdPerson = JsonConvert.DeserializeObject<PersonViewModel>(personResponseData);
+                int personId = createdPerson.IdPerson;
+
+                // Crear Cliente
+                clientModel.IdPerson = personId;
+                var clientData = JsonConvert.SerializeObject(clientModel);
+                var clientContent = new StringContent(clientData, Encoding.UTF8, "application/json");
+                var clientResponse = await _client.PostAsync(_client.BaseAddress + $"/Client?idPerson={clientModel.IdPerson}", clientContent);
+                if (!clientResponse.IsSuccessStatusCode)
+                {
+                    TempData["errorMessage"] = "Error creating client";
+                    return View();
                 }
 
+                TempData["successMessage"] = "Client created successfully";
                 return RedirectToAction("ClientGet");
             }
-
-            // Optional: Reload additional data for dropdowns, etc. in case of error
-            ViewBag.IdentificationTypes = GetTypeIdentifications();
-            return View(client);
+            catch (Exception ex)
+            {
+                TempData["errorMessage"] = ex.Message;
+                return View();
+            }
         }
         #endregion
     }
 
 }
+
+
+
 
 
 
