@@ -18,7 +18,6 @@ namespace FrontBerries.Models
 
         [DisplayName("Client")]
         public int IdClient { get; set; }
-        public string ClientName { get; set; }
         public IEnumerable<SelectListItem> Client { get; set; }
 
         [DisplayName("Date Sale")]

@@ -42,7 +42,7 @@ namespace FrontBerries.Controllers
                         var person = persons.FirstOrDefault(p => p.IdPerson == client.IdPerson);
                         if (person != null)
                         {
-                            billSale.ClientName = $"{person.Name} {person.LastName}";
+                            //billSale.Name = $"{person.Name} {person.LastName}";
                         }
                     }
 
