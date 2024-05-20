@@ -1,4 +1,5 @@
 ﻿using FrontBerries.Models;
+using FrontBerries.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
@@ -82,18 +83,40 @@ namespace FrontBerries.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            CreateClientVM createClientVM = new CreateClientVM
+            {
+                ClientModel = new ClientVM(),
+                PersonModel = new PersonVM(),
+                ContactModel = new ContactVM(),
+                AddressModel = new AddressVM(),
+                CityModel = new CityVM()
+            };     
+
+            return View(createClientVM);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(ClientViewModel clientModel, PersonViewModel personModel, ContactViewModel contactModel, AddressViewModel addressModel)
+        public async Task<IActionResult> Create(CreateClientVM createClientVM)
         {
             try
             {
+                // Crear Ciudad
+                var cityData = JsonConvert.SerializeObject(createClientVM.CityModel);
+                var cityContent = new StringContent(cityData, Encoding.UTF8, "application/json");
+                var cityResponse = await _client.PostAsync(_client.BaseAddress + $"/City?nameCity={createClientVM.CityModel.NameCity}", cityContent);
+                if (!cityResponse.IsSuccessStatusCode)
+                {
+                    TempData["errorMessage"] = "Error creating address";
+                    return View();
+                }
+                var cityResponseData = await cityResponse.Content.ReadAsStringAsync();
+                var createdCity = JsonConvert.DeserializeObject<CityViewModel>(cityResponseData);
+                int cityId = createdCity.IdCity;
+
                 // Crear Dirección
-                var addressData = JsonConvert.SerializeObject(addressModel);
+                /*var addressData = JsonConvert.SerializeObject(createClientVM.AddressModel);
                 var addressContent = new StringContent(addressData, Encoding.UTF8, "application/json");
-                var addressResponse = await _client.PostAsync(_client.BaseAddress + $"/Address?addres={addressModel.Addres}&idCity={5}", addressContent);
+                var addressResponse = _client.PostAsync(_client.BaseAddress + $"/Address?addres={createClientVM.AddressModel.Addres}&idCity={cityId}", addressContent).Result;
                 if (!addressResponse.IsSuccessStatusCode)
                 {
                     TempData["errorMessage"] = "Error creating address";
@@ -101,12 +124,12 @@ namespace FrontBerries.Controllers
                 }
                 var addressResponseData = await addressResponse.Content.ReadAsStringAsync();
                 var createdAddress = JsonConvert.DeserializeObject<AddressViewModel>(addressResponseData);
-                int addressId = createdAddress.IdAddress;
+                int addressId = createdAddress.IdAddress;*/
 
                 // Crear Contacto
-                var contactData = JsonConvert.SerializeObject(contactModel);
+                var contactData = JsonConvert.SerializeObject(createClientVM.ContactModel);
                 var contactContent = new StringContent(contactData, Encoding.UTF8, "application/json");
-                var contactResponse = await _client.PostAsync(_client.BaseAddress + $"/Contact?phone={contactModel.Phone}&email={contactModel.Email}", contactContent);
+                var contactResponse = await _client.PostAsync(_client.BaseAddress + $"/Contact?phone={createClientVM.ContactModel.Phone}&email={createClientVM.ContactModel.Email}", contactContent);
                 if (!contactResponse.IsSuccessStatusCode)
                 {
                     TempData["errorMessage"] = "Error creating contact";
@@ -116,14 +139,16 @@ namespace FrontBerries.Controllers
                 var createdContact = JsonConvert.DeserializeObject<ContactViewModel>(contactResponseData);
                 int contactId = createdContact.IdContact;
 
+                int id = 5;
+                int TI = 1;
                 // Crear Persona
-                //personModel.IdAddress = addressId;
-                personModel.IdContact = contactId;
-                var personData = JsonConvert.SerializeObject(personModel);
+                //createClientVM.PersonModel.IdAddress = addressId;
+                createClientVM.PersonModel.IdContact = contactId;
+                var personData = JsonConvert.SerializeObject(createClientVM.PersonModel);
                 var personContent = new StringContent(personData, Encoding.UTF8, "application/json");
-                var personResponse = await _client.PostAsync(_client.BaseAddress + $"/Person?name={personModel.Name}&lastName={personModel.LastName}" +
-                    $"&idContact={personModel.IdContact}&idTypeIdentification={personModel.IdTypeIdentification}&numberIdentification={personModel.NumberIdentification}" +
-                    $"&idAddress={20}", personContent);
+                var personResponse = await _client.PostAsync(_client.BaseAddress + $"/Person?name={createClientVM.PersonModel.Name}&lastName={createClientVM.PersonModel.LastName}" +
+                    $"&idContact={contactId}&idTypeIdentification={TI}&numberIdentification={createClientVM.PersonModel.NumberIdentification}" +
+                    $"&idAddress={id}", personContent);
 
                 if (!personResponse.IsSuccessStatusCode)
                 {
@@ -135,10 +160,10 @@ namespace FrontBerries.Controllers
                 int personId = createdPerson.IdPerson;
 
                 // Crear Cliente
-                clientModel.IdPerson = personId;
-                var clientData = JsonConvert.SerializeObject(clientModel);
+                //createClientVM.ClientModel.IdPerson = personId;
+                var clientData = JsonConvert.SerializeObject(createClientVM.ClientModel);
                 var clientContent = new StringContent(clientData, Encoding.UTF8, "application/json");
-                var clientResponse = await _client.PostAsync(_client.BaseAddress + $"/Client?idPerson={clientModel.IdPerson}", clientContent);
+                var clientResponse = await _client.PostAsync(_client.BaseAddress + $"/Client?idPerson={personId}", clientContent);
                 if (!clientResponse.IsSuccessStatusCode)
                 {
                     TempData["errorMessage"] = "Error creating client";
