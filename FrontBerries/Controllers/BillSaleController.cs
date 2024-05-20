@@ -49,14 +49,14 @@ namespace FrontBerries.Controllers
                     var salesDetail = salesDetails.FirstOrDefault(sd => sd.IdSalesDetails == billSale.IdSalesDetails);
                     if (salesDetail != null)
                     {
-                        billSale.Amount = salesDetails.Amount;
-                        billSale.SalePrice = salesDetails.SalePrice;
+                        //billSale.Amount = salesDetails.Amount;
+                        //billSale.SalePrice = salesDetails.SalePrice;
                     }
                 }
             }
-            var activeBillSales = billSaleList.Where(bill => !billSale.StateDeleted).ToList();
+            //var activeBillSales = billSaleList.Where(bill => !billSale.StateDeleted).ToList();
 
-            return View(activeBillSales);
+            return View(/*activeBillSales*/);
         }
 
         private List<Client> GetClient()

@@ -6,7 +6,8 @@ namespace FrontBerries.Models
     public class ClientViewModel
     {
         public int IdClient { get; set; }
-
+        public int IdPerson { get; set; }
+        public PersonViewModel Person { get; set; }
         public bool StateDelete { get; set; }
 
     }
