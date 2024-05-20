@@ -81,33 +81,6 @@ namespace FrontBerries.Controllers
 
 
 
-        [HttpGet]
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult Create(ClientViewModel model)
-        {
-            try
-            {
-                String data = JsonConvert.SerializeObject(model);
-                StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = _client.PostAsync(_client.BaseAddress + $"/Client/Create?addres={model.IdPerson}", content).Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    TempData["successMessage"] = "Client Created";
-                    return RedirectToAction("ClientGet");
-                }
-            }
-            catch (Exception ex)
-            {
-                TempData["errorMessage"] = ex.Message;
-                return View();
-            }
-            return View();
-        }
 
         [HttpGet]
         public IActionResult Update(int id)
