@@ -36,26 +36,28 @@ namespace FrontBerries.Models
         public string Phone { get; set; } // Propiedad para mostrar el nombre del contacto
         public string Email { get; set; } // Propiedad para mostrar el nombre del contacto
 
-        [DisplayName("Type Identification")]
-        public int IdTypeIdentification { get; set; }
+        [DisplayName("Identification Type")]
+        public int IdIdentificationType { get; set; }
         public IEnumerable<SelectListItem> TypeIdentifications { get; set; }
         public string IdentifiType { get; set; } // Propiedad para mostrar el nombre del tipo de identificación
 
-        [DisplayName("Number Identification")]
+        [DisplayName("Identification Number")]
         public int NumberIdentification { get; set; }
 
         [DisplayName("Adress")]
         public int IdAddress { get; set; }
         public string Address { get; set; } // Propiedad para mostrar el nombre de la dirección
         public IEnumerable<SelectListItem> Addresses { get; set; }
-        [DisplayName("Date Sale")]
+        [DisplayName("Date")]
         public DateTime DateSale { get; set; }
 
         [DisplayName("Details")]
         public int IdSalesDetails { get; set; }
         public IEnumerable<SelectListItem> SalesDetails { get; set; }
-        public int Amount { get; set; }
-        public decimal SalePrice { get; set; }
+        public string Amount { get; set; }
+
+        [DisplayName("Price")]
+        public string SalePrice { get; set; }
 
         [DisplayName("Notes")]
         public string Notes { get; set; }
