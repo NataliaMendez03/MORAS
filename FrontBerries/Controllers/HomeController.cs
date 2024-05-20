@@ -35,7 +35,7 @@ namespace FrontBerries.Controllers
         public async Task<IActionResult> Exit()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction("Login","Acceso");
+            return RedirectToAction("MainPage", "Main");
         }
     }
 }

@@ -15,7 +15,7 @@ builder.Services.AddDbContext<berriesdbContext>(options =>
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
-        options.LoginPath = "/Acceso/Login";
+        options.LoginPath = "/Main/MainPage";
         options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
     });
 var app = builder.Build();
@@ -38,6 +38,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Main}/{action=MainPage}/{id?}");
+   pattern: "{controller=Main}/{action=MainPage}/{id?}");
+  //pattern: "{controller=Acceso}/{action=Login}/{id?}");
 
 app.Run();
