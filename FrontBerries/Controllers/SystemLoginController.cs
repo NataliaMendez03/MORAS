@@ -1,6 +1,8 @@
 ﻿using FrontBerries.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Sistema_de_Gestion_Moras.Models;
+using System;
 using System.Text;
 
 namespace FrontBerries.Controllers
@@ -15,20 +17,93 @@ namespace FrontBerries.Controllers
             _client = new HttpClient();
             _client.BaseAddress = baseAddress;
         }
+
+    #region GetClient
         [HttpGet]
         public IActionResult SystemLoginGet()
         {
-            List<SystemLoginViewModel> SystemLoginlist = new List<SystemLoginViewModel>();
+            List<SystemLoginViewModel> Loginlist = new List<SystemLoginViewModel>();
             HttpResponseMessage respone = _client.GetAsync(_client.BaseAddress + "/SystemLogin").Result;
             if (respone.IsSuccessStatusCode)
             {
                 string data = respone.Content.ReadAsStringAsync().Result;
-                SystemLoginlist = JsonConvert.DeserializeObject<List<SystemLoginViewModel>>(data);
-            }
-            var inactiveSystemLogins = SystemLoginlist.Where(SystemLogin => !SystemLogin.StateDelete).ToList();
+                Loginlist = JsonConvert.DeserializeObject<List<SystemLoginViewModel>>(data);
 
-            return View(inactiveSystemLogins);
+                List<Person> person = GetPerson();
+                List<Contact> contacts = GetContacts();
+                List<IdentificationType> typeIdentifications = GetTypeIdentifications();
+                List<Address> addresses = GetAddresses();
+
+                foreach (var systemLogin in Loginlist)
+                {
+                    systemLogin.Name = person.FirstOrDefault(p => p.IdPerson == systemLogin.IdPerson)?.Name;
+                    systemLogin.LastName = person.FirstOrDefault(p => p.IdPerson == systemLogin.IdPerson)?.LastName;
+                    systemLogin.NumberIdentification = person.FirstOrDefault(ni => ni.IdPerson == systemLogin.IdPerson).NumberIdentification;
+
+                    var personInfo = person.FirstOrDefault(p => p.IdPerson == systemLogin.IdPerson);
+                    if (personInfo != null)
+                    {
+                        var identificationType = typeIdentifications.FirstOrDefault(ti => ti.IdIdentificationType == personInfo.IdTypeIdentification);
+                        var email = contacts.FirstOrDefault(ti => ti.IdContact == personInfo.IdContact);
+                        var phone = contacts.FirstOrDefault(ti => ti.IdContact == personInfo.IdContact);
+                        var address = addresses.FirstOrDefault(ti => ti.IdAddress == personInfo.IdAddress);
+                       
+                        if (identificationType != null || email != null || phone != null || address != null)
+                        {
+                            systemLogin.IdentifiType = identificationType.IdentifiType;
+                            systemLogin.Email = email.Email;
+                            systemLogin.Phone = phone.Phone;
+                            systemLogin.Address = address.Addres;
+                        }
+                    }
+                }
+
+            }
+            var inactiveLogins = Loginlist.Where(login => !login.StateDelete).ToList();
+
+            return View(inactiveLogins);
         }
+        private List<Person> GetPerson()
+        {
+            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Person").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string data = response.Content.ReadAsStringAsync().Result;
+                return JsonConvert.DeserializeObject<List<Person>>(data);
+            }
+            return new List<Person>();
+        }
+        private List<Contact> GetContacts()
+        {
+            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Contact").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string data = response.Content.ReadAsStringAsync().Result;
+                return JsonConvert.DeserializeObject<List<Contact>>(data);
+            }
+            return new List<Contact>();
+        }
+        private List<IdentificationType> GetTypeIdentifications()
+        {
+            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/IdentificationType").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string data = response.Content.ReadAsStringAsync().Result;
+                return JsonConvert.DeserializeObject<List<IdentificationType>>(data);
+            }
+            return new List<IdentificationType>();
+        }
+        private List<Address> GetAddresses()
+        {
+            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Address").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string data = response.Content.ReadAsStringAsync().Result;
+                return JsonConvert.DeserializeObject<List<Address>>(data);
+            }
+            return new List<Address>();
+        }
+    #endregion
 
         [HttpGet]
         public IActionResult Create()

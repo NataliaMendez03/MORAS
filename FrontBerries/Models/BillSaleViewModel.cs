@@ -9,6 +9,10 @@ namespace FrontBerries.Models
     {
         public BillSaleViewModel()
         {
+            Person = new List<SelectListItem>();
+            Contacts = new List<SelectListItem>();
+            TypeIdentifications = new List<SelectListItem>();
+            Addresses = new List<SelectListItem>();
             Client = new List<SelectListItem>();
             SalesDetails = new List<SelectListItem>();
         }
@@ -20,6 +24,30 @@ namespace FrontBerries.Models
         public int IdClient { get; set; }
         public IEnumerable<SelectListItem> Client { get; set; }
 
+        [DisplayName("Person")]
+        public int IdPerson { get; set; }
+        public IEnumerable<SelectListItem> Person { get; set; }
+
+        public string Name { get; set; }
+        public string LastName { get; set; }
+        public int IdContact { get; set; }
+
+        public IEnumerable<SelectListItem> Contacts { get; set; }
+        public string Phone { get; set; } // Propiedad para mostrar el nombre del contacto
+        public string Email { get; set; } // Propiedad para mostrar el nombre del contacto
+
+        [DisplayName("Type Identification")]
+        public int IdTypeIdentification { get; set; }
+        public IEnumerable<SelectListItem> TypeIdentifications { get; set; }
+        public string IdentifiType { get; set; } // Propiedad para mostrar el nombre del tipo de identificación
+
+        [DisplayName("Number Identification")]
+        public int NumberIdentification { get; set; }
+
+        [DisplayName("Adress")]
+        public int IdAddress { get; set; }
+        public string Address { get; set; } // Propiedad para mostrar el nombre de la dirección
+        public IEnumerable<SelectListItem> Addresses { get; set; }
         [DisplayName("Date Sale")]
         public DateTime DateSale { get; set; }
 
