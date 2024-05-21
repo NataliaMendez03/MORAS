@@ -8,6 +8,7 @@ namespace Sistema_de_Gestion_Moras.Repositories
     {
         Task<List<Achievements>> GetAll();
         Task<Achievements> GetAchievements(int idAchievements);
+        Task<List<Achievements>> GetByIdLogin(int idLogin);
         Task<Achievements> CreateAchievements(int IdLogin, int IdMission);
         Task<Achievements> UpdateAchievements(Achievements Achievements);
         Task<Achievements> DeleteAchievements(Achievements Achievements);
@@ -68,6 +69,12 @@ namespace Sistema_de_Gestion_Moras.Repositories
                 await _db.SaveChangesAsync();
             }
             return AchievementsUpdate;
+        }
+
+        public async Task<List<Achievements>> GetByIdLogin(int idLogin)
+        {
+            return await _db.Achievements.Where(a => a.IdLogin == idLogin).ToListAsync();
+            throw new NotImplementedException();
         }
     }
 }

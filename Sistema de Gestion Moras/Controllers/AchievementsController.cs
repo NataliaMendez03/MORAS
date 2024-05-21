@@ -32,6 +32,20 @@ namespace Sistema_de_Gestion_Moras.Controllers
             }
             return Ok(Achievements);
         }
+
+        // GET api/<AchievementsController>/5
+        [HttpGet("ByLogin/{idLogin}")]
+        public async Task<ActionResult<Achievements>> GetByIdLogin(int idLogin)
+        {
+            var Achievements = await _AchievementsService.GetByIdLogin(idLogin);
+            if (Achievements == null)
+            {
+                return BadRequest("No achievements found for this user");
+            }
+            return Ok(Achievements);
+        }
+
+
         // POST: api/Achievements
         [HttpPost]
         public async Task<ActionResult<Achievements>> PostAchievements(int idLogin, int IdMission)

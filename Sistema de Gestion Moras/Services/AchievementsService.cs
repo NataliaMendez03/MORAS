@@ -10,6 +10,7 @@ namespace Sistema_de_Gestion_Moras.Services
     {
         Task<List<Achievements>> GetAll();
         Task<Achievements> GetAchievements(int idAchievements);
+        Task<List<Achievements>> GetByIdLogin(int idLogin);
         Task<Achievements> CreateAchievements(int IdLogin, int IdMission);
         Task<Achievements> UpdateAchievements(int idAchievements, int? idLogin = null, int? IdMission = null);
         Task<Achievements> DeleteAchievements(int idAchievements);
@@ -50,6 +51,13 @@ namespace Sistema_de_Gestion_Moras.Services
         public async Task<List<Achievements>> GetAll()
         {
             return await _AchievementsRepository.GetAll();
+            throw new NotImplementedException();
+        }
+
+        public async Task<List<Achievements>> GetByIdLogin(int idLogin)
+        {
+            return await _AchievementsRepository.GetByIdLogin(idLogin);
+
             throw new NotImplementedException();
         }
 
