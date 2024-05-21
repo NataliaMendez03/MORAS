@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - BerriesManagementSystem</title>
+    <title>@ViewData["Title"] - MoraLipsis</title>
     <link rel="icon" type="image/png" href="~/src/moralipsispng.png">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
@@ -25,55 +25,20 @@
                         </div>
                         <ul class="nav flex-column mt-3">
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index" style="font-weight: bold; display: flex; align-items: center;">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="IndexGame" style="font-weight: bold; display: flex; align-items: center;">
                                     <img src="~/src/home.png" alt="Home Icon" style="width: 20px; height: 20px; margin-right: 5px;" />Home
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy" style="font-weight: bold; display: flex; align-items: center;">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="PrivacityGame" style="font-weight: bold; display: flex; align-items: center;">
                                     <img src="~/src/privacidad.png" alt="Privacy Icon" style="width: 20px; height: 20px; margin-right: 5px;" />Privacy
                                 </a>
                             </li>
-                      
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Supplies" asp-action="SuppliesGet" style="font-weight: bold; display: flex; align-items: center;">
-                                    Supplies
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="LoginGet" style="font-weight: bold; display: flex; align-items: center;">
+                                    Game User
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Contact" asp-action="ContactGet" style="font-weight: bold; display: flex; align-items: center;">
-                                    Contacts</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Address" asp-action="AddressGet" style="font-weight: bold; display: flex; align-items: center;"> 
-                                    Address</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Person" asp-action="PersonGet" style="font-weight: bold; display: flex; align-items: center;">
-                                    Person</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="IdentificationType" asp-action="IdentificationTypeGet" style="font-weight: bold; display: flex; align-items: center;">
-                                    IdentificationType</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Client" asp-action="ClientGet" style="font-weight: bold; display: flex; align-items: center;">
-                                    Client</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Employees" asp-action="EmployeesGet" style="font-weight: bold; display: flex; align-items: center;">
-                                    Employees</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="BillSale" asp-action="BillSaleGet" style="font-weight: bold; display: flex; align-items: center;">
-                                    Bill Sale</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="SystemSystemLogin" asp-action="SystemLoginGet" style="font-weight: bold; display: flex; align-items: center;">
-                                    System Users
-                                </a>
-                            </li>
-
 
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Exit" style="font-weight: bold; display: flex; align-items: center;">
@@ -86,7 +51,7 @@
             </div>
             <div class="col-md-10">
                 <header class="text-center">
-                    <h1>BerriesManagementSystem</h1>
+                    <h1>MoraLipsis</h1>
                 </header>
                 <main role="main" class="pb-3">
                     @{
