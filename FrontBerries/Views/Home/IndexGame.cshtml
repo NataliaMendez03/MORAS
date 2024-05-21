@@ -1,0 +1,17 @@
+﻿@using System.Security.Claims;
+@{
+    Layout = "_LayoutGame";
+    ViewData["Title"] = "Home Game";
+}
+
+<div class="text-center">
+
+    @if (User.Identity!.IsAuthenticated)
+    {
+        <h1 class="display-4">
+            Game Welcome 
+            @User.Claims.Where(c => c.Type == ClaimTypes.Name).Select(c => c.Value).SingleOrDefault()
+        </h1>
+    }
+    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>

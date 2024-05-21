@@ -26,6 +26,15 @@ namespace FrontBerries.Controllers
         {
             return View();
         }
+        public IActionResult IndexGame()
+        {
+            return View();
+        }
+
+        public IActionResult PrivacyGame()
+        {
+            return View();
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
