@@ -17,7 +17,9 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     {
         options.LoginPath = "/Main/MainPage";
         options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
-        options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+        options.Cookie.SecurePolicy = builder.Environment.IsDevelopment()
+            ? CookieSecurePolicy.SameAsRequest
+            : CookieSecurePolicy.Always;
     });
 var app = builder.Build();
 

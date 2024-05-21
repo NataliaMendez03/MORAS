@@ -3,9 +3,14 @@ using FrontBerries.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace FrontBerries.Controllers
 {
+    [Authorize]
     public class LoginController : Controller
     {
         Uri baseAddress = new Uri("http://berriessystemmanagement.somee.com/api");
