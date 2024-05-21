@@ -19,18 +19,18 @@
         <div class="col-sm-4">
             <div class="card">
                 <div class="card-header  text-center">
-                    <h1 style="color: mediumpurple; font-family:'Trebuchet MS',sans-serif; font-weight:bold;">Management System</h1>
+                    <h1 style="color: mediumpurple; font-family:'Trebuchet MS',sans-serif; font-weight:bold;">Management System Prueba</h1>
                 </div>
                 <div class="card-body">
                     <div class="d-grid gap-2 mb-3">
                         <style="color: black;" align="center">---------  Quick Sign in  ----------</>
                     </div>
 
-                    <form asp-controller="SystemAccess" asp-action="SystemLogin" method="post">
+                    <form asp-controller="AccesoSystem" asp-action="LoginS" method="post">
                         <input class="form-control mb-3" type="text" placeholder="User Name" required asp-for="Username" />
                         <input class="form-control mb-3" type="password" placeholder="Password" required asp-for="Password" />
                         <div class="d-grid gap-2 mb-3">
-                            <a asp-controller="SystemAccess" asp-action="SystemRegister" style="color: rebeccapurple;">Forgot password?</a>
+                            <a asp-controller="AccesoSystem" asp-action="LoginS" style="color: rebeccapurple;">Forgot password?</a>
                         </div>
                         <div class="d-grid gap-2 mb-3">
                             <!--<button class="btn btn-primary" type="submit">Iniciar Sesión</button>-->
