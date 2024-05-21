@@ -96,7 +96,7 @@ namespace Sistema_de_Gestion_Moras.Services
 
             var claims = new ClaimsIdentity();
             claims.AddClaim(new Claim(ClaimTypes.Name, username));
-            claims.AddClaim(new Claim(ClaimTypes.Role, "User"));
+            claims.AddClaim(new Claim(ClaimTypes.Role, "Admin"));
 
             var credencialesToken = new SigningCredentials
                 (

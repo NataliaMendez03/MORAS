@@ -124,9 +124,9 @@ namespace FrontBerries.Controllers
                 int cityId = createdCity.IdCity;
 
                 // Crear Dirección
-                /*var addressData = JsonConvert.SerializeObject(createClientVM.AddressModel);
+                var addressData = JsonConvert.SerializeObject(createClientVM.AddressModel);
                 var addressContent = new StringContent(addressData, Encoding.UTF8, "application/json");
-                var addressResponse = _client.PostAsync(_client.BaseAddress + $"/Address?addres={createClientVM.AddressModel.Addres}&idCity={cityId}", addressContent).Result;
+                var addressResponse = await _client.PostAsync(_client.BaseAddress + $"/Address?addres={createClientVM.AddressModel.Addres}&idCity={cityId}", addressContent);
                 if (!addressResponse.IsSuccessStatusCode)
                 {
                     TempData["errorMessage"] = "Error creating address";
@@ -134,7 +134,7 @@ namespace FrontBerries.Controllers
                 }
                 var addressResponseData = await addressResponse.Content.ReadAsStringAsync();
                 var createdAddress = JsonConvert.DeserializeObject<AddressViewModel>(addressResponseData);
-                int addressId = createdAddress.IdAddress;*/
+                int addressId = createdAddress.IdAddress;
 
                 // Crear Contacto
                 var contactData = JsonConvert.SerializeObject(createClientVM.ContactModel);
@@ -152,13 +152,13 @@ namespace FrontBerries.Controllers
                 int id = 5;
                 int TI = 1;
                 // Crear Persona
-                //createClientVM.PersonModel.IdAddress = addressId;
+                createClientVM.PersonModel.IdAddress = addressId;
                 createClientVM.PersonModel.IdContact = contactId;
                 var personData = JsonConvert.SerializeObject(createClientVM.PersonModel);
                 var personContent = new StringContent(personData, Encoding.UTF8, "application/json");
                 var personResponse = await _client.PostAsync(_client.BaseAddress + $"/Person?name={createClientVM.PersonModel.Name}&lastName={createClientVM.PersonModel.LastName}" +
                     $"&idContact={contactId}&idTypeIdentification={TI}&numberIdentification={createClientVM.PersonModel.NumberIdentification}" +
-                    $"&idAddress={id}", personContent);
+                    $"&idAddress={addressId}", personContent);
 
                 if (!personResponse.IsSuccessStatusCode)
                 {
