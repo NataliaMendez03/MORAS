@@ -31,7 +31,7 @@ namespace FrontBerries.Controllers
             return View();
         }
 
-        /*[HttpPost]
+        [HttpPost]
         public async Task<IActionResult> SystemRegister(SystemLoginVM model)
         {
             if (model.Password != model.ConfirmPassword)
@@ -59,7 +59,7 @@ namespace FrontBerries.Controllers
                 }
                 return View();
             }
-        }*/
+        }
 
 
         /// REGISTER -----------------------------------------------------------------------------------------------------------------
@@ -252,7 +252,7 @@ namespace FrontBerries.Controllers
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
 
                 HttpResponseMessage response = await _client.PostAsync(
-                    _client.BaseAddress + $"/SystemLogin/Authentication?userName={model.UserName}&password={model.Password}", content);
+                    _client.BaseAddress + $"/SystemLogin/Authentication?userName={model.Username}&password={model.Password}", content);
 
                 string token = await response.Content.ReadAsStringAsync();
 
@@ -267,7 +267,7 @@ namespace FrontBerries.Controllers
                     {
                         var claims = new List<Claim>
                         {
-                            new Claim(ClaimTypes.Name, model.UserName),
+                            new Claim(ClaimTypes.Name, model.Username),
                             new Claim("Token", token)
                         };
 
