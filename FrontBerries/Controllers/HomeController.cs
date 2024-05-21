@@ -31,7 +31,7 @@ namespace FrontBerries.Controllers
             return View();
         }
 
-        public IActionResult PrivacyGame()
+        public IActionResult PrivacityGame()
         {
             return View();
         }
