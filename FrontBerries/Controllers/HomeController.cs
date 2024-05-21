@@ -45,6 +45,12 @@ namespace FrontBerries.Controllers
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("MainPage", "Main");
+
+        }
+        public async Task<IActionResult> ExitGame()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("MainPage", "Main");
         }
     }
 }
