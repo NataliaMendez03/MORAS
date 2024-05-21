@@ -119,7 +119,7 @@ namespace FrontBerries.Controllers
 
                         var ResponseData = await response.Content.ReadAsStringAsync();
                         var loginID = JsonConvert.DeserializeObject<LoginViewModel>(ResponseData);
-                        IdLoginA = loginID.IdLogin;
+                        //IdLoginA = loginID.IdLogin;
 
 
                         return RedirectToAction("IndexGame", "Home");

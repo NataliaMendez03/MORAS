@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Sistema_de_Gestion_Moras.Models;
 using FrontBerries.Controllers;
+using FrontBerries.ViewModels;
+using System;
+using NuGet.Protocol.Core.Types;
 
 namespace FrontBerries.Controllers
 {
@@ -17,16 +20,16 @@ namespace FrontBerries.Controllers
             _client.BaseAddress = baseAddress;
         }
 
-        #region GetClient
+        #region GetAchievemetsByUser
         [HttpGet]
-        public IActionResult ClientGet()
+        public IActionResult AchievementsGet()
         {
-            List<AchievementsViewModel> Loginlist = new List<AchievementsViewModel>();
-            HttpResponseMessage respone = _client.GetAsync(_client.BaseAddress + "/Achievements").Result;
+            List<AchievementsViewModel> Achievementslist = new List<AchievementsViewModel>();
+            HttpResponseMessage respone = _client.GetAsync(_client.BaseAddress + $"/Achievements/ByLogin/{1}").Result;
             if (respone.IsSuccessStatusCode)
             {
                 string data = respone.Content.ReadAsStringAsync().Result;
-                Loginlist = JsonConvert.DeserializeObject<List<AchievementsViewModel>>(data);
+                Achievementslist = JsonConvert.DeserializeObject<List<AchievementsViewModel>>(data);
 
                 // Obtener datos adicionales
                 List<Login> login = GetLogin();
@@ -34,16 +37,27 @@ namespace FrontBerries.Controllers
                 List<Levels> levels = GetLevels();
 
                 // Mapear datos relacionados
-                foreach (var Achievements in Loginlist)
+                foreach (var achievements in Achievementslist)
                 {
-                    Achievements.UserName = login.FirstOrDefault(p => p.IdLogin == Achievements.IdLogin)?.UserName;
-                    Achievements.NameMission = missions.FirstOrDefault(p => p.IdMission == Achievements.IdMission)?.NameMission;
-                    Achievements.Description = missions.FirstOrDefault(ni => ni.IdMission == Achievements.IdMission).Description;
-                    Achievements.NameLevel = levels.FirstOrDefault(p => p.IdLevel == Achievements.IdLevel)?.NameLevel;
+                    achievements.UserName = login.FirstOrDefault(p => p.IdLogin == achievements.IdLogin)?.UserName;
+                    achievements.NameMission = missions.FirstOrDefault(p => p.IdMission == achievements.IdMission)?.NameMission;
+                    achievements.Description = missions.FirstOrDefault(ni => ni.IdMission == achievements.IdMission).Description;
+                    achievements.NameLevel = levels.FirstOrDefault(p => p.IdLevel == achievements.IdLevel)?.NameLevel;
+
+                    var achInfo = missions.FirstOrDefault(m => m.IdLevel == achievements.IdLevel);
+                    if (achInfo != null)
+                    {
+                        var level = levels.FirstOrDefault(ti => ti.IdLevel == achInfo.IdLevel);
+                        if (level != null)
+                        {
+                            achievements.NameLevel = level.NameLevel;
+                        }
+                    }
+
                 }
 
             }
-            var inactiveLogins = Loginlist.Where(login => !login.StateDelete).ToList();
+            var inactiveLogins = Achievementslist.Where(ach => !ach.StateDelete).ToList();
 
             return View(inactiveLogins);
         }
@@ -77,7 +91,7 @@ namespace FrontBerries.Controllers
             }
             return new List<Levels>();
         }
-      
+
         #endregion
 
 
