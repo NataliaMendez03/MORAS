@@ -31,7 +31,7 @@ namespace FrontBerries.Controllers
             return View();
         }
 
-        public IActionResult PrivacyGame()
+        public IActionResult PrivacityGame()
         {
             return View();
         }
@@ -42,6 +42,12 @@ namespace FrontBerries.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
         public async Task<IActionResult> Exit()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("MainPage", "Main");
+
+        }
+        public async Task<IActionResult> ExitGame()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("MainPage", "Main");

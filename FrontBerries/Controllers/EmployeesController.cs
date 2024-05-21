@@ -3,9 +3,14 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Sistema_de_Gestion_Moras.Models;
 using System.Text;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace FrontBerries.Controllers
 {
+    [Authorize]
     public class EmployeesController : Controller
     {
         Uri BaseAddress = new Uri("http://berriessystemmanagement.somee.com/api");

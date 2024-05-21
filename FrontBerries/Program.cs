@@ -13,17 +13,22 @@ builder.Services.AddDbContext<berriesdbContext>(options =>
 });
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie(options =>
+   .AddCookie(options =>
     {
-        options.LoginPath = "/Main/MainPage";
+        options.LoginPath = "/Acceso/Login";
         options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
-    });
+        options.Cookie.SecurePolicy = builder.Environment.IsDevelopment()
+            ? CookieSecurePolicy.SameAsRequest
+            : CookieSecurePolicy.Always;
+    }
+    );
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Home/Error");
+    app.UseExceptionHandler("/Home/Error"); 
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
