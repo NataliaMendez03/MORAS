@@ -18,7 +18,6 @@ namespace FrontBerries.Models
         public string Name { get; set; }
         public string LastName { get; set; }
 
-
         public int IdTypeIdentification { get; set; }
         public IEnumerable<SelectListItem> TypeIdentifications { get; set; }
         [DisplayName("Identification Type")]

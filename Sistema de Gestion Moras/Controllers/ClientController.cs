@@ -34,9 +34,9 @@ namespace Sistema_de_Gestion_Moras.Controllers
         }
         // POST: api/Client
         [HttpPost]
-        public async Task<ActionResult<Client>> PostClient(int idClient)
+        public async Task<ActionResult<Client>> PostClient(int idPerson)
         {
-            var ClientToPut = await _clientService.CreateClient(idClient);
+            var ClientToPut = await _clientService.CreateClient(idPerson);
 
             if (ClientToPut != null)
             {

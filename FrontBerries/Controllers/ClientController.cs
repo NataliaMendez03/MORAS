@@ -1,5 +1,7 @@
 ﻿using FrontBerries.Models;
+using FrontBerries.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 using Sistema_de_Gestion_Moras.Models;
@@ -18,7 +20,7 @@ namespace FrontBerries.Controllers
             _client.BaseAddress = baseAddress;
         }
 
-    #region GetClient
+        #region GetClient
         [HttpGet]
         public IActionResult ClientGet()
         {
@@ -50,7 +52,7 @@ namespace FrontBerries.Controllers
                         }
                     }
                 }
-                
+
             }
             var inactiveLogins = Loginlist.Where(login => !login.StateDelete).ToList();
 
@@ -76,94 +78,141 @@ namespace FrontBerries.Controllers
             }
             return new List<IdentificationType>();
         }
-    #endregion
+        #endregion
 
-
-
-
+        #region CreateClient
         [HttpGet]
-        public IActionResult Update(int id)
+        public IActionResult Create()
         {
-            try
+            CreateClientVM createClientVM = new CreateClientVM
             {
-                ClientViewModel login = new ClientViewModel();
-                HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Client/" + id).Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    string data = response.Content.ReadAsStringAsync().Result;
-                    login = JsonConvert.DeserializeObject<ClientViewModel>(data);
-                }
-                return View(login);
-            }
-            catch (Exception ex)
-            {
-                TempData["errorMessage"] = ex.Message;
-                return View();
-            }
+                ClientModel = new ClientVM(),
+                PersonModel = new PersonVM(),
+                ContactModel = new ContactVM(),
+                AddressModel = new AddressVM(),
+                CityModel = new CityVM(),
+                IdentTypeModel = new IdentificationTypeVM(),
+                TypeIdentifications = GetTypeIdentificationsSelectList(),
+            };     
 
+            return View(createClientVM);
         }
+
         [HttpPost]
-        public IActionResult Update(ClientViewModel model)
+        public async Task<IActionResult> Create(CreateClientVM createClientVM)
         {
+            if (!ModelState.IsValid)
+            {
+                // Repopulate the lists in case of validation error
+                createClientVM.TypeIdentifications = GetTypeIdentificationsSelectList();
+                return View(createClientVM);
+            }
             try
             {
-                string data = JsonConvert.SerializeObject(model);
-                StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = _client.PutAsync(_client.BaseAddress + $"/Client/Update/{model.IdPerson}", content).Result;
-                if (response.IsSuccessStatusCode)
+                createClientVM.TypeIdentifications = GetTypeIdentificationsSelectList();
+                // Crear Ciudad
+                var cityData = JsonConvert.SerializeObject(createClientVM.CityModel);
+                var cityContent = new StringContent(cityData, Encoding.UTF8, "application/json");
+                var cityResponse = await _client.PostAsync(_client.BaseAddress + $"/City?nameCity={createClientVM.CityModel.NameCity}", cityContent);
+                if (!cityResponse.IsSuccessStatusCode)
                 {
-                    TempData["successMessage"] = "Client details updated";
-                    return RedirectToAction("ClientGet");
+                    TempData["errorMessage"] = "Error creating address";
+                    return View();
                 }
+                var cityResponseData = await cityResponse.Content.ReadAsStringAsync();
+                var createdCity = JsonConvert.DeserializeObject<CityViewModel>(cityResponseData);
+                int cityId = createdCity.IdCity;
+
+                // Crear Dirección
+                var addressData = JsonConvert.SerializeObject(createClientVM.AddressModel);
+                var addressContent = new StringContent(addressData, Encoding.UTF8, "application/json");
+                var addressResponse = await _client.PostAsync(_client.BaseAddress + $"/Address?addres={createClientVM.AddressModel.Addres}&idCity={cityId}", addressContent);
+                if (!addressResponse.IsSuccessStatusCode)
+                {
+                    TempData["errorMessage"] = "Error creating address";
+                    return View();
+                }
+                var addressResponseData = await addressResponse.Content.ReadAsStringAsync();
+                var createdAddress = JsonConvert.DeserializeObject<AddressViewModel>(addressResponseData);
+                int addressId = createdAddress.IdAddress;
+
+                // Crear Contacto
+                var contactData = JsonConvert.SerializeObject(createClientVM.ContactModel);
+                var contactContent = new StringContent(contactData, Encoding.UTF8, "application/json");
+                var contactResponse = await _client.PostAsync(_client.BaseAddress + $"/Contact?phone={createClientVM.ContactModel.Phone}&email={createClientVM.ContactModel.Email}", contactContent);
+                if (!contactResponse.IsSuccessStatusCode)
+                {
+                    TempData["errorMessage"] = "Error creating contact";
+                    return View();
+                }
+                var contactResponseData = await contactResponse.Content.ReadAsStringAsync();
+                var createdContact = JsonConvert.DeserializeObject<ContactViewModel>(contactResponseData);
+                int contactId = createdContact.IdContact;
+
+                int id = 5;
+                int TI = 1;
+                // Crear Persona
+                createClientVM.PersonModel.IdAddress = addressId;
+                createClientVM.PersonModel.IdContact = contactId;
+                var personData = JsonConvert.SerializeObject(createClientVM.PersonModel);
+                var personContent = new StringContent(personData, Encoding.UTF8, "application/json");
+                var personResponse = await _client.PostAsync(_client.BaseAddress + $"/Person?name={createClientVM.PersonModel.Name}&lastName={createClientVM.PersonModel.LastName}" +
+                    $"&idContact={contactId}&idTypeIdentification={TI}&numberIdentification={createClientVM.PersonModel.NumberIdentification}" +
+                    $"&idAddress={addressId}", personContent);
+
+                if (!personResponse.IsSuccessStatusCode)
+                {
+                    TempData["errorMessage"] = "Error creating person";
+                    return View();
+                }
+                var personResponseData = await personResponse.Content.ReadAsStringAsync();
+                var createdPerson = JsonConvert.DeserializeObject<PersonViewModel>(personResponseData);
+                int personId = createdPerson.IdPerson;
+
+                // Crear Cliente
+                //createClientVM.ClientModel.IdPerson = personId;
+                var clientData = JsonConvert.SerializeObject(createClientVM.ClientModel);
+                var clientContent = new StringContent(clientData, Encoding.UTF8, "application/json");
+                var clientResponse = await _client.PostAsync(_client.BaseAddress + $"/Client?idPerson={personId}", clientContent);
+                if (!clientResponse.IsSuccessStatusCode)
+                {
+                    TempData["errorMessage"] = "Error creating client";
+                    return View();
+                }
+
+                TempData["successMessage"] = "Client created successfully";
+                return RedirectToAction("ClientGet");
             }
             catch (Exception ex)
             {
                 TempData["errorMessage"] = ex.Message;
                 return View();
             }
-            return View();
         }
-        [HttpGet]
-        public IActionResult Delete(int id)
+
+        private List<SelectListItem> GetTypeIdentificationsSelectList()
         {
-            try
+            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/IdentificationType").Result;
+            if (response.IsSuccessStatusCode)
             {
-                ClientViewModel login = new ClientViewModel();
-                HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Client/" + id).Result;
-                if (response.IsSuccessStatusCode)
+                string data = response.Content.ReadAsStringAsync().Result;
+                var typeIdentifications = JsonConvert.DeserializeObject<List<IdentificationType>>(data);
+                return typeIdentifications.Select(ti => new SelectListItem
                 {
-                    string data = response.Content.ReadAsStringAsync().Result;
-                    login = JsonConvert.DeserializeObject<ClientViewModel>(data);
-                }
-                return View(login);
+                    Value = ti.IdIdentificationType.ToString(),
+                    Text = ti.IdentifiType
+                }).ToList();
             }
-            catch (Exception ex)
-            {
-                TempData["errorMessage"] = ex.Message;
-                return View();
-            }
-
+            return new List<SelectListItem>();
         }
 
-        [HttpPost, ActionName("Delete")]
-        public IActionResult DeleteConfirmed(int id)
-        {
-            try
-            {
-                HttpResponseMessage response = _client.DeleteAsync(_client.BaseAddress + $"/Client/Delete/{id}").Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    TempData["successMessage"] = "User details deleted";
-                    return RedirectToAction("ClientGet");
-                }
-            }
-            catch (Exception ex)
-            {
-                TempData["errorMessage"] = ex.Message;
-                return View();
-            }
-            return View("ClientGet");
-
-        }
+        #endregion
     }
+
 }
+
+
+
+
+
+

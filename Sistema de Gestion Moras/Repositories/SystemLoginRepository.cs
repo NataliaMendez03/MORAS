@@ -11,7 +11,7 @@ namespace Sistema_de_Gestion_Moras.Repositories
         Task<SystemLogin> CreateSystemLogin(string username, string password, int idPerson);
         Task<SystemLogin> UpdateSystemLogin(SystemLogin SystemLogin);
         Task<SystemLogin> DeleteSystemLogin(SystemLogin SystemLogin);
-        Task<Login> AuthUser(string userName);
+        Task<SystemLogin> AuthUser(string userName);
 
     }
     public class SystemLoginRepository : ISystemLoginRepository
@@ -62,9 +62,9 @@ namespace Sistema_de_Gestion_Moras.Repositories
 
 
         // AUTENTICACION------------------------------------------------------------------------------
-        public async Task<Login> AuthUser(string userName)
+        public async Task<SystemLogin> AuthUser(string userName)
         {
-            return await _db.Login.FirstOrDefaultAsync(u => u.UserName == userName);
+            return await _db.SystemLogin.FirstOrDefaultAsync(u => u.Username == userName);
         }
 
         public async Task<SystemLogin> UpdateSystemLogin(SystemLogin SystemLogin)

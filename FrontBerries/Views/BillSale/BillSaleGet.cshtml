@@ -49,7 +49,25 @@
                 @Html.DisplayNameFor(model => model.IdBillSale)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdClient)
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdentifiType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumberIdentification)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.DateSale)
@@ -63,7 +81,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.Notes)
             </th>
-
             <th></th>
         </tr>
     </thead>
@@ -75,7 +92,25 @@
                     @Html.DisplayFor(modelItem => item.IdBillSale)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IdClient)
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdentifiType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumberIdentification)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.DateSale)
@@ -89,10 +124,9 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Notes)
                 </td>
-
                 <td>
-                    @Html.ActionLink("Update", "Update", new { id = item.IdBillSale}, new { style = "color: rebeccapurple;" })
-                    @Html.ActionLink("Delete", "Delete", new { id = item.IdBillSale}, new { style = "color: rebeccapurple;" })
+                    @Html.ActionLink("Update", "Update", new { id = item.IdBillSale }, new { style = "color: rebeccapurple;" })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.IdBillSale }, new { style = "color: rebeccapurple;" })
                 </td>
             </tr>
         }

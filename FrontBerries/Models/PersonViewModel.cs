@@ -36,8 +36,9 @@ namespace FrontBerries.Models
 
         [DisplayName("Adress")]
         public int IdAddress { get; set; }
-        public string Addres { get; set; } // Propiedad para mostrar el nombre de la dirección
         public IEnumerable<SelectListItem> Addresses { get; set; }
+        public string Addres { get; set; }
+        public int IdCity { get; set; }
 
         public bool StateDelete { get; set; }
 
