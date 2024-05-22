@@ -15,10 +15,13 @@ builder.Services.AddDbContext<berriesdbContext>(options =>
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
    .AddCookie(options =>
     {
-        options.LoginPath = "/Main/MainPage";
-        options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
-    }
-    );
+        options.LoginPath = "/Acceso/Login";
+         options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+         options.Cookie.SecurePolicy = builder.Environment.IsDevelopment()
+             ? CookieSecurePolicy.SameAsRequest
+             : CookieSecurePolicy.Always;
+        
+    });
 
 var app = builder.Build();
 
