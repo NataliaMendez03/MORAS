@@ -6,6 +6,7 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using Sistema_de_Gestion_Moras.Migrations;
 
 
 namespace FrontBerries.Controllers
@@ -35,6 +36,7 @@ namespace FrontBerries.Controllers
                 List<Person> person = GetPerson();
                 List<Post> post = GetPost();
                 List<IdentificationType> typeIdentifications = GetTypeIdentifications();
+                List<Contact> contacts = GetContacts();
 
 
                 // Mapear datos relacionados
@@ -46,12 +48,19 @@ namespace FrontBerries.Controllers
                     employees.NumberIdentification = person.FirstOrDefault(ni => ni.IdPerson == employees.IdPerson).NumberIdentification;
 
                     var personInfo = person.FirstOrDefault(p => p.IdPerson == employees.IdPerson);
+
                     if (personInfo != null)
                     {
+                        var contactInfo = contacts.FirstOrDefault(c => c.IdContact == personInfo.IdContact);
                         var identificationType = typeIdentifications.FirstOrDefault(ti => ti.IdIdentificationType == personInfo.IdTypeIdentification);
                         if (identificationType != null)
                         {
                             employees.IdentifiType = identificationType.IdentifiType;
+                        }
+                        if (contactInfo != null)
+                        {
+                            employees.Email = contactInfo.Email;
+                            employees.Phone = contactInfo.Phone;
                         }
                     }
 
@@ -70,6 +79,16 @@ namespace FrontBerries.Controllers
                 return JsonConvert.DeserializeObject<List<Person>>(data);
             }
             return new List<Person>();
+        }
+        private List<Contact> GetContacts()
+        {
+            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Contact").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string data = response.Content.ReadAsStringAsync().Result;
+                return JsonConvert.DeserializeObject<List<Contact>>(data);
+            }
+            return new List<Contact>();
         }
         private List<Post> GetPost()
         {
@@ -92,77 +111,9 @@ namespace FrontBerries.Controllers
             return new List<IdentificationType>();
         }
 
-        ///-///////////---------------------------------------------------------------------------------------------------------------------/
-        [HttpGet]
-        public IActionResult Create()
-        {
-            return View();
-        }
 
-        [HttpPost]
-        public IActionResult Create(EmployeesViewModel model)
-        {
-            try
-            {
-                String data = JsonConvert.SerializeObject(model);
-                StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = _client.PostAsync(_client.BaseAddress + $"/Employees/Create?idPost={model.IdPost}&idPerson={model.IdPerson}", content).Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    TempData["successMessage"] = "Employees Created";
-                    return RedirectToAction("EmployeesGet");
-                }
-            }
-            catch (Exception ex)
-            {
-                TempData["errorMessage"] = ex.Message;
-                return View();
-            }
-            return View();
-        }
 
-        [HttpGet]
-        public IActionResult Update(int id)
-        {
-            try
-            {
-                EmployeesViewModel login = new EmployeesViewModel();
-                HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Employees/" + id).Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    string data = response.Content.ReadAsStringAsync().Result;
-                    login = JsonConvert.DeserializeObject<EmployeesViewModel>(data);
-                }
-                return View(login);
-            }
-            catch (Exception ex)
-            {
-                TempData["errorMessage"] = ex.Message;
-                return View();
-            }
-
-        }
-        [HttpPost]
-        public IActionResult Update(EmployeesViewModel model)
-        {
-            try
-            {
-                string data = JsonConvert.SerializeObject(model);
-                StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = _client.PutAsync(_client.BaseAddress + $"/Employees/Update/{model.IdEmployees}?idPost={model.IdPost}&idPerson={model.IdPerson}\"", content).Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    TempData["successMessage"] = "Employees details updated";
-                    return RedirectToAction("EmployeesGet");
-                }
-            }
-            catch (Exception ex)
-            {
-                TempData["errorMessage"] = ex.Message;
-                return View();
-            }
-            return View();
-        }
+    #region DELETE
         [HttpGet]
         public IActionResult Delete(int id)
         {
@@ -205,5 +156,6 @@ namespace FrontBerries.Controllers
             return View("EmployeesGet");
 
         }
+    #endregion
     }
 }

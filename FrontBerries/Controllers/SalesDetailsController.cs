@@ -31,7 +31,7 @@ namespace FrontBerries.Controllers
                 string data = respone.Content.ReadAsStringAsync().Result;
                 Loginlist = JsonConvert.DeserializeObject<List<SalesDetailsViewModel>>(data);
             }
-            var inactiveLogins = Loginlist.Where(login => !login.StateDeleted).ToList();
+            var inactiveLogins = Loginlist.Where(login => !login.StateDelete).ToList();
 
             return View(inactiveLogins);
         }

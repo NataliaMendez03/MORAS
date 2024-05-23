@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using Sistema_de_Gestion_Moras.Models;
+using System.ComponentModel;
 
 namespace FrontBerries.Models
 {
@@ -20,11 +21,17 @@ namespace FrontBerries.Models
         public string Email { get; set; }
         public int IdMission { get; set; }
         public IEnumerable<SelectListItem> Missions { get; set; }
+
+        [DisplayName("Mission")]
         public string NameMission { get; set; }
         public string Description { get; set; }
         public int IdLevel { get; set; }
         public IEnumerable<SelectListItem> Levels { get; set; }
+
+        [DisplayName("Level")]
         public string NameLevel { get; set; }
+
+        [DisplayName("Achievement date")]
         public DateTime DateAchievement { get; set; }
         public bool StateDelete { get; set; }
 

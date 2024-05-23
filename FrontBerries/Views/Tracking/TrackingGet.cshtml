@@ -1,12 +1,14 @@
-﻿@model IEnumerable<FrontBerries.Models.AchievementsViewModel>
+﻿@model IEnumerable<FrontBerries.Models.TrackingViewModel>
 
 @{
-    Layout = "_LayoutGame";
-    ViewData["Title"] = "Achievements";
+    Layout = "_Layout";
+    ViewData["Title"] = "Tracking";
 }
 
-<h1 style="color: black; font-family:'Trebuchet MS',sans-serif; font-weight:bold;">Congrats, here are your achievements!</h1>
-
+<h1 style="color: black; font-family:'Trebuchet MS',sans-serif; font-weight:bold;">Consult Trackings</h1>
+<p>
+    <a asp-action="Create" style="color: rebeccapurple;">Create New</a>
+</p>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,16 +28,16 @@
             }
 
             .table th {
-                background-color: #9D76C1; /* Fondo para los encabezados */
+                background-color: gray; /* Fondo para los encabezados */
                 font-weight: bold; /* Texto en negrita */
             }
 
             .table tr:nth-child(even) {
-                background-color: #DCBFFF; /* Color de fondo para filas pares */
+                background-color: lightgray; /* Color de fondo para filas pares */
             }
 
             .table tr:hover {
-                background-color: #81689D; /* Color de fondo al pasar el ratón */
+                background-color: darkgray; /* Color de fondo al pasar el ratón */
             }
     </style>
 </head>
@@ -44,20 +46,15 @@
     <thead style="color: black; background-color: lightgray;">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.UserName)
+                @Html.DisplayNameFor(model => model.IdTracking)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NameMission)
+                @Html.DisplayNameFor(model => model.DateTracking)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Description)
+                @Html.DisplayNameFor(model => model.NameState)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NameLevel)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DateAchievement)
-            </th>
+            <td></td>
         </tr>
     </thead>
     <tbody>
@@ -65,19 +62,17 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.UserName)
+                    @Html.DisplayFor(modelItem => item.IdTracking)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.NameLevel)
+                    @Html.DisplayFor(modelItem => item.DateTracking)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.NameMission)
+                    @Html.DisplayFor(modelItem => item.NameState)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DateAchievement)
+                    @Html.ActionLink("Update", "Update", new { id = item.IdTracking }, new { style = "color: rebeccapurple;" }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.IdTracking }, new { style = "color: rebeccapurple;" })
                 </td>
             </tr>
         }

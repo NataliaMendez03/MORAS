@@ -1,11 +1,11 @@
-﻿@model IEnumerable<FrontBerries.Models.BillSaleViewModel>
+﻿@model IEnumerable<FrontBerries.Models.StorageViewModel>
 
 @{
     Layout = "_Layout";
-    ViewData["Title"] = "BillSale";
+    ViewData["Title"] = "Storage";
 }
 
-<h1 style="color: black; font-family:'Trebuchet MS',sans-serif; font-weight:bold;">Consult Bill Sales</h1>
+<h1 style="color: black; font-family:'Trebuchet MS',sans-serif; font-weight:bold;">Consult Storage</h1>
 <p>
     <a asp-action="Create" style="color: rebeccapurple;">Create New</a>
 </p>
@@ -30,7 +30,6 @@
             .table th {
                 background-color: gray; /* Fondo para los encabezados */
                 font-weight: bold; /* Texto en negrita */
-                text-align: center; /* Alineación del texto */
             }
 
             .table tr:nth-child(even) {
@@ -47,10 +46,31 @@
     <thead style="color: black; background-color: lightgray;">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.IdBillSale)
+                @Html.DisplayNameFor(model => model.IdStorage)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DateSale)
+                @Html.DisplayNameFor(model => model.StorageName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HarvestDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EntryDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HarvestAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Temperature)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NQuality)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NamePost)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
@@ -64,21 +84,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.NumberIdentification)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Phone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Amount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SalePrice)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Notes)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -87,10 +92,31 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IdBillSale)
+                    @Html.DisplayFor(modelItem => item.IdStorage)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.DateSale)
+                    @Html.DisplayFor(modelItem => item.StorageName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HarvestDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EntryDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HarvestAmount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Temperature)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NQuality)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NamePost)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
@@ -105,24 +131,8 @@
                     @Html.DisplayFor(modelItem => item.NumberIdentification)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Phone)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-
-                <td>
-                    @Html.DisplayFor(modelItem => item.Amount)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SalePrice)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Notes)
-                </td>
-                <td>
-                    @Html.ActionLink("Update", "Update", new { id = item.IdBillSale }, new { style = "color: rebeccapurple;" })
-                    @Html.ActionLink("Delete", "Delete", new { id = item.IdBillSale }, new { style = "color: rebeccapurple;" })
+                    @Html.ActionLink("Update", "Update", new { id = item.IdStorage }, new { style = "color: rebeccapurple;" }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.IdStorage }, new { style = "color: rebeccapurple;" })
                 </td>
             </tr>
         }

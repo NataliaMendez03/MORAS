@@ -12,6 +12,8 @@ namespace FrontBerries.Models
             Person = new List<SelectListItem>();
             TypeIdentifications = new List<SelectListItem>();
             Post = new List<SelectListItem>();
+            Contact = new List<SelectListItem>();
+
         }
 
         [DisplayName("Id")]
@@ -29,7 +31,6 @@ namespace FrontBerries.Models
         public string Name { get; set; }
         public string LastName { get; set; }
 
-
         public int IdTypeIdentification { get; set; }
         public IEnumerable<SelectListItem> TypeIdentifications { get; set; }
         [DisplayName("Identification Type")]
@@ -37,6 +38,11 @@ namespace FrontBerries.Models
 
         [DisplayName("Identification Number")]
         public int NumberIdentification { get; set; }
+        public int IdContact { get; set; }
+        public IEnumerable<SelectListItem> Contact { get; set; }
+
+        public string Phone { get; set; }
+        public string Email { get; set; }
 
         public bool StateDelete { get; set; }
 

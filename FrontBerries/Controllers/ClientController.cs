@@ -39,6 +39,7 @@ namespace FrontBerries.Controllers
                 // Obtener datos adicionales
                 List<Person> person = GetPerson();
                 List<IdentificationType> typeIdentifications = GetTypeIdentifications();
+                List<Contact> contacts = GetContacts();
 
                 // Mapear datos relacionados
                 foreach (var client in Loginlist)
@@ -50,10 +51,16 @@ namespace FrontBerries.Controllers
                     var personInfo = person.FirstOrDefault(p => p.IdPerson == client.IdPerson);
                     if (personInfo != null)
                     {
+                        var contactInfo = contacts.FirstOrDefault(c => c.IdContact == personInfo.IdContact);
                         var identificationType = typeIdentifications.FirstOrDefault(ti => ti.IdIdentificationType == personInfo.IdTypeIdentification);
                         if (identificationType != null)
                         {
                             client.IdentifiType = identificationType.IdentifiType;
+                        }
+                        if (contactInfo != null)
+                        {
+                            client.Email = contactInfo.Email;
+                            client.Phone = contactInfo.Phone;
                         }
                     }
                 }
@@ -73,6 +80,17 @@ namespace FrontBerries.Controllers
             }
             return new List<Person>();
         }
+        private List<Contact> GetContacts()
+        {
+            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Contact").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string data = response.Content.ReadAsStringAsync().Result;
+                return JsonConvert.DeserializeObject<List<Contact>>(data);
+            }
+            return new List<Contact>();
+        }
+
         private List<IdentificationType> GetTypeIdentifications()
         {
             HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/IdentificationType").Result;
@@ -106,16 +124,24 @@ namespace FrontBerries.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateClientVM createClientVM)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                // Repopulate the lists in case of validation error
-                createClientVM.TypeIdentifications = GetTypeIdentificationsSelectList();
-                return View(createClientVM);
+                // Procesar la información recibida desde el formulario
+                var person = createClientVM.PersonModel;
+                var contact = createClientVM.ContactModel;
+                var address = createClientVM.AddressModel;
+                var city = createClientVM.CityModel;
+                var identificationTypeId = createClientVM.IdentTypeModel.IdIdentificationType;
+
+                // Guardar los datos en la base de datos o realizar las operaciones necesarias
+                // ...
+
+                return RedirectToAction("ClientGet");
             }
             try
             {
                 createClientVM.TypeIdentifications = GetTypeIdentificationsSelectList();
-                // Crear Ciudad
+                /*// Crear Ciudad
                 var cityData = JsonConvert.SerializeObject(createClientVM.CityModel);
                 var cityContent = new StringContent(cityData, Encoding.UTF8, "application/json");
                 var cityResponse = await _client.PostAsync(_client.BaseAddress + $"/City?nameCity={createClientVM.CityModel.NameCity}", cityContent);
@@ -139,7 +165,7 @@ namespace FrontBerries.Controllers
                 }
                 var addressResponseData = await addressResponse.Content.ReadAsStringAsync();
                 var createdAddress = JsonConvert.DeserializeObject<AddressViewModel>(addressResponseData);
-                int addressId = createdAddress.IdAddress;
+                int addressId = createdAddress.IdAddress;*/
 
                 // Crear Contacto
                 var contactData = JsonConvert.SerializeObject(createClientVM.ContactModel);
@@ -156,14 +182,16 @@ namespace FrontBerries.Controllers
 
                 int id = 5;
                 int TI = 1;
+                var identificationTypeId = createClientVM.IdentTypeModel.IdIdentificationType;
+
                 // Crear Persona
-                createClientVM.PersonModel.IdAddress = addressId;
+                //createClientVM.PersonModel.IdAddress = addressId;
                 createClientVM.PersonModel.IdContact = contactId;
                 var personData = JsonConvert.SerializeObject(createClientVM.PersonModel);
                 var personContent = new StringContent(personData, Encoding.UTF8, "application/json");
                 var personResponse = await _client.PostAsync(_client.BaseAddress + $"/Person?name={createClientVM.PersonModel.Name}&lastName={createClientVM.PersonModel.LastName}" +
-                    $"&idContact={contactId}&idTypeIdentification={TI}&numberIdentification={createClientVM.PersonModel.NumberIdentification}" +
-                    $"&idAddress={addressId}", personContent);
+                    $"&idContact={contactId}&idTypeIdentification={identificationTypeId}&numberIdentification={createClientVM.PersonModel.NumberIdentification}" +
+                    $"&idAddress={id}", personContent);
 
                 if (!personResponse.IsSuccessStatusCode)
                 {
@@ -176,6 +204,8 @@ namespace FrontBerries.Controllers
 
                 // Crear Cliente
                 //createClientVM.ClientModel.IdPerson = personId;
+
+
                 var clientData = JsonConvert.SerializeObject(createClientVM.ClientModel);
                 var clientContent = new StringContent(clientData, Encoding.UTF8, "application/json");
                 var clientResponse = await _client.PostAsync(_client.BaseAddress + $"/Client?idPerson={personId}", clientContent);
@@ -211,6 +241,54 @@ namespace FrontBerries.Controllers
             return new List<SelectListItem>();
         }
 
+        #endregion
+
+
+
+        #region DELETE
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            try
+            {
+                ClientViewModel login = new ClientViewModel();
+                HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Client/" + id).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    string data = response.Content.ReadAsStringAsync().Result;
+                    login = JsonConvert.DeserializeObject<ClientViewModel>(data);
+                }
+                return View(login);
+            }
+            catch (Exception ex)
+            {
+                TempData["errorMessage"] = ex.Message;
+                return View();
+            }
+
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            try
+            {
+                HttpResponseMessage response = _client.DeleteAsync(_client.BaseAddress + $"/Client/Delete/{id}").Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    TempData["successMessage"] = "Client details deleted";
+                    return RedirectToAction("ClientGet");
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["errorMessage"] = ex.Message;
+                return View();
+            }
+            return View("ClientGet");
+
+        }
         #endregion
     }
 

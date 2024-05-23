@@ -71,7 +71,7 @@ namespace FrontBerries.Controllers
 
 
             }
-            var inactiveLogins = Loginlist.Where(login => !login.StateDeleted).ToList();
+            var inactiveLogins = Loginlist.Where(login => !login.StateDelete).ToList();
 
             return View(inactiveLogins);
         }
@@ -140,6 +140,55 @@ namespace FrontBerries.Controllers
 
 
 
+
+
+
+
+    #region DELETE
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            try
+            {
+                BillSaleViewModel login = new BillSaleViewModel();
+                HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/BillSale/" + id).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    string data = response.Content.ReadAsStringAsync().Result;
+                    login = JsonConvert.DeserializeObject<BillSaleViewModel>(data);
+                }
+                return View(login);
+            }
+            catch (Exception ex)
+            {
+                TempData["errorMessage"] = ex.Message;
+                return View();
+            }
+
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            try
+            {
+                HttpResponseMessage response = _client.DeleteAsync(_client.BaseAddress + $"/BillSale/Delete/{id}").Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    TempData["successMessage"] = "BillSale details deleted";
+                    return RedirectToAction("BillSaleGet");
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["errorMessage"] = ex.Message;
+                return View();
+            }
+            return View("BillSaleGet");
+
+        }
+    #endregion
 
     }
 }

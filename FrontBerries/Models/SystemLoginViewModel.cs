@@ -24,6 +24,7 @@ namespace FrontBerries.Models
         public IEnumerable<SelectListItem> Person { get; set; }
 
         public string Name { get; set; }
+        [DisplayName("Last Name")]
         public string LastName { get; set; }
         public int IdContact { get; set; }
 
@@ -36,7 +37,7 @@ namespace FrontBerries.Models
         public IEnumerable<SelectListItem> TypeIdentifications { get; set; }
         public string IdentifiType { get; set; } // Propiedad para mostrar el nombre del tipo de identificación
 
-        [DisplayName("Number Identification")]
+        [DisplayName("Identification Number")]
         public int NumberIdentification { get; set; }
 
         [DisplayName("Adress")]

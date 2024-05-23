@@ -70,9 +70,6 @@
                 @Html.DisplayNameFor(model => model.Email)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Address)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.RegisterDate)
             </th>
             <th></th>
@@ -83,10 +80,10 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayNameFor(model => model.IdSystemLogin)
+                    @Html.DisplayFor(modelItem => item.IdSystemLogin)
                 </td>
                 <td>
-                    @Html.DisplayNameFor(model => model.Username)
+                    @Html.DisplayFor(modelItem => item.Username)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
@@ -107,7 +104,7 @@
                     @Html.DisplayFor(modelItem => item.Email)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Address)
+                    @Html.DisplayFor(modelItem => item.RegisterDate)
                 </td>
 
                 <td>

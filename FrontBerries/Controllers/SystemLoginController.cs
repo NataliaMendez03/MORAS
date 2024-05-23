@@ -7,6 +7,7 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using FrontBerries.ViewModels;
 
 
 namespace FrontBerries.Controllers
@@ -40,24 +41,29 @@ namespace FrontBerries.Controllers
 
                 foreach (var systemLogin in Loginlist)
                 {
-                    systemLogin.Name = person.FirstOrDefault(p => p.IdPerson == systemLogin.IdPerson)?.Name;
-                    systemLogin.LastName = person.FirstOrDefault(p => p.IdPerson == systemLogin.IdPerson)?.LastName;
-                    systemLogin.NumberIdentification = person.FirstOrDefault(ni => ni.IdPerson == systemLogin.IdPerson).NumberIdentification;
-
                     var personInfo = person.FirstOrDefault(p => p.IdPerson == systemLogin.IdPerson);
                     if (personInfo != null)
                     {
+                        systemLogin.Name = personInfo.Name;
+                        systemLogin.LastName = personInfo.LastName;
+                        systemLogin.NumberIdentification = personInfo.NumberIdentification;
+
                         var identificationType = typeIdentifications.FirstOrDefault(ti => ti.IdIdentificationType == personInfo.IdTypeIdentification);
-                        var email = contacts.FirstOrDefault(ti => ti.IdContact == personInfo.IdContact);
-                        var phone = contacts.FirstOrDefault(ti => ti.IdContact == personInfo.IdContact);
-                        var address = addresses.FirstOrDefault(ti => ti.IdAddress == personInfo.IdAddress);
-                       
-                        if (identificationType != null || email != null || phone != null || address != null)
+                        var contactInfo = contacts.FirstOrDefault(c => c.IdContact == personInfo.IdContact);
+                        var addressInfo = addresses.FirstOrDefault(a => a.IdAddress == personInfo.IdAddress);
+
+                        if (identificationType != null)
                         {
                             systemLogin.IdentifiType = identificationType.IdentifiType;
-                            systemLogin.Email = email.Email;
-                            systemLogin.Phone = phone.Phone;
-                            systemLogin.Address = address.Addres;
+                        }
+                        if (contactInfo != null)
+                        {
+                            systemLogin.Email = contactInfo.Email;
+                            systemLogin.Phone = contactInfo.Phone;
+                        }
+                        if (addressInfo != null)
+                        {
+                            systemLogin.Address = addressInfo.Addres;
                         }
                     }
                 }
@@ -178,6 +184,9 @@ namespace FrontBerries.Controllers
             }
             return View();
         }
+
+
+
         [HttpGet]
         public IActionResult Delete(int id)
         {
