@@ -25,7 +25,7 @@ namespace FrontBerries.Controllers
         public IActionResult AchievementsGet()
         {
             List<AchievementsViewModel> Achievementslist = new List<AchievementsViewModel>();
-            HttpResponseMessage respone = _client.GetAsync(_client.BaseAddress + $"/Achievements/ByLogin/{1}").Result;
+            HttpResponseMessage respone = _client.GetAsync(_client.BaseAddress + $"/Achievements/ByLogin/{53}").Result;
             if (respone.IsSuccessStatusCode)
             {
                 string data = respone.Content.ReadAsStringAsync().Result;
