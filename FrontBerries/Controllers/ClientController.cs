@@ -39,6 +39,7 @@ namespace FrontBerries.Controllers
                 // Obtener datos adicionales
                 List<Person> person = GetPerson();
                 List<IdentificationType> typeIdentifications = GetTypeIdentifications();
+                List<Contact> contacts = GetContacts();
 
                 // Mapear datos relacionados
                 foreach (var client in Loginlist)
@@ -50,10 +51,16 @@ namespace FrontBerries.Controllers
                     var personInfo = person.FirstOrDefault(p => p.IdPerson == client.IdPerson);
                     if (personInfo != null)
                     {
+                        var contactInfo = contacts.FirstOrDefault(c => c.IdContact == personInfo.IdContact);
                         var identificationType = typeIdentifications.FirstOrDefault(ti => ti.IdIdentificationType == personInfo.IdTypeIdentification);
                         if (identificationType != null)
                         {
                             client.IdentifiType = identificationType.IdentifiType;
+                        }
+                        if (contactInfo != null)
+                        {
+                            client.Email = contactInfo.Email;
+                            client.Phone = contactInfo.Phone;
                         }
                     }
                 }
@@ -73,6 +80,17 @@ namespace FrontBerries.Controllers
             }
             return new List<Person>();
         }
+        private List<Contact> GetContacts()
+        {
+            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Contact").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string data = response.Content.ReadAsStringAsync().Result;
+                return JsonConvert.DeserializeObject<List<Contact>>(data);
+            }
+            return new List<Contact>();
+        }
+
         private List<IdentificationType> GetTypeIdentifications()
         {
             HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/IdentificationType").Result;
@@ -106,11 +124,19 @@ namespace FrontBerries.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateClientVM createClientVM)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                // Repopulate the lists in case of validation error
-                createClientVM.TypeIdentifications = GetTypeIdentificationsSelectList();
-                return View(createClientVM);
+                // Procesar la información recibida desde el formulario
+                var person = createClientVM.PersonModel;
+                var contact = createClientVM.ContactModel;
+                var address = createClientVM.AddressModel;
+                var city = createClientVM.CityModel;
+                var identificationTypeId = createClientVM.IdentTypeModel.IdIdentificationType;
+
+                // Guardar los datos en la base de datos o realizar las operaciones necesarias
+                // ...
+
+                return RedirectToAction("ClientGet");
             }
             try
             {

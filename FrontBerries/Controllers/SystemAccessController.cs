@@ -45,7 +45,7 @@ namespace FrontBerries.Controllers
                 {
                     String data = JsonConvert.SerializeObject(model);
                     StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                    HttpResponseMessage response = _client.PostAsync(_client.BaseAddress + $"/SystemLogin/CreateuserName={model.UserName}&password={model.Password}&email={model.Email}", content).Result;
+                    HttpResponseMessage response = _client.PostAsync(_client.BaseAddress + $"/SystemLogin/CreateuserName={model.Username}&password={model.Password}&email={model.Email}", content).Result;
                     if (response.IsSuccessStatusCode)
                     {
                         TempData["successMessage"] = "User Created";

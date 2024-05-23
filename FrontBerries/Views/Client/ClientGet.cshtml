@@ -60,8 +60,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.NumberIdentification)
             </th>
-
-            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -83,8 +87,12 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.NumberIdentification)
                 </td>
-
-
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
                 <td>
                     @Html.ActionLink("Update", "Update", new { id = item.IdClient }, new { style = "color: rebeccapurple;" }) |
                     @Html.ActionLink("Delete", "Delete", new { id = item.IdClient }, new { style = "color: rebeccapurple;" })

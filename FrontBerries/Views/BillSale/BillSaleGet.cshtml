@@ -50,6 +50,9 @@
                 @Html.DisplayNameFor(model => model.IdBillSale)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.DateSale)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
@@ -71,9 +74,6 @@
                 @Html.DisplayNameFor(model => model.Address)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DateSale)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Amount)
             </th>
             <th>
@@ -91,6 +91,9 @@
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.IdBillSale)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateSale)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
@@ -112,9 +115,6 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Address)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DateSale)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Amount)

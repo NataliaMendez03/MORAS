@@ -8,7 +8,7 @@
     <div class="col-md-6" style="color: black;">
         <form asp-action="Create" method="post">
             <div>
-                <h3>Person Details</h3>
+                <h3>Personal Information</h3>
                 <div class="form-group">
                     <label asp-for="PersonModel.Name" class="control-label">Name</label>
                     <input asp-for="PersonModel.Name" class="form-control" />
@@ -44,20 +44,6 @@
                     <label asp-for="ContactModel.Phone" class="control-label">Phone</label>
                     <input asp-for="ContactModel.Phone" class="form-control" />
                     <span asp-validation-for="ContactModel.Phone" class="text-danger"></span>
-                </div>
-            </div>
-
-            <div>
-                <h3>Address Details</h3>
-                <div class="form-group">
-                    <label asp-for="AddressModel.Addres" class="control-label">Address</label>
-                    <input asp-for="AddressModel.Addres" class="form-control" />
-                    <span asp-validation-for="AddressModel.Addres" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="CityModel.NameCity" class="control-label">City</label>
-                    <input asp-for="CityModel.NameCity" class="form-control" />
-                    <span asp-validation-for="CityModel.NameCity" class="text-danger"></span>
                 </div>
             </div>
 

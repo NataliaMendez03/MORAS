@@ -6,6 +6,7 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using Sistema_de_Gestion_Moras.Migrations;
 
 
 namespace FrontBerries.Controllers
@@ -35,6 +36,7 @@ namespace FrontBerries.Controllers
                 List<Person> person = GetPerson();
                 List<Post> post = GetPost();
                 List<IdentificationType> typeIdentifications = GetTypeIdentifications();
+                List<Contact> contacts = GetContacts();
 
 
                 // Mapear datos relacionados
@@ -46,12 +48,19 @@ namespace FrontBerries.Controllers
                     employees.NumberIdentification = person.FirstOrDefault(ni => ni.IdPerson == employees.IdPerson).NumberIdentification;
 
                     var personInfo = person.FirstOrDefault(p => p.IdPerson == employees.IdPerson);
+
                     if (personInfo != null)
                     {
+                        var contactInfo = contacts.FirstOrDefault(c => c.IdContact == personInfo.IdContact);
                         var identificationType = typeIdentifications.FirstOrDefault(ti => ti.IdIdentificationType == personInfo.IdTypeIdentification);
                         if (identificationType != null)
                         {
                             employees.IdentifiType = identificationType.IdentifiType;
+                        }
+                        if (contactInfo != null)
+                        {
+                            employees.Email = contactInfo.Email;
+                            employees.Phone = contactInfo.Phone;
                         }
                     }
 
@@ -70,6 +79,16 @@ namespace FrontBerries.Controllers
                 return JsonConvert.DeserializeObject<List<Person>>(data);
             }
             return new List<Person>();
+        }
+        private List<Contact> GetContacts()
+        {
+            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Contact").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string data = response.Content.ReadAsStringAsync().Result;
+                return JsonConvert.DeserializeObject<List<Contact>>(data);
+            }
+            return new List<Contact>();
         }
         private List<Post> GetPost()
         {
