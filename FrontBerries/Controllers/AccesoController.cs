@@ -10,8 +10,6 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Newtonsoft.Json;
 using System.Net;
 using System.Text;
-using FrontBerries.Models;
-using Sistema_de_Gestion_Moras.Migrations;
 
 namespace FrontBerries.Controllers
 {
@@ -20,7 +18,6 @@ namespace FrontBerries.Controllers
         private readonly berriesdbContext _berriesdbContext;
         Uri baseAddress = new Uri("http://berriessystemmanagement.somee.com/api");
         private readonly HttpClient _client;
-
         public AccesoController(berriesdbContext berriesdbContext)
         {
             _berriesdbContext = berriesdbContext;
@@ -116,14 +113,7 @@ namespace FrontBerries.Controllers
                         TempData["successMessage"] = "Login successful";
                         TempData["responseBody"] = token;
 
-
-                        var ResponseData = await response.Content.ReadAsStringAsync();
-                        var loginID = JsonConvert.DeserializeObject<LoginViewModel>(ResponseData);
-                        //IdLoginA = loginID.IdLogin;
-
-
                         return RedirectToAction("IndexGame", "Home");
-
                     }
                 }
                 else if (response.StatusCode == HttpStatusCode.Unauthorized)
@@ -146,4 +136,3 @@ namespace FrontBerries.Controllers
         }
     }
 }
-    
