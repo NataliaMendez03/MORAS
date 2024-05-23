@@ -1,0 +1,134 @@
+﻿@model IEnumerable<FrontBerries.Models.StorageViewModel>
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Storage";
+}
+
+<h1 style="color: black; font-family:'Trebuchet MS',sans-serif; font-weight:bold;">Consult Storage</h1>
+<p>
+    <a asp-action="Create" style="color: rebeccapurple;">Create New</a>
+</p>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabla Estilizada</title>
+    <style>
+        .table {
+            width: 100%;
+            border-collapse: collapse; /* Elimina los espacios entre celdas */
+            font-family: Arial, sans-serif; /* Define la fuente */
+            margin: 20px 0; /* Espaciado alrededor de la tabla */
+        }
+
+            .table th, .table td {
+                border: 1px solid #ddd; /* Borde alrededor de las celdas */
+                padding: 8px; /* Espaciado dentro de las celdas */
+                text-align: left; /* Alineación del texto */
+            }
+
+            .table th {
+                background-color: gray; /* Fondo para los encabezados */
+                font-weight: bold; /* Texto en negrita */
+            }
+
+            .table tr:nth-child(even) {
+                background-color: lightgray; /* Color de fondo para filas pares */
+            }
+
+            .table tr:hover {
+                background-color: darkgray; /* Color de fondo al pasar el ratón */
+            }
+    </style>
+</head>
+
+<table class="table" style="color: black;">
+    <thead style="color: black; background-color: lightgray;">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdStorage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StorageName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HarvestDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EntryDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HarvestAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NQuality)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NamePost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TypeIdentifications)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumberIdentification)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdStorage)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StorageName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HarvestDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EntryDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HarvestAmount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NQuality)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quality)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NamePost)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TypeIdentifications)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumberIdentification)
+                </td>
+                <td>
+                    @Html.ActionLink("Update", "Update", new { id = item.IdEmployees }, new { style = "color: rebeccapurple;" }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.IdEmployees }, new { style = "color: rebeccapurple;" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
