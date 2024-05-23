@@ -1,5 +1,6 @@
 ﻿using FrontBerries.Models;
 using FrontBerries.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Identity.Client.Extensions.Msal;
@@ -8,6 +9,7 @@ using Sistema_de_Gestion_Moras.Models;
 
 namespace FrontBerries.Controllers
 {
+    [Authorize]
     public class StorageController : Controller
     {
         Uri BaseAddress = new Uri("http://berriessystemmanagement.somee.com/api");

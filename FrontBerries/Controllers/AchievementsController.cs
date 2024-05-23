@@ -6,9 +6,11 @@ using FrontBerries.Controllers;
 using FrontBerries.ViewModels;
 using System;
 using NuGet.Protocol.Core.Types;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FrontBerries.Controllers
 {
+    [Authorize]
     public class AchievementsController : Controller
     {
         Uri baseAddress = new Uri("http://berriessystemmanagement.somee.com/api");

@@ -12,6 +12,7 @@ using FrontBerries.ViewModels;
 
 namespace FrontBerries.Controllers
 {
+    [Authorize]
     public class SystemSystemLoginController : Controller
     {
         Uri baseAddress = new Uri("http://berriessystemmanagement.somee.com/api");

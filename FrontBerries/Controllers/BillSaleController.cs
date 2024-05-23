@@ -1,4 +1,5 @@
 ﻿using FrontBerries.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
@@ -8,6 +9,7 @@ using System.Text;
 
 namespace FrontBerries.Controllers
 {
+    [Authorize]
     public class BillSaleController : Controller
     {
         Uri baseAddress = new Uri("http://berriessystemmanagement.somee.com/api");

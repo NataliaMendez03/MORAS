@@ -1,10 +1,12 @@
 ﻿using FrontBerries.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Sistema_de_Gestion_Moras.Models;
 
 namespace FrontBerries.Controllers
 {
+    [Authorize]
     public class MissionsController : Controller
     {
         Uri baseAddress = new Uri("http://berriessystemmanagement.somee.com/api");
