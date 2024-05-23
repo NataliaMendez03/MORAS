@@ -9,6 +9,6 @@ namespace FrontBerries.Models
 
         [DisplayName("Price")]
         public decimal SalePrice { get; set; }
-        public bool StateDeleted { get; set; }
+        public bool StateDelete { get; set; }
     }
 }

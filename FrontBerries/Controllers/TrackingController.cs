@@ -52,5 +52,52 @@ namespace FrontBerries.Controllers
             return new List<State>();
         }
     #endregion
+
+
+
+    #region DELETE
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            try
+            {
+                TrackingViewModel login = new TrackingViewModel();
+                HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Tracking/" + id).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    string data = response.Content.ReadAsStringAsync().Result;
+                    login = JsonConvert.DeserializeObject<TrackingViewModel>(data);
+                }
+                return View(login);
+            }
+            catch (Exception ex)
+            {
+                TempData["errorMessage"] = ex.Message;
+                return View();
+            }
+
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            try
+            {
+                HttpResponseMessage response = _client.DeleteAsync(_client.BaseAddress + $"/Tracking/Delete/{id}").Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    TempData["successMessage"] = "Tracking details deleted";
+                    return RedirectToAction("TrackingGet");
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["errorMessage"] = ex.Message;
+                return View();
+            }
+            return View("TrackingGet");
+
+        }
+    #endregion
     }
 }

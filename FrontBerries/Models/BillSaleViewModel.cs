@@ -62,6 +62,6 @@ namespace FrontBerries.Models
         [DisplayName("Notes")]
         public string Notes { get; set; }
 
-        public bool StateDeleted { get; set; }
+        public bool StateDelete { get; set; }
     }
 }

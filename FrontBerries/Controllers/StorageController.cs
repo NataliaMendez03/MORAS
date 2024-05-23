@@ -141,5 +141,53 @@ namespace FrontBerries.Controllers
             }
             return new List<IdentificationType>();
         }
+
+
+
+
+        #region DELETE
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            try
+            {
+                StorageViewModel login = new StorageViewModel();
+                HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Storage/" + id).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    string data = response.Content.ReadAsStringAsync().Result;
+                    login = JsonConvert.DeserializeObject<StorageViewModel>(data);
+                }
+                return View(login);
+            }
+            catch (Exception ex)
+            {
+                TempData["errorMessage"] = ex.Message;
+                return View();
+            }
+
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            try
+            {
+                HttpResponseMessage response = _client.DeleteAsync(_client.BaseAddress + $"/Storage/Delete/{id}").Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    TempData["successMessage"] = "Storage details deleted";
+                    return RedirectToAction("StorageGet");
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["errorMessage"] = ex.Message;
+                return View();
+            }
+            return View("StorageGet");
+
+        }
+        #endregion
     }
 }

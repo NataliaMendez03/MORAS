@@ -111,77 +111,9 @@ namespace FrontBerries.Controllers
             return new List<IdentificationType>();
         }
 
-        ///-///////////---------------------------------------------------------------------------------------------------------------------/
-        [HttpGet]
-        public IActionResult Create()
-        {
-            return View();
-        }
 
-        [HttpPost]
-        public IActionResult Create(EmployeesViewModel model)
-        {
-            try
-            {
-                String data = JsonConvert.SerializeObject(model);
-                StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = _client.PostAsync(_client.BaseAddress + $"/Employees/Create?idPost={model.IdPost}&idPerson={model.IdPerson}", content).Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    TempData["successMessage"] = "Employees Created";
-                    return RedirectToAction("EmployeesGet");
-                }
-            }
-            catch (Exception ex)
-            {
-                TempData["errorMessage"] = ex.Message;
-                return View();
-            }
-            return View();
-        }
 
-        [HttpGet]
-        public IActionResult Update(int id)
-        {
-            try
-            {
-                EmployeesViewModel login = new EmployeesViewModel();
-                HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Employees/" + id).Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    string data = response.Content.ReadAsStringAsync().Result;
-                    login = JsonConvert.DeserializeObject<EmployeesViewModel>(data);
-                }
-                return View(login);
-            }
-            catch (Exception ex)
-            {
-                TempData["errorMessage"] = ex.Message;
-                return View();
-            }
-
-        }
-        [HttpPost]
-        public IActionResult Update(EmployeesViewModel model)
-        {
-            try
-            {
-                string data = JsonConvert.SerializeObject(model);
-                StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = _client.PutAsync(_client.BaseAddress + $"/Employees/Update/{model.IdEmployees}?idPost={model.IdPost}&idPerson={model.IdPerson}\"", content).Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    TempData["successMessage"] = "Employees details updated";
-                    return RedirectToAction("EmployeesGet");
-                }
-            }
-            catch (Exception ex)
-            {
-                TempData["errorMessage"] = ex.Message;
-                return View();
-            }
-            return View();
-        }
+    #region DELETE
         [HttpGet]
         public IActionResult Delete(int id)
         {
@@ -224,5 +156,6 @@ namespace FrontBerries.Controllers
             return View("EmployeesGet");
 
         }
+    #endregion
     }
 }

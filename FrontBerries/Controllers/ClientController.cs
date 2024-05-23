@@ -238,6 +238,54 @@ namespace FrontBerries.Controllers
         }
 
         #endregion
+
+
+
+        #region DELETE
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            try
+            {
+                ClientViewModel login = new ClientViewModel();
+                HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Client/" + id).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    string data = response.Content.ReadAsStringAsync().Result;
+                    login = JsonConvert.DeserializeObject<ClientViewModel>(data);
+                }
+                return View(login);
+            }
+            catch (Exception ex)
+            {
+                TempData["errorMessage"] = ex.Message;
+                return View();
+            }
+
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            try
+            {
+                HttpResponseMessage response = _client.DeleteAsync(_client.BaseAddress + $"/Client/Delete/{id}").Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    TempData["successMessage"] = "Client details deleted";
+                    return RedirectToAction("ClientGet");
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["errorMessage"] = ex.Message;
+                return View();
+            }
+            return View("ClientGet");
+
+        }
+        #endregion
     }
 
 }

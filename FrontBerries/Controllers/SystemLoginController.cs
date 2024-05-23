@@ -7,6 +7,7 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using FrontBerries.ViewModels;
 
 
 namespace FrontBerries.Controllers
@@ -183,6 +184,9 @@ namespace FrontBerries.Controllers
             }
             return View();
         }
+
+
+
         [HttpGet]
         public IActionResult Delete(int id)
         {
