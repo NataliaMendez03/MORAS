@@ -40,14 +40,12 @@ namespace FrontBerries.Controllers
                 foreach (var achievements in Achievementslist)
                 {
                     achievements.UserName = login.FirstOrDefault(p => p.IdLogin == achievements.IdLogin)?.UserName;
-                    achievements.NameMission = missions.FirstOrDefault(p => p.IdMission == achievements.IdMission)?.NameMission;
-                    achievements.Description = missions.FirstOrDefault(ni => ni.IdMission == achievements.IdMission).Description;
-                    achievements.NameLevel = levels.FirstOrDefault(p => p.IdLevel == achievements.IdLevel)?.NameLevel;
-
-                    var achInfo = missions.FirstOrDefault(m => m.IdLevel == achievements.IdLevel);
-                    if (achInfo != null)
+                    var mission = missions.FirstOrDefault(p => p.IdMission == achievements.IdMission);
+                    if (mission != null)
                     {
-                        var level = levels.FirstOrDefault(ti => ti.IdLevel == achInfo.IdLevel);
+                        achievements.NameMission = mission.NameMission;
+                        achievements.Description = mission.Description;
+                        var level = levels.FirstOrDefault(l => l.IdLevel == mission.IdLevel);
                         if (level != null)
                         {
                             achievements.NameLevel = level.NameLevel;
@@ -83,7 +81,7 @@ namespace FrontBerries.Controllers
         }
         private List<Levels> GetLevels()
         {
-            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Login").Result;
+            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Levels").Result;
             if (response.IsSuccessStatusCode)
             {
                 string data = response.Content.ReadAsStringAsync().Result;

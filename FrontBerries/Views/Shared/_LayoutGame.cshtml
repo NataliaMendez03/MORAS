@@ -18,7 +18,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div style="display: flex; align-items: center;">
-                            <img src="~/src/icondefault.png" alt="User Icon" style="width: 28px; height: 28px;" />
+                            <img src="~/src/usergame.png" alt="User Icon" style="width: 28px; height: 28px;" />
                             <span style="color: #666666; font-weight: bold; margin-left: 10px;">
                                 @User.Claims.Where(c => c.Type == ClaimTypes.Name).Select(c => c.Value).SingleOrDefault()
                             </span>
@@ -40,13 +40,21 @@
                                 </a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Missions" asp-action="MissionsGet" style="font-weight: bold; display: flex; align-items: center;">
+                                    <img src="~/src/missions.png" alt="Exit Icon" style="width: 20px; height: 20px; margin-right: 5px;" /> 
+                                    Missions
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Achievements" asp-action="AchievementsGet" style="font-weight: bold; display: flex; align-items: center;">
+                                    <img src="~/src/achievements.png" alt="Exit Icon" style="width: 20px; height: 20px; margin-right: 5px;" />
                                     Achievements
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="ExitGame" style="font-weight: bold; display: flex; align-items: center;">
-                                    <img src="~/src/salida.png" alt="Exit Icon" style="width: 20px; height: 20px; margin-right: 5px;" />Exit
+                                    <img src="~/src/salida.png" alt="Exit Icon" style="width: 20px; height: 20px; margin-right: 5px;" />
+                                    Exit
                                 </a>
                             </li>
                         </ul>
