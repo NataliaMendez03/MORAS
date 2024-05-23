@@ -113,7 +113,7 @@
                     @Html.DisplayFor(modelItem => item.NQuality)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Quality)
+                    @Html.DisplayFor(modelItem => item.Quantity)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.NamePost)
@@ -125,14 +125,14 @@
                     @Html.DisplayFor(modelItem => item.LastName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.TypeIdentifications)
+                    @Html.DisplayFor(modelItem => item.IdentifiType)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.NumberIdentification)
                 </td>
                 <td>
-                    @Html.ActionLink("Update", "Update", new { id = item.IdEmployees }, new { style = "color: rebeccapurple;" }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.IdEmployees }, new { style = "color: rebeccapurple;" })
+                    @Html.ActionLink("Update", "Update", new { id = item.IdStorage }, new { style = "color: rebeccapurple;" }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.IdStorage }, new { style = "color: rebeccapurple;" })
                 </td>
             </tr>
         }

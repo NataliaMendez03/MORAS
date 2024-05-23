@@ -1,6 +1,7 @@
 ﻿using FrontBerries.Models;
 using FrontBerries.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Identity.Client.Extensions.Msal;
 using Newtonsoft.Json;
 using Sistema_de_Gestion_Moras.Models;
@@ -20,12 +21,12 @@ namespace FrontBerries.Controllers
         [HttpGet]
         public IActionResult StorageGet()
         {
-            List<StorageViewModel> Loginlist = new List<StorageViewModel>();
+            List<StorageViewModel> storageList = new List<StorageViewModel>();
             HttpResponseMessage respone = _client.GetAsync(_client.BaseAddress + "/Storage").Result;
             if (respone.IsSuccessStatusCode)
             {
                 string data = respone.Content.ReadAsStringAsync().Result;
-                Loginlist = JsonConvert.DeserializeObject<List<StorageViewModel>>(data);
+                storageList = JsonConvert.DeserializeObject<List<StorageViewModel>>(data);
 
                 // Obtener datos adicionales
                 List<Person> person = GetPerson();
@@ -37,22 +38,25 @@ namespace FrontBerries.Controllers
 
 
                 // Mapear datos relacionados
-                foreach (var storage in Loginlist)
+                foreach (var storage in storageList)
                 {
-                    storage.HarvestDate = harvests.FirstOrDefault(c => c.IdHarvests == storage.IdHarvests).HarvestDate;
-                    storage.HarvestAmount = harvests.FirstOrDefault(p => p.IdHarvests == storage.IdHarvests)?.HarvestAmount;
+                    var harvestInfo = harvests.FirstOrDefault(h => h.IdHarvests == storage.IdHarvests);
+                    if (harvestInfo != null)
+                    {
+                        storage.HarvestDate = harvestInfo.HarvestDate;
+                        storage.HarvestAmount = harvestInfo.HarvestAmount;
+                    }
 
-                    var employeesInfo = employees.FirstOrDefault(p => p.IdEmployees == storage.IdEmployees);
-
+                    var employeesInfo = employees.FirstOrDefault(e => e.IdEmployees == harvestInfo.Idemployees);
                     if (employeesInfo != null)
                     {
-                        var postInfo = post.FirstOrDefault(p => p.IdPost == storage.IdPost);
+                        var postInfo = post.FirstOrDefault(p => p.IdPost == employeesInfo.IdPost);
                         if (postInfo != null)
                         {
                             storage.NamePost = postInfo.NamePost;
                         }
 
-                        var personInfo = person.FirstOrDefault(p => p.IdPerson == storage.IdPerson);
+                        var personInfo = person.FirstOrDefault(p => p.IdPerson == employeesInfo.IdPerson);
                         if (personInfo != null)
                         {
                             storage.Name = personInfo.Name;
@@ -65,22 +69,23 @@ namespace FrontBerries.Controllers
                                 storage.IdentifiType = identificationType.IdentifiType;
                             }
                         }
-                        var qualityInfo = quality.FirstOrDefault(p => p.IdQuality == storage.IdQuality);
+
+                        var qualityInfo = quality.FirstOrDefault(q => q.IdQuality == harvestInfo.IdQuality);
                         if (qualityInfo != null)
                         {
                             storage.NQuality = qualityInfo.NQuality;
                             storage.Quantity = qualityInfo.Quantity;
                         }
-                        
-                        
                     }
-
                 }
+
             }
-            var inactiveLogins = Loginlist.Where(login => !login.StateDelete).ToList();
+            var inactiveLogins = storageList.Where(login => !login.StateDelete).ToList();
 
             return View(inactiveLogins);
         }
+   
+
         private List<Employees> GetEmployees()
         {
             HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Employees").Result;

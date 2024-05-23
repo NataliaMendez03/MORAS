@@ -141,7 +141,7 @@ namespace FrontBerries.Controllers
             try
             {
                 createClientVM.TypeIdentifications = GetTypeIdentificationsSelectList();
-                // Crear Ciudad
+                /*// Crear Ciudad
                 var cityData = JsonConvert.SerializeObject(createClientVM.CityModel);
                 var cityContent = new StringContent(cityData, Encoding.UTF8, "application/json");
                 var cityResponse = await _client.PostAsync(_client.BaseAddress + $"/City?nameCity={createClientVM.CityModel.NameCity}", cityContent);
@@ -165,7 +165,7 @@ namespace FrontBerries.Controllers
                 }
                 var addressResponseData = await addressResponse.Content.ReadAsStringAsync();
                 var createdAddress = JsonConvert.DeserializeObject<AddressViewModel>(addressResponseData);
-                int addressId = createdAddress.IdAddress;
+                int addressId = createdAddress.IdAddress;*/
 
                 // Crear Contacto
                 var contactData = JsonConvert.SerializeObject(createClientVM.ContactModel);
@@ -182,14 +182,16 @@ namespace FrontBerries.Controllers
 
                 int id = 5;
                 int TI = 1;
+                var identificationTypeId = createClientVM.IdentTypeModel.IdIdentificationType;
+
                 // Crear Persona
-                createClientVM.PersonModel.IdAddress = addressId;
+                //createClientVM.PersonModel.IdAddress = addressId;
                 createClientVM.PersonModel.IdContact = contactId;
                 var personData = JsonConvert.SerializeObject(createClientVM.PersonModel);
                 var personContent = new StringContent(personData, Encoding.UTF8, "application/json");
                 var personResponse = await _client.PostAsync(_client.BaseAddress + $"/Person?name={createClientVM.PersonModel.Name}&lastName={createClientVM.PersonModel.LastName}" +
-                    $"&idContact={contactId}&idTypeIdentification={TI}&numberIdentification={createClientVM.PersonModel.NumberIdentification}" +
-                    $"&idAddress={addressId}", personContent);
+                    $"&idContact={contactId}&idTypeIdentification={identificationTypeId}&numberIdentification={createClientVM.PersonModel.NumberIdentification}" +
+                    $"&idAddress={id}", personContent);
 
                 if (!personResponse.IsSuccessStatusCode)
                 {
@@ -202,6 +204,8 @@ namespace FrontBerries.Controllers
 
                 // Crear Cliente
                 //createClientVM.ClientModel.IdPerson = personId;
+
+
                 var clientData = JsonConvert.SerializeObject(createClientVM.ClientModel);
                 var clientContent = new StringContent(clientData, Encoding.UTF8, "application/json");
                 var clientResponse = await _client.PostAsync(_client.BaseAddress + $"/Client?idPerson={personId}", clientContent);
